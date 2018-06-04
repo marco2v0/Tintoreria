@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'tintoreria.insumos',
     'tintoreria.articulos',
     'tintoreria.notas',
-    'tintoreria.empleados'
+    'tintoreria.empleados',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,66 +11,95 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script src="{% static "js/app.js" %}"></script>
 </head>
-<body>
-<div class="row">
-  <div class="col-md-1 col-md-offset-10">
-     <button type="button" class="btn btn-success">Agregar</button>
-  </div>  
-</div>
+<body ng-App="App" >
+  <div ng-controller="clientesCtrl">
+    {% verbatim %}
 
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <th scope="col"><button type="button" class="btn btn-success">Editar</button></th>
-      <th scope="col"><button type="button" class="btn btn-success">Eliminar</button></th>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <th scope="col"><button type="button" class="btn btn-success">Editar</button></th>
-      <th scope="col"><button type="button" class="btn btn-success">Eliminar</button></th>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <th scope="col"><button type="button" class="btn btn-success">Editar</button></th>
-      <th scope="col"><button type="button" class="btn btn-success">Eliminar</button></th>
-    </tr>
-  </tbody>
-</table>
+    <div class="row">
+      <div class="col-md-1 col-md-offset-10">
+        <!-- Button trigger modal -->
+        <br></br>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Agregar
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Agregar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Nombre:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente.nombre" name="nombre" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente.materno" name="materno" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="paterno" class="col-sm-2 col-md-3 control-label">Paterno:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente.paterno" name="paterno" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="guardar()">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--button type="button" class="btn btn-success">Agregar</button-->
+      </div>  
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Paterno</th>
+              <th scope="col">Materno</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="cliente in clientes">
+              <th scope="row">1</th>
+              <td>{{ cliente.nombre }}</td>
+              <td>{{ cliente.paterno }}</td>
+              <td>{{ cliente.materno }}</td>
+              <th scope="col"><button type="button" class="btn btn-success">Editar</button></th>
+              <th scope="col"><button type="button" class="btn btn-success">Eliminar</button></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% endverbatim %}
   </div>
-</div>
 </body>
 </html>
