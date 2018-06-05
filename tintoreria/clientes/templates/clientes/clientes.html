@@ -19,23 +19,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="{% static "js/app.js" %}"></script>
 </head>
+
 <body ng-App="App" >
   <div ng-controller="clientesCtrl">
     {% verbatim %}
 
     <div class="row">
       <div class="col-md-1 col-md-offset-10">
+        
         <!-- Button trigger modal -->
         <br></br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Agregar
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Agregar
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalTitle" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Agregar Cliente</h5>
+                <h5 class="modal-title" id="AddModalTitle">Agregar Cliente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,15 +51,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="cliente.materno" name="materno" />
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label for="paterno" class="col-sm-2 col-md-3 control-label">Paterno:</label>
                     <div class="col-sm-10 col-md-4">
                       <input type="text" class="form-control" ng-model="cliente.paterno" name="paterno" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente.materno" name="materno" />
                     </div>
                   </div>
                 </form>
@@ -69,9 +71,10 @@
             </div>
           </div>
         </div>
-        <!--button type="button" class="btn btn-success">Agregar</button-->
+
       </div>  
     </div>
+
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <table class="table table-striped">
@@ -87,15 +90,59 @@
           </thead>
           <tbody>
             <tr ng-repeat="cliente in clientes">
-              <th scope="row">1</th>
+              <th scope="row">{{cliente.id}}</th>
               <td>{{ cliente.nombre }}</td>
               <td>{{ cliente.paterno }}</td>
               <td>{{ cliente.materno }}</td>
-              <th scope="col"><button type="button" class="btn btn-success">Editar</button></th>
-              <th scope="col"><button type="button" class="btn btn-success">Eliminar</button></th>
+              <th scope="col"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#UpdateModal">Editar</button></th>
+              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(cliente)">Eliminar</button></th>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+   <div class="row">
+      <div class="col-md-1 col-md-offset-10">
+        <!-- Modal Actualizar-->
+        <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="UpdateModalTitle">Actualizar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" id="UpdateForm" ng-submit="UpdateInfo(cliente)" hidden>
+                  <div class="form-group">
+                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Nombre:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente.nombre" name="nombre" value="{{cliente.nombre}}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="paterno" class="col-sm-2 col-md-3 control-label">Paterno:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente.paterno" name="paterno" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente.materno" name="materno" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="guardar()">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
