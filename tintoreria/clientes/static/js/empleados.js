@@ -1,4 +1,4 @@
-app.controller('notasCtrl', function($http, $scope){
+app.controller('empleadosCtrl', function($http, $scope){
 	$scope.nota = {
 		'cantidad': null,
 		'persona_servicio': null,

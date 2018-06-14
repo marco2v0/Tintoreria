@@ -44,64 +44,58 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Cantidad:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="nota.cantidad" name="cantidad" />
+                <form>
+                  <div class="row">
+                    <div class="form-group">
+                      <label for="cantidad" class="col-sm-2 col-md-3 control-label">Cantidad:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="text" class="form-control" ng-model="nota.cantidad" name="cantidad"/>
+                      </div>
+                      <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona Servicio:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="text" class="form-control" ng-model="nota.persona_servicio" name="persona_servicio"/>
+                      </div>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="paterno" class="col-sm-2 col-md-3 control-label">Persona Servicio:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="nota.persona_servicio" name="persona_servicio" />
+                  <br>
+                  <div class="row">
+                    <div class="form-group">
+                      <label for="observaciones" class="col-sm-2 col-md-3 control-label">Observaciones:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="text" class="form-control" ng-model="nota.observaciones" name="observaciones" />
+                      </div>
+                      <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="text" class="form-control" ng-model="nota.status" name="status" />
+                      </div>
                     </div>
                   </div>
+                  <br>
                   <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Observaciones:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="nota.observaciones" name="observaciones" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Status:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="nota.status" name="status" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Cliente:</label>
-                    <div class="col-sm-10 col-md-4">
+                    <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
+                    <div class="col-sm-10 col-md-3">
                       <input type="text" class="form-control" ng-model="nota.cliente" name="cliente" />
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Fecha Término:</label>
-                    <div class="col-sm-10 col-md-4">
+                    <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha Término:</label>
+                    <div class="col-sm-10 col-md-3">
                       <input type="date" class="form-control" ng-model="nota.fecha_termino" name="fecha_termino" />
                     </div>
                   </div>
+                  <br>
                   <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Fecha Captura:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="date" class="form-control" ng-model="nota.fecha_captura" name="fecha_captura" />
+                    <label for="descuento" class="col-sm-2 col-md-3 control-label">Descuento:</label>
+                    <div class="col-sm-10 col-md-3">
+                      <input type="text" class="form-control" ng-model="nota.descuento" name="descuento" />
                     </div>
-                  </div>
-                  <div class="form-group">
                     <label for="materno" class="col-sm-2 col-md-3 control-label">Fecha Entrega:</label>
-                    <div class="col-sm-10 col-md-4">
+                    <div class="col-sm-10 col-md-3">
                       <input type="date" class="form-control" ng-model="nota.fecha_entrega" name="fecha_entrega" />
                     </div>
                   </div>
+                  <br>
                   <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Descuento:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="nota.descuento" name="descuento" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Servicio:</label>
-                    <div class="col-sm-10 col-md-4">
+                    <label for="servicio" class="col-sm-2 col-md-3 control-label">Servicio:</label>
+                    <div class="col-sm-10 col-md-3">
                       <input type="text" class="form-control" ng-model="nota.servicio" name="servicio" />
                     </div>
                   </div>
@@ -137,8 +131,8 @@
               <td>{{ nota.cliente }}</td>
               <td>{{ nota.cantidad }}</td>
               <td>{{ nota.persona_servicio }}</td>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="update(cliente)">Editar</button></th>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(cliente)">Eliminar</button></th>
+              <th scope="col"><button type="button" class="btn btn-success" ng-click="update(nota)">Editar</button></th>
+              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(nota)">Eliminar</button></th>
             </tr>
           </tbody>
         </table>
@@ -152,7 +146,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="UpdateModalTitle">Actualizar Cliente</h5>
+                <h5 class="modal-title" id="UpdateModalTitle">Actualizar Nota</h5>
                 <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button-->
@@ -160,87 +154,51 @@
               <div class="modal-body">
                 <form class="form-horizontal" id="UpdateForm">
                   <div class="form-group">
-                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Nombre:</label>
+                    <label for="cantidad" class="col-sm-2 col-md-3 control-label">Cantidad:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="nombre_m" name="nombre_m"/>
+                      <input type="text" class="form-control" ng-model="cantidad_m" name="cantidad_m"/>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="paterno" class="col-sm-2 col-md-3 control-label">Paterno:</label>
+                    <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona Servicio:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="paterno_m" name="paterno_m" />
+                      <input type="text" class="form-control" ng-model="persona_servicio_m" name="persona_servicio_m" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
+                    <label for="observaciones" class="col-sm-2 col-md-3 control-label">observaciones:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="materno_m" name="materno_m" />
+                      <input type="text" class="form-control" ng-model="observaciones_m" name="observaciones_m" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Dirección:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="direccion_m" name="direccion_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Ciudad:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="ciudad_m" name="ciudad_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Colonia:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="colonia_m" name="colonia_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Cp:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="cp_m" name="cp_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Estado:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="estado_m" name="estado_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Tel. Fijo:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="tel_fijo_m" name="tel_fijo_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Tel. Móvil:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="tel_movil_m" name="tel_movil_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Tel. Trabajo:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="tel_trabajo_m" name="tel_trabajo_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Email:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="email_m" name="email_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Sexo:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="sexo_m" name="sexo_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Status:</label>
+                    <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
                     <div class="col-sm-10 col-md-4">
                       <input type="text" class="form-control" ng-model="status_m" name="status_m" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="cliente_m" name="cliente_m" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha Termino:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="fecha_termino_m" name="fecha_termino_m" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fecha_entrega" class="col-sm-2 col-md-3 control-label">Fecha Entrega:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="fecha_entrega_m" name="fecha_entrega_m" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="descuento" class="col-sm-2 col-md-3 control-label">Descuento:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="descuento_m" name="descuento_m" />
                     </div>
                   </div>
                 </form>
