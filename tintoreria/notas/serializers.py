@@ -12,5 +12,6 @@ class NotaSerializer(ModelSerializer):
 			      'status',
 			      'cliente',
 			      'fecha_termino',
+			      'fecha_entrega',
 			      'descuento',
 			      'servicio')

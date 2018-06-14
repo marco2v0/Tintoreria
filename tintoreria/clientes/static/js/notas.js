@@ -8,7 +8,8 @@ app.controller('notasCtrl', function($http, $scope){
 		'fecha_termino': null,
 		'fecha_entrega': null,
 		'descuento': null,
-		'servicio': null
+		'servicio': null,
+		'fecha_captura': null
 	}
 
 	$scope.nota_nvo = {
@@ -20,7 +21,8 @@ app.controller('notasCtrl', function($http, $scope){
 		'fecha_termino': null,
 		'fecha_entrega': null,
 		'descuento': null,
-		'servicio': null
+		'servicio': null,
+		'fecha_captura': null
 	}
 
 	$scope.mostrar = function(){
@@ -84,6 +86,7 @@ app.controller('notasCtrl', function($http, $scope){
 		$scope.fecha_entrega_m = nota.fecha_entrega;
 		$scope.descuento_m = nota.descuento;
 		$scope.servicio_m = nota.servicio;
+		$scope.fecha_captura_m = nota.fecha_captura;
 		$scope.id_m = nota.id;
 
 	}
