@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from tintoreria.notas.models import Nota
+from tintoreria.notas.models import Nota, Status
 
 class NotaSerializer(ModelSerializer):
 
@@ -15,3 +15,11 @@ class NotaSerializer(ModelSerializer):
 			      'fecha_entrega',
 			      'descuento',
 			      'servicio')
+
+class StatusSerializer(ModelSerializer):
+
+	class Meta:
+		model  = Status
+		fields = ('id',
+			      'valor',
+			      'descripcion')
