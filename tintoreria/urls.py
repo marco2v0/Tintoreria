@@ -37,6 +37,6 @@ urlpatterns = [
     url(r'^api/nota/(?P<pk>[0-9]+)/$', csrf_exempt(NotaDetail.as_view())),
     url(r'^api/empleado/$', csrf_exempt(EmpleadoList.as_view())),
     url(r'^api/empleado/(?P<pk>[0-9]+)/$', csrf_exempt(EmpleadoDetail.as_view())),
-    url(r'^api/puestos/$', csrf_exempt(PuestoList.as_view())),
-    url(r'^api/puestos/(?P<pk>[0-9]+)/$', csrf_exempt(PuestoDetail.as_view())),
+    url(r'^api/puesto/$', csrf_exempt(PuestoList.as_view())),
+    url(r'^api/puesto/(?P<pk>[0-9]+)/$', csrf_exempt(PuestoDetail.as_view())),
 ]

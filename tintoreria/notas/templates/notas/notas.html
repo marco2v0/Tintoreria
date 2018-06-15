@@ -71,35 +71,107 @@
                     </div>
                   </div>
                   <br>
-                  <div class="form-group">
-                    <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
-                    <div class="col-sm-10 col-md-3">
-                      <input type="text" class="form-control" ng-model="nota.cliente" name="cliente" />
-                    </div>
-                    <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha Término:</label>
-                    <div class="col-sm-10 col-md-3">
-                      <input type="date" class="form-control" ng-model="nota.fecha_termino" name="fecha_termino" />
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <label for="descuento" class="col-sm-2 col-md-3 control-label">Descuento:</label>
-                    <div class="col-sm-10 col-md-3">
-                      <input type="text" class="form-control" ng-model="nota.descuento" name="descuento" />
-                    </div>
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Fecha Entrega:</label>
-                    <div class="col-sm-10 col-md-3">
-                      <input type="date" class="form-control" ng-model="nota.fecha_entrega" name="fecha_entrega" />
+                  <div class="row">
+                    <div class="form-group">
+                      <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="text" class="form-control" ng-model="nota.cliente" name="cliente" />
+                      </div>
+                      <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha Término:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="date" class="form-control" ng-model="nota.fecha_termino" name="fecha_termino" />
+                      </div>
                     </div>
                   </div>
                   <br>
-                  <div class="form-group">
-                    <label for="servicio" class="col-sm-2 col-md-3 control-label">Servicio:</label>
-                    <div class="col-sm-10 col-md-3">
-                      <input type="text" class="form-control" ng-model="nota.servicio" name="servicio" />
+                  <div class="row">
+                    <div class="form-group">
+                      <label for="descuento" class="col-sm-2 col-md-3 control-label">Descuento:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="text" class="form-control" ng-model="nota.descuento" name="descuento" />
+                      </div>
+                      <label for="materno" class="col-sm-2 col-md-3 control-label">Fecha Entrega:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="date" class="form-control" ng-model="nota.fecha_entrega" name="fecha_entrega" />
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="form-group">
+                      <label for="servicio" class="col-sm-2 col-md-3 control-label">Servicio:</label>
+                      <div class="col-sm-10 col-md-3">
+                        <input type="text" class="form-control" ng-model="nota.servicio" name="servicio" />
+                      </div>
                     </div>
                   </div>
                 </form>
+                <br>
+                <br>
+                <label for="servicio" class="col-sm-2 col-md-6 control-label">Detalle:</label>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Partida</label>
+                      </th>
+                      <th scope="col">
+                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Articulo</label>
+                      </th>
+                      <th scope="col">
+                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Cantidad</label>
+                      </th>
+                      <th scope="col">
+                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Servicio</label>
+                      </th>
+                      <th scope="col">
+                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Agregar</label>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row"></th>
+                      <td>
+                        <div class="col-sm-10 col-md-4">
+                          <input type="text" class="form-control" ng-model="articulo_ad" name="articulo_ad"/>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="col-sm-10 col-md-4">
+                          <input type="text" class="form-control" ng-model="cantidad_ad" name="cantidad_ad"/>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="col-sm-10 col-md-4">
+                          <input type="text" class="form-control" ng-model="servicio_ad" name="servicio_ad"/>
+                        </div>
+                      </td>
+                      <th scope="col"><button type="button" class="btn btn-success" ng-click="guardarDet(nota)">Agregar</button></th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              {{nota_det}}
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <table class="table table-striped">
+                    <tbody>
+                      <tr ng-repeat="nota_d in nota_det">
+                        <th>{{ nota_d.partida }}</th>
+                        <th>{{ nota_d.articulo }}</th>
+                        <th>{{ nota_d.cantidad }}</th>
+                        <th>{{ nota_d.servicio }}</th>
+                        <th>
+                          <button type="button" class="btn btn-success" ng-click="updateDet(nota)">Editar</button>
+                        </th>
+                        <th>
+                          <button type="button" class="btn btn-success" ng-click="borrarDet(nota)">Eliminar</button>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

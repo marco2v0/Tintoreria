@@ -1,4 +1,4 @@
-app.controller('empleadosCtrl', function($http, $scope){
+app.controller('notasCtrl', function($http, $scope){
 	$scope.nota = {
 		'cantidad': null,
 		'persona_servicio': null,
@@ -10,6 +10,12 @@ app.controller('empleadosCtrl', function($http, $scope){
 		'descuento': null,
 		'servicio': null,
 		'fecha_captura': null
+	}
+	$scope.nota_det = {
+		'partida': null,
+		'articulo': null,
+		'cantidad': null,
+		'servicio': null
 	}
 
 	$scope.nota_nvo = {
@@ -59,6 +65,35 @@ app.controller('empleadosCtrl', function($http, $scope){
 		
 	}
 
+	$scope.guardarDet = function(){
+		console.log($scope.articulo_ad);
+		/*$scope.nota_det = {
+			'partida': 1,
+			'articulo': $scope.articulo_ad,
+			'cantidad': $scope.cantidad_ad,
+			'servicio': $scope.servicio_ad
+		}*/
+		$scope.nota_det.partida = 1;
+		$scope.nota_det.articulo = $scope.articulo_ad;
+		$scope.nota_det.cantidad = $scope.cantidad_ad;
+		$scope.nota_det.servicio = $scope.servicio_ad;
+		console.log($scope.nota_det);
+		/*$http.post(
+			'/api/nota/',
+			$scope.nota
+		).then(
+			function(response){
+				alert("Registro guardado con exito");
+				$scope.mostrar();
+				$('#AddModal').modal('hide');
+			},
+			function(err){
+				console.log(err);
+			}
+		)*/
+		
+	}
+
 	$scope.borrar = function(nota){
 		$http.delete(
 			'/api/nota/'+nota.id
@@ -103,7 +138,7 @@ app.controller('empleadosCtrl', function($http, $scope){
 		'descuento': $scope.descuento_m,
 		'servicio': $scope.servicio_m
 		}
-		console.log($scope.nota);
+		//console.log($scope.nota);
 		$http.put(
 			'/api/nota/'+$scope.id_m+'/',$scope.nota_nvo	
 		).then(
