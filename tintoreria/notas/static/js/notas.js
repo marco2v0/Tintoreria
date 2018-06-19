@@ -67,12 +67,6 @@ app.controller('notasCtrl', function($http, $scope){
 
 	$scope.guardarDet = function(){
 		console.log($scope.articulo_ad);
-		/*$scope.nota_det = {
-			'partida': 1,
-			'articulo': $scope.articulo_ad,
-			'cantidad': $scope.cantidad_ad,
-			'servicio': $scope.servicio_ad
-		}*/
 		$scope.nota_det.partida = 1;
 		$scope.nota_det.articulo = $scope.articulo_ad;
 		$scope.nota_det.cantidad = $scope.cantidad_ad;

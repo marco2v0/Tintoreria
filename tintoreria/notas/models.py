@@ -29,5 +29,14 @@ class Nota(models.Model):
 	servicio = models.CharField(max_length=20)
 
 	def __str__(self):
-		return self.folio
+		return self.cliente
 
+class detalleNota (models.Model):
+
+	nota = models.ForeignKey(Nota, db_column='nota_id')
+	partida = models.IntegerField()
+	articulo = models.ForeignKey('articulos.Articulo',on_delete=models.CASCADE)
+	cantidad = models.IntegerField()
+
+	def __str__(self):
+		return self.nota
