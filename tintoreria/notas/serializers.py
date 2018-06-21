@@ -1,7 +1,16 @@
 from rest_framework.serializers import ModelSerializer
-from tintoreria.notas.models import Nota, Status
+from tintoreria.notas.models import Nota, Status, Detalle
+
+class DetalleSerializer (ModelSerializer):
+	
+	class Meta:
+		model = Detalle
+		fields = ('partida',
+			      'articulo',
+			      'cantidad')
 
 class NotaSerializer(ModelSerializer):
+	detalle = DetalleSerializer(many=True);
 
 	class Meta:
 		model  = Nota
@@ -14,6 +23,7 @@ class NotaSerializer(ModelSerializer):
 			      'fecha_termino',
 			      'fecha_entrega',
 			      'descuento',
+			      'detalle',
 			      'servicio')
 
 class StatusSerializer(ModelSerializer):

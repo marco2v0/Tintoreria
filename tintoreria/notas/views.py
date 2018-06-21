@@ -23,11 +23,9 @@ class NotaAPI(APIView):
 		response = self.serializer(lista,many=True)
 		return HttpResponse(json.dumps(response.data),content_type='application/json')
 
-
 class NotaList(generics.ListCreateAPIView):
     queryset = Nota.objects.all()
     serializer_class = NotaSerializer
-
 
 class NotaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Nota.objects.all()
@@ -43,7 +41,6 @@ class StatusAPI(APIView):
 		lista = Status.objects.all()
 		response = self.serializer(lista,many=True)
 		return HttpResponse(json.dumps(response.data),content_type='application/json')
-
 
 class StatusList(generics.ListCreateAPIView):
     queryset = Status.objects.all()

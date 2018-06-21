@@ -9,27 +9,21 @@ app.controller('notasCtrl', function($http, $scope){
 		'fecha_entrega': null,
 		'descuento': null,
 		'servicio': null,
-		'fecha_captura': null
-	}
-	$scope.nota_det = {
-		'partida': null,
-		'articulo': null,
-		'cantidad': null,
-		'servicio': null
+		'detalle': []
 	}
 
-	$scope.nota_nvo = {
-		'cantidad': null,
-		'persona_servicio': null,
-		'observaciones': null,
-		'status': null,
-		'cliente': null,
-		'fecha_termino': null,
-		'fecha_entrega': null,
-		'descuento': null,
-		'servicio': null,
-		'fecha_captura': null
+	var partida = 1;
+
+	const limpiaDetalle = function(){
+		$scope.detalle = {
+			'partida' : partida,
+			'articulo': 0,
+			'cantidad': 0,
+			'servicio': 0,
+		}
 	}
+
+	limpiaDetalle();
 
 	$scope.mostrar = function(){
 		$http.get(
@@ -65,26 +59,22 @@ app.controller('notasCtrl', function($http, $scope){
 		
 	}
 
-	$scope.guardarDet = function(){
-		console.log($scope.articulo_ad);
-		$scope.nota_det.partida = 1;
-		$scope.nota_det.articulo = $scope.articulo_ad;
-		$scope.nota_det.cantidad = $scope.cantidad_ad;
-		$scope.nota_det.servicio = $scope.servicio_ad;
-		console.log($scope.nota_det);
-		/*$http.post(
-			'/api/nota/',
-			$scope.nota
-		).then(
-			function(response){
-				alert("Registro guardado con exito");
-				$scope.mostrar();
-				$('#AddModal').modal('hide');
-			},
-			function(err){
-				console.log(err);
-			}
-		)*/
+	$scope.guardarDet = function(nota){
+		console.log($scope.nota);
+		partida += 1;
+		$scope.nota.detalle.push($scope.detalle)
+		limpiaDetalle();
+	}
+
+	$scope.borrarDet = function(nota){
+		console.log($scope.nota.detalle.indexOf(nota));
+		$scope.nota.detalle.splice($scope.nota.detalle.indexOf(nota), 1) 	
+		partida = 0;
+		$scope.nota.detalle.forEach(function(detalle){
+			partida += 1;
+			detalle.partida = partida;
+		})
+		//partida += 1;
 		
 	}
 
@@ -115,7 +105,6 @@ app.controller('notasCtrl', function($http, $scope){
 		$scope.fecha_entrega_m = nota.fecha_entrega;
 		$scope.descuento_m = nota.descuento;
 		$scope.servicio_m = nota.servicio;
-		$scope.fecha_captura_m = nota.fecha_captura;
 		$scope.id_m = nota.id;
 
 	}

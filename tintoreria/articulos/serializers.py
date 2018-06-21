@@ -7,5 +7,4 @@ class ArticuloSerializer(ModelSerializer):
 		model  = Articulo
 		fields = ('id',
 			      'descripcion',
-			      'status',
-			      'clasificacion')
+			      'status')

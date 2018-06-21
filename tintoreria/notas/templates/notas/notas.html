@@ -10,6 +10,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="tintoreria/notas/static/css/notas.css">
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -108,65 +110,61 @@
                 </form>
                 <br>
                 <br>
-                <label for="servicio" class="col-sm-2 col-md-6 control-label">Detalle:</label>
-                <table class="table table-striped">
+                <label class="col-sm-2 col-md-6 control-label">Detalle:</label>
+                <table class="table table-hover" style="font-size: 12px">
                   <thead>
                     <tr>
-                      <th scope="col">
-                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Partida</label>
-                      </th>
-                      <th scope="col">
-                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Articulo</label>
-                      </th>
-                      <th scope="col">
-                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Cantidad</label>
-                      </th>
-                      <th scope="col">
-                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Servicio</label>
-                      </th>
-                      <th scope="col">
-                        <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Agregar</label>
+                      <th scope="row">
+                        <th scope="col">
+                          <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Articulo</label>
+                        </th>
+                        <th scope="col">
+                          <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Cantidad</label>
+                        </th>
+                        <th scope="col">
+                          <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Agregar</label>
+                        </th>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row"></th>
-                      <td>
-                        <div class="col-sm-10 col-md-4">
-                          <input type="text" class="form-control" ng-model="articulo_ad" name="articulo_ad"/>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="col-sm-10 col-md-4">
-                          <input type="text" class="form-control" ng-model="cantidad_ad" name="cantidad_ad"/>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="col-sm-10 col-md-4">
-                          <input type="text" class="form-control" ng-model="servicio_ad" name="servicio_ad"/>
-                        </div>
-                      </td>
-                      <th scope="col"><button type="button" class="btn btn-success" ng-click="guardarDet(nota)">Agregar</button></th>
+                      <th scope="row">
+                        <td>
+                          <div class="col-sm-10 col-md-7">
+                            <input type="text" class="form-control" ng-model="detalle.articulo" name="articulo_ad"/>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="col-sm-10 col-md-7">
+                            <input type="text" class="form-control" ng-model="detalle.cantidad" name="cantidad_ad"/>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="col-sm-10 col-md-7">
+                            <input type="text" class="form-control" ng-model="detalle.servicio" name="servicio_ad"/>
+                          </div>
+                        </td>
+                      </th>
+                      <th scope="col"><button type="button" class="btn btn-success" ng-click="guardarDet()">Agregar</button></th>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              {{nota_det}}
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                   <table class="table table-striped">
                     <tbody>
-                      <tr ng-repeat="nota_d in nota_det">
-                        <th>{{ nota_d.partida }}</th>
-                        <th>{{ nota_d.articulo }}</th>
-                        <th>{{ nota_d.cantidad }}</th>
-                        <th>{{ nota_d.servicio }}</th>
+                      <tr ng-repeat="det in nota.detalle">
+                        <th>{{ det.partida }}</th>
+                        <th>{{ det.articulo }}</th>
+                        <th>{{ det.cantidad }}</th>
+                        <th>{{ det.servicio }}</th>
                         <th>
-                          <button type="button" class="btn btn-success" ng-click="updateDet(nota)">Editar</button>
+                          <button type="button" class="btn btn-success" ng-click="updateDet(det)">Editar</button>
                         </th>
                         <th>
-                          <button type="button" class="btn btn-success" ng-click="borrarDet(nota)">Eliminar</button>
+                          <button type="button" class="btn btn-success" ng-click="borrarDet(det)">Eliminar</button>
                         </th>
                       </tr>
                     </tbody>

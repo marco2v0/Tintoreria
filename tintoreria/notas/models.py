@@ -31,9 +31,8 @@ class Nota(models.Model):
 	def __str__(self):
 		return self.cliente
 
-class detalleNota (models.Model):
-
-	nota = models.ForeignKey(Nota, db_column='nota_id')
+class Detalle (models.Model):
+	nota = models.ForeignKey(Nota, related_name="detalle", db_column='nota_id')
 	partida = models.IntegerField()
 	articulo = models.ForeignKey('articulos.Articulo',on_delete=models.CASCADE)
 	cantidad = models.IntegerField()
