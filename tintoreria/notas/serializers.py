@@ -1,5 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from tintoreria.notas.models import Nota, Status, Detalle
+from tintoreria.clientes.serializers import ClienteSerializer
+from tintoreria.empleados.serializers import EmpleadoSerializer
 
 class DetalleSerializer (ModelSerializer):
 	
@@ -11,6 +13,8 @@ class DetalleSerializer (ModelSerializer):
 
 class NotaSerializer(ModelSerializer):
 	detalle = DetalleSerializer(many=True);
+	cliente = ClienteSerializer()
+	empleado = EmpleadoSerializer()
 
 	def create (self, validated_data):
 		print(validated_data)
@@ -20,6 +24,7 @@ class NotaSerializer(ModelSerializer):
 		detalle_nota = Detalle()
 		nota.cantidad = validated_data['cantidad']
 		nota.persona_servicio = validated_data['persona_servicio']
+		
 		nota.observaciones = validated_data['observaciones']
 		nota.status = validated_data['status']
 		nota.cliente = validated_data['cliente']

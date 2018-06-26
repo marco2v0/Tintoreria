@@ -191,9 +191,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="nota in notas">
+            <tr ng-repeat="nota in notas.results">
               <th>{{nota.id}}</th>
-              <td>{{nota.cliente}}</td>
+              <td>{{nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno}}</td>
               <td>{{nota.cantidad}}</td>
               <td>{{nota.persona_servicio}}</td>
               <th scope="col"><button type="button" class="btn btn-warning btn-xs" ng-click="update(nota)">Editar</button></th>
@@ -201,6 +201,11 @@
             </tr>
           </tbody>
         </table>
+
+        <button ng-show='notas.previous' ng-click="mostrar('ant')">anterior</button>
+        <button ng-show='notas.next' ng-click="mostrar('sig')">siguiente</button>
+
+        registros totales {{ notas.count }}
       </div>
     </div>
 

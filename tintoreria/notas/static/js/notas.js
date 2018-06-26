@@ -25,9 +25,16 @@ app.controller('notasCtrl', function($http, $scope){
 
 	limpiaDetalle();
 
-	$scope.mostrar = function(){
+	$scope.mostrar = function(pagina){
+		if(pagina == null)
+			ruta = '/api/nota/?page=1'
+		else if(pagina == 'ant')
+			ruta = $scope.notas.previous;
+		else if(pagina == 'sig')
+			ruta = $scope.notas.next;
+
 		$http.get(
-			'/api/nota/'		
+			ruta		
 		).then(
 			function(response){
 				console.log(response.data);
@@ -39,7 +46,7 @@ app.controller('notasCtrl', function($http, $scope){
 		)
 	}
 
-	$scope.mostrar();
+	$scope.mostrar(null);
 
 	$scope.guardar = function(){
 		console.log($scope.nota);
@@ -49,7 +56,7 @@ app.controller('notasCtrl', function($http, $scope){
 		).then(
 			function(response){
 				alert("Registro guardado con exito");
-				$scope.mostrar();
+				$scope.mostrar(null);
 				$('#AddModal').modal('hide');
 			},
 			function(err){
