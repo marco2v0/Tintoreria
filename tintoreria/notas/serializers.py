@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from tintoreria.notas.models import Nota, Status, Detalle
+from tintoreria.clientes.models import Cliente
 from tintoreria.clientes.serializers import ClienteSerializer
 from tintoreria.empleados.serializers import EmpleadoSerializer
 
@@ -14,25 +15,25 @@ class DetalleSerializer (ModelSerializer):
 class NotaSerializer(ModelSerializer):
 	detalle = DetalleSerializer(many=True);
 	cliente = ClienteSerializer()
-	empleado = EmpleadoSerializer()
+	persona_servicio = EmpleadoSerializer()
 
 	def create (self, validated_data):
 		print(validated_data)
-		#detalle_nota = validated_data.pop('detalle')
-		#print(detalle_nota)
 		nota = Nota()
 		detalle_nota = Detalle()
+		cliente_nvo = Cliente()
+
+		cliente_nvo.filter(id=validated_data['cliente'])
+
 		nota.cantidad = validated_data['cantidad']
 		nota.persona_servicio = validated_data['persona_servicio']
-		
 		nota.observaciones = validated_data['observaciones']
 		nota.status = validated_data['status']
-		nota.cliente = validated_data['cliente']
+		#nota.cliente = validated_data['cliente']
+		nota.cliente = cliente_nvo.filter(id=validated_data['cliente'])
 		nota.fecha_termino = validated_data['fecha_termino']
 		nota.fecha_entrega = validated_data['fecha_entrega']
 		nota.descuento = validated_data['descuento']
-		nota.servicio = validated_data['servicio']
-		#nota.id = validated_data['id']
 
 		detalle_nota = validated_data['detalle']
 
@@ -61,8 +62,7 @@ class NotaSerializer(ModelSerializer):
 			      'fecha_termino',
 			      'fecha_entrega',
 			      'descuento',
-			      'detalle',
-			      'servicio')
+			      'detalle')
 
 class StatusSerializer(ModelSerializer):
 

@@ -1,4 +1,5 @@
 app.controller('notasCtrl', function($http, $scope){
+	$scope.empleados = [];
 	$scope.nota = {
 		'cantidad': null,
 		'persona_servicio': null,
@@ -13,19 +14,31 @@ app.controller('notasCtrl', function($http, $scope){
 	}
 
 	var partida = 1;
+	var cantidad_nota = 0;
+
+    $scope.inicializaEmpleados = function () {
+        var ruta = '/api/empleado/';
+       $http.get(ruta).then(
+			function(response){
+				console.log(response.data);
+				$scope.empleados = response.data;
+				console.log($scope.empleados);
+       });
+    };
 
 	const limpiaDetalle = function(){
 		$scope.detalle = {
 			'partida' : partida,
-			'articulo': 0,
-			'cantidad': 0,
-			'servicio': 0,
+			'articulo': null,
+			'cantidad': null,
+			'servicio': null,
 		}
 	}
 
 	limpiaDetalle();
 
 	$scope.mostrar = function(pagina){
+		$scope.inicializaEmpleados();
 		if(pagina == null)
 			ruta = '/api/nota/?page=1'
 		else if(pagina == 'ant')
@@ -50,27 +63,60 @@ app.controller('notasCtrl', function($http, $scope){
 
 	$scope.guardar = function(){
 		console.log($scope.nota);
-		$http.post(
-			'/api/nota/',
-			$scope.nota
-		).then(
-			function(response){
-				alert("Registro guardado con exito");
-				$scope.mostrar(null);
-				$('#AddModal').modal('hide');
-			},
-			function(err){
-				console.log(err);
+		if ($scope.nota.cliente != null){
+			if ($scope.nota.persona_servicio != null){
+				if ($scope.nota.fecha_termino != null){
+					if ($scope.nota.fecha_entrega != null){
+						$scope.nota.cantidad = cantidad_nota;
+						$http.post(
+							'/api/nota/',
+							$scope.nota
+						).then(
+							function(response){
+								alert("Registro guardado con exito");
+								$scope.mostrar(null);
+								$('#AddModal').modal('hide');
+							},
+							function(err){
+								console.log(err);
+							}
+						)
+					}
+					else{
+						alert("Debe ingresar la fecha de entrega");	
+					}
+				}
+				else{
+					alert("Debe ingresar la fecha de término");	
+				}
 			}
-		)
-		
+			else
+			{
+				alert("Debe ingresar la persona asignada al servicio");	
+			}
+		}
+		else{
+			alert("Debe ingresar un cliente");	
+		}
 	}
 
 	$scope.guardarDet = function(nota){
-		console.log($scope.nota);
-		partida += 1;
-		$scope.nota.detalle.push($scope.detalle)
-		limpiaDetalle();
+		//console.log($scope.nota);
+		if ($scope.detalle.articulo !=null){
+			if ($scope.detalle.cantidad !=null){
+				cantidad_nota = parseInt(cantidad_nota) + parseInt($scope.detalle.cantidad);
+				partida += 1;
+				$scope.nota.detalle.push($scope.detalle)
+				limpiaDetalle();
+			}
+			else{
+				alert("Debe ingresar una cantidad para el artículo");
+			}
+		}
+		else{
+			alert("Debe ingresar un articulo");
+		}
+
 	}
 
 	$scope.borrarDet = function(nota){

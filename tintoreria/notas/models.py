@@ -20,13 +20,12 @@ class Nota(models.Model):
 	fecha_captura = models.DateTimeField(auto_now_add=True)
 	cantidad = models.IntegerField()
 	persona_servicio = models.ForeignKey('empleados.Empleado',on_delete=models.CASCADE)
-	observaciones = models.TextField()
+	observaciones = models.TextField(null=True)
 	status = models.ForeignKey('Status',on_delete=models.CASCADE, null=True)
 	cliente = models.ForeignKey('clientes.Cliente',on_delete=models.CASCADE)
 	fecha_termino = models.DateTimeField()
 	fecha_entrega = models.DateTimeField()
-	descuento = models.IntegerField()
-	servicio = models.CharField(max_length=20)
+	descuento = models.IntegerField(null=True)
 
 	def __str__(self):
 		return self.cliente
