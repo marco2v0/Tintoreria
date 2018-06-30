@@ -50,7 +50,8 @@
                     <div class="form-group">
                       <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
                       <div class="col-sm-10 col-md-9">
-                        <input type="text" class="form-control" ng-model="nota.cliente" name="cliente" />
+                        <!--input type="text" class="form-control" ng-model="nota.cliente" name="cliente" /-->
+                        <select class="form-control form-control-sm" name="selectCliente" ng-options="cliente.nombre + cliente.paterno + cliente.materno for cliente in clientes track by cliente.id" ng-model="nota.cliente"></select>
                       </div>
                     </div>
                   </div>
@@ -60,7 +61,7 @@
                       <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona Servicio:</label>
                       <div class="col-sm-10 col-md-9">
                         <!--input type="text" class="form-control" ng-model="nota.persona_servicio" name="persona_servicio"/-->
-                        <select class="form-control form-control-sm" name="selectEmpleado" ng-options="empleado.nombre for empleado in empleados track by empleado.id" ng-model="nota.persona_servicio"></select>
+                        <select class="form-control form-control-sm" name="selectEmpleado" ng-options="empleado.nombre + empleado.paterno + empleado.materno for empleado in empleados track by empleado.id" ng-model="nota.persona_servicio"></select>
                       </div>
                     </div>
                   </div>

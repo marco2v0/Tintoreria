@@ -21,16 +21,12 @@ class NotaSerializer(ModelSerializer):
 		print(validated_data)
 		nota = Nota()
 		detalle_nota = Detalle()
-		cliente_nvo = Cliente()
-
-		cliente_nvo.filter(id=validated_data['cliente'])
 
 		nota.cantidad = validated_data['cantidad']
 		nota.persona_servicio = validated_data['persona_servicio']
 		nota.observaciones = validated_data['observaciones']
 		nota.status = validated_data['status']
-		#nota.cliente = validated_data['cliente']
-		nota.cliente = cliente_nvo.filter(id=validated_data['cliente'])
+		nota.cliente = validated_data['cliente']
 		nota.fecha_termino = validated_data['fecha_termino']
 		nota.fecha_entrega = validated_data['fecha_entrega']
 		nota.descuento = validated_data['descuento']

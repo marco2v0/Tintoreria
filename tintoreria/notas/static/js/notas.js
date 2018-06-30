@@ -16,13 +16,36 @@ app.controller('notasCtrl', function($http, $scope){
 	var partida = 1;
 	var cantidad_nota = 0;
 
+    function autocomplete (){
+    	let ruta_clientes = '/api/cliente/';
+    	$http.get(ruta_clientes).success(function(dataCliente){
+        $scope.cliente_auto = dataCliente;
+        $(document).ready(function () {
+            $('#autocomplete-cliente').autocomplete({
+                data: $scope.dataCliente,
+                limit: 5
+            });
+        });
+    	});
+    }
+
     $scope.inicializaEmpleados = function () {
-        var ruta = '/api/empleado/';
+        let ruta = '/api/empleado/';
        $http.get(ruta).then(
 			function(response){
-				console.log(response.data);
-				$scope.empleados = response.data;
+				console.log(response.data.results);
+				$scope.empleados = response.data.results;
 				console.log($scope.empleados);
+       });
+    };
+
+    $scope.inicializaClientes = function () {
+        let ruta = '/api/cliente/';
+       $http.get(ruta).then(
+			function(response){
+				console.log(response.data.results);
+				$scope.clientes = response.data.results;
+				console.log($scope.clientes);
        });
     };
 
@@ -39,6 +62,7 @@ app.controller('notasCtrl', function($http, $scope){
 
 	$scope.mostrar = function(pagina){
 		$scope.inicializaEmpleados();
+		$scope.inicializaClientes();
 		if(pagina == null)
 			ruta = '/api/nota/?page=1'
 		else if(pagina == 'ant')
