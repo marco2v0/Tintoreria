@@ -14,8 +14,8 @@ app.controller('articulosCtrl', function($http, $scope){
 			'/api/articulo/'		
 		).then(
 			function(response){
-				console.log(response.data);
-				$scope.articulos = response.data;
+				console.log(response.data.results);
+				$scope.articulos = response.data.results;
 			},
 			function(err){
 				console.log(err);

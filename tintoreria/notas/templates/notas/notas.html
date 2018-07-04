@@ -2,290 +2,326 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>
-  </title>
+    <title>
+    </title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="{% static "js/app.js" %}"></script>
     <script src="{% static "js/notas.js" %}"></script>
 </head>
 
-<body ng-App="App" >
-  <div ng-controller="notasCtrl">
+<body ng-App="App">
+<div ng-controller="notasCtrl">
     {% verbatim %}
 
     <div class="row">
-      <div class="col-md-1 col-md-offset-10">
-        
-        <!-- Button trigger modal -->
-        <br></br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Agregar
-        </button>
+        <div class="col-md-1 col-md-offset-10">
 
-        <!-- Modal -->
-        <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalTitle" aria-hidden="true">
-          <!--div class="modal-dialog modal-lg" role="document"-->
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="AddModalTitle">Agregar Nota</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" style="font-size: 12px">
-                <form>
-                  <div class="row">
-                    <div class="form-group">
-                      <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
-                      <div class="col-sm-10 col-md-9">
-                        <!--input type="text" class="form-control" ng-model="nota.cliente" name="cliente" /-->
-                        <select class="form-control form-control-sm" name="selectCliente" ng-options="cliente.nombre + cliente.paterno + cliente.materno for cliente in clientes track by cliente.id" ng-model="nota.cliente"></select>
-                      </div>
+            <!-- Button trigger modal -->
+            <br></br>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Agregar
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalTitle"
+                 aria-hidden="true">
+                <!--div class="modal-dialog modal-lg" role="document"-->
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="AddModalTitle">Agregar Nota</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="font-size: 12px">
+                            <form>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
+                                        <div class="col-sm-10 col-md-9">
+                                            <!--input type="text" class="form-control" ng-model="nota.cliente" name="cliente" /-->
+                                            <select class="form-control form-control-sm" name="selectCliente"
+                                                    ng-options="cliente.nombre + ' ' + cliente.paterno + ' ' + cliente.materno for cliente in clientes track by cliente.id"
+                                                    ng-model="nota.cliente"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona
+                                            Servicio:</label>
+                                        <div class="col-sm-10 col-md-9">
+                                            <select class="form-control form-control-sm" name="selectEmpleado"
+                                                    ng-options="empleado.nombre + ' ' + empleado.paterno + ' ' + empleado.materno for empleado in empleados track by empleado.id"
+                                                    ng-model="nota.persona_servicio"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="descuento"
+                                               class="col-sm-2 col-md-3 control-label">Descuento:</label>
+                                        <div class="col-sm-10 col-md-3">
+                                            <input type="text" class="form-control" ng-model="nota.descuento"
+                                                   name="descuento"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha
+                                            Término:</label>
+                                        <div class="col-sm-10 col-md-3">
+                                            <input type="date" class="form-control" ng-model="nota.fecha_termino"
+                                                   name="fecha_termino"/>
+                                        </div>
+                                        <label for="materno" class="col-sm-2 col-md-3 control-label">Fecha
+                                            Entrega:</label>
+                                        <div class="col-sm-10 col-md-3">
+                                            <input type="date" class="form-control" ng-model="nota.fecha_entrega"
+                                                   name="fecha_entrega"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="observaciones" class="col-sm-2 col-md-3 control-label">Observaciones:</label>
+                                        <div class="col-sm-10 col-md-9">
+                                            <textarea type="text" class="form-control" rows="3"
+                                                      ng-model="nota.observaciones" name="observaciones"/>
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <label class="col-sm-2 col-md-6 control-label">Detalle:</label>
+                            </div>
+                            <br>
+                            <div style="overflow-x: auto; overflow-y: auto;">
+                                <div>
+                                    <table class="table table-hover" style="font-size: 12px">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <label>Articulo</label>
+                                            </th>
+                                            <th>
+                                                <label>Cantidad</label>
+                                            </th>
+                                            <th>
+                                                <label>Agregar</label>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th>
+                                                <select type="text" class="form-control form-control-sm"
+                                                        name="selectArticulo"
+                                                        ng-options="articulo.descripcion for articulo in articulos track by articulo.id"
+                                                        ng-model="detalle.articulo"></select>
+                                            </th>
+                                            <th>
+                                                <input type="number" class="form-control" ng-model="detalle.cantidad"/>
+                                            </th>
+                                            <th>
+                                                <button type="button" class="btn btn-info btn-sm"
+                                                        ng-click="guardarDet()">Agregar
+                                                </button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row col-md-8 col-md-offset-2">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                        <thead>
+                                        <tr>
+                                            <th>Partida</th>
+                                            <th>Artículo</th>
+                                            <th>Cantidad</th>
+                                            <th>Servicio</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tr ng-repeat="det in nota.detalle">
+                                            <th>{{ det.partida }}</th>
+                                            <th>{{ det.articulo }}</th>
+                                            <th>{{ det.cantidad }}</th>
+                                            <th>{{ det.servicio }}</th>
+                                            <th>
+                                                <button type="button" class="btn btn-danger btn-xs"
+                                                        ng-click="borrarDet(det)">Eliminar
+                                                </button>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" ng-click="guardar()">Guardar</button>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <div class="form-group">
-                      <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona Servicio:</label>
-                      <div class="col-sm-10 col-md-9">
-                        <!--input type="text" class="form-control" ng-model="nota.persona_servicio" name="persona_servicio"/-->
-                        <select class="form-control form-control-sm" name="selectEmpleado" ng-options="empleado.nombre + empleado.paterno + empleado.materno for empleado in empleados track by empleado.id" ng-model="nota.persona_servicio"></select>
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <div class="form-group">
-                      <label for="descuento" class="col-sm-2 col-md-3 control-label">Descuento:</label>
-                      <div class="col-sm-10 col-md-3">
-                        <input type="text" class="form-control" ng-model="nota.descuento" name="descuento" />
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <div class="form-group">
-                      <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha Término:</label>
-                      <div class="col-sm-10 col-md-3">
-                        <input type="date" class="form-control" ng-model="nota.fecha_termino" name="fecha_termino" />
-                      </div>
-                      <label for="materno" class="col-sm-2 col-md-3 control-label">Fecha Entrega:</label>
-                      <div class="col-sm-10 col-md-3">
-                        <input type="date" class="form-control" ng-model="nota.fecha_entrega" name="fecha_entrega" />
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <div class="form-group">
-                      <label for="observaciones" class="col-sm-2 col-md-3 control-label">Observaciones:</label>
-                      <div class="col-sm-10 col-md-9">
-                        <textarea type="text" class="form-control" rows="3" ng-model="nota.observaciones" name="observaciones" />
-                        </textarea>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <br>
-                <br>
-                <div class="row">
-                  <label class="col-sm-2 col-md-6 control-label">Detalle:</label>
                 </div>
-                <br>
-                <div style="overflow-x: auto; overflow-y: auto;">
-                  <div>
-                    <table class="table table-hover" style="font-size: 12px">
-                      <thead>
-                        <tr>
-                          <th scope="row">
-                            <th scope="col">
-                              <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Articulo</label>
-                            </th>
-                            <th scope="col">
-                              <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Cantidad</label>
-                            </th>
-                            <th scope="col">
-                              <label for="articulo_d" class="col-sm-2 col-md-4 control-label">Agregar</label>
-                            </th>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">
-                            <td>
-                              <div class="col-sm-10 col-md-7">
-                                <input type="text" class="form-control" ng-model="detalle.articulo" name="articulo_ad"/>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="col-sm-10 col-md-7">
-                                <input type="text" class="form-control" ng-model="detalle.cantidad" name="cantidad_ad"/>
-                              </div>
-                            </td>
-                          </th>
-                          <th scope="col"><button type="button" class="btn btn-info btn-sm" ng-click="guardarDet()">Agregar</button></th>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="row col-md-8 col-md-offset-2">
-                    <table class="table table-striped">
-                      <tbody>
-                        <thead>
-                          <tr>
-                            <th>Partida</th>
-                            <th>Artículo</th>
-                            <th>Cantidad</th>
-                            <th>Servicio</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tr ng-repeat="det in nota.detalle">
-                          <th>{{ det.partida }}</th>
-                          <th>{{ det.articulo }}</th>
-                          <th>{{ det.cantidad }}</th>
-                          <th>{{ det.servicio }}</th>
-                          <th>
-                            <button type="button" class="btn btn-danger btn-xs" ng-click="borrarDet(det)">Eliminar</button>
-                          </th>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" ng-click="guardar()">Guardar</button>
-              </div>
+
             </div>
-          </div>
         </div>
 
-      </div>  
-    </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Persona Servicio</th>
+                        <th scope="col">Fecha Entrega</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="nota in notas.results">
+                        <th>{{nota.id}}</th>
+                        <td>{{nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno}}</td>
+                        <td>{{nota.cantidad}}</td>
+                        <td>{{nota.persona_servicio.nombre+' '+nota.persona_servicio.paterno+'
+                            '+nota.persona_servicio.materno}}
+                        </td>
+                        <td>{{nota.fecha_entrega}}</td>
+                        <th scope="col">
+                            <button type="button" class="btn btn-warning btn-xs" ng-click="update(nota)">Editar</button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="borrar(nota)">Eliminar
+                            </button>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
 
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <table class="table table-condensed">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Cliente</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Persona Servicio</th>
-              <th scope="col">Fecha Entrega</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Eliminar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="nota in notas.results">
-              <th>{{nota.id}}</th>
-              <td>{{nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno}}</td>
-              <td>{{nota.cantidad}}</td>
-              <td>{{nota.persona_servicio.nombre+' '+nota.persona_servicio.paterno+' '+nota.persona_servicio.materno}}</td>
-              <td>{{nota.fecha_entrega}}</td>
-              <th scope="col"><button type="button" class="btn btn-warning btn-xs" ng-click="update(nota)">Editar</button></th>
-              <th scope="col"><button type="button" class="btn btn-danger btn-xs" ng-click="borrar(nota)">Eliminar</button></th>
-            </tr>
-          </tbody>
-        </table>
+                <button ng-show='notas.previous' ng-click="mostrar('ant')">anterior</button>
+                <button ng-show='notas.next' ng-click="mostrar('sig')">siguiente</button>
 
-        <button ng-show='notas.previous' ng-click="mostrar('ant')">anterior</button>
-        <button ng-show='notas.next' ng-click="mostrar('sig')">siguiente</button>
-
-        registros totales {{ notas.count }}
-      </div>
-    </div>
-
-   <div class="row">
-      <div class="col-md-1 col-md-offset-10">
-        <!-- Modal Actualizar-->
-        <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalTitle" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="UpdateModalTitle">Actualizar Nota</h5>
-                <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button-->
-              </div>
-              <div class="modal-body">
-                <form class="form-horizontal" id="UpdateForm">
-                  <div class="form-group">
-                    <label for="cantidad" class="col-sm-2 col-md-3 control-label">Cantidad:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="cantidad_m" name="cantidad_m"/>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona Servicio:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="persona_servicio_m" name="persona_servicio_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="observaciones" class="col-sm-2 col-md-3 control-label">observaciones:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="observaciones_m" name="observaciones_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="status_m" name="status_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="cliente_m" name="cliente_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha Termino:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="fecha_termino_m" name="fecha_termino_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="fecha_entrega" class="col-sm-2 col-md-3 control-label">Fecha Entrega:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="fecha_entrega_m" name="fecha_entrega_m" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="descuento" class="col-sm-2 col-md-3 control-label">Descuento:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="descuento_m" name="descuento_m" />
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" ng-click="actualizar()">Guardar</button>
-              </div>
+                registros totales {{ notas.count }}
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    {% endverbatim %}
-  </div>
+        <div class="row">
+            <div class="col-md-1 col-md-offset-10">
+                <!-- Modal Actualizar-->
+                <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="UpdateModalTitle">Actualizar Nota</h5>
+                                <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button-->
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" id="UpdateForm">
+                                    <div class="form-group">
+                                        <label for="cantidad" class="col-sm-2 col-md-3 control-label">Cantidad:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="cantidad_m"
+                                                   name="cantidad_m"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona
+                                            Servicio:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="persona_servicio_m"
+                                                   name="persona_servicio_m"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="observaciones" class="col-sm-2 col-md-3 control-label">observaciones:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="observaciones_m"
+                                                   name="observaciones_m"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="status_m"
+                                                   name="status_m"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cliente" class="col-sm-2 col-md-3 control-label">Cliente:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="cliente_m"
+                                                   name="cliente_m"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fecha_termino" class="col-sm-2 col-md-3 control-label">Fecha
+                                            Termino:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="fecha_termino_m"
+                                                   name="fecha_termino_m"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fecha_entrega" class="col-sm-2 col-md-3 control-label">Fecha
+                                            Entrega:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="fecha_entrega_m"
+                                                   name="fecha_entrega_m"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="descuento"
+                                               class="col-sm-2 col-md-3 control-label">Descuento:</label>
+                                        <div class="col-sm-10 col-md-4">
+                                            <input type="text" class="form-control" ng-model="descuento_m"
+                                                   name="descuento_m"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" ng-click="actualizar()">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endverbatim %}
+    </div>
 </body>
 </html>
