@@ -34,7 +34,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         $http.get(ruta).then(
             function (response) {
                 $scope.empleados = response.data.results;
-                console.log($scope.empleados);
+                //console.log($scope.empleados);
             });
     };
 
@@ -43,7 +43,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         $http.get(ruta).then(
             function (response) {
                 $scope.clientes = response.data.results;
-                console.log($scope.clientes);
+                //console.log($scope.clientes);
             });
     };
 
@@ -138,6 +138,7 @@ app.controller('notasCtrl', function ($http, $scope) {
                 cantidad_nota = parseInt(cantidad_nota) + parseInt($scope.detalle.cantidad);
                 partida += 1;
                 $scope.nota.detalle.push($scope.detalle)
+                console.log($scope.detalle);
                 limpiaDetalle();
             }
             else {

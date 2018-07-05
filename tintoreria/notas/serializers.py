@@ -1,69 +1,76 @@
 from rest_framework.serializers import ModelSerializer
-from tintoreria.notas.models import Nota, Status, Detalle
+from tintoreria.notas.models import Nota, Detalle
 from tintoreria.clientes.models import Cliente
+from tintoreria.empleados.models import Empleado
+from tintoreria.articulos.models import Articulo
 from tintoreria.clientes.serializers import ClienteSerializer
 from tintoreria.empleados.serializers import EmpleadoSerializer
+from tintoreria.articulos.serializers import ArticuloSerializer
 
-class DetalleSerializer (ModelSerializer):
-	
-	class Meta:
-		model = Detalle
-		fields = ('partida',
-			      'articulo',
-			      'cantidad')
+
+class DetalleSerializer(ModelSerializer):
+    articulo = ArticuloSerializer()
+    class Meta:
+        model = Detalle
+        fields = ('partida',
+                  'articulo',
+                  'cantidad')
 
 class NotaSerializer(ModelSerializer):
-	detalle = DetalleSerializer(many=True);
-	cliente = ClienteSerializer()
-	persona_servicio = EmpleadoSerializer()
+    detalle = DetalleSerializer(many=True);
+    cliente = ClienteSerializer()
+    persona_servicio = EmpleadoSerializer()
 
-	def create (self, validated_data):
-		print(validated_data)
-		nota = Nota()
-		detalle_nota = Detalle()
+    def create(self, validated_data):
+        print("**************validated_data******************")
+        print(validated_data)
+        nota = Nota()
+        detalle_nota = Detalle()
+        e = validated_data.pop('persona_servicio')
+        c = validated_data.pop('cliente')
+        empleado = Empleado.objects.get(id=e['id'])
+        cliente = Cliente.objects.get(id=c['id'])
 
-		nota.cantidad = validated_data['cantidad']
-		nota.persona_servicio = validated_data['persona_servicio']
-		nota.observaciones = validated_data['observaciones']
-		nota.status = validated_data['status']
-		nota.cliente = validated_data['cliente']
-		nota.fecha_termino = validated_data['fecha_termino']
-		nota.fecha_entrega = validated_data['fecha_entrega']
-		nota.descuento = validated_data['descuento']
+        nota.cantidad = validated_data['cantidad']
+        nota.persona_servicio = empleado
+        nota.observaciones = validated_data['observaciones']
+        nota.status = validated_data['status']
+        nota.cliente = cliente
+        nota.fecha_termino = validated_data['fecha_termino']
+        nota.fecha_entrega = validated_data['fecha_entrega']
+        nota.descuento = validated_data['descuento']
 
-		detalle_nota = validated_data['detalle']
+        print("**************detalle******************")
 
-		nota.save()
+        detalle_nota = validated_data['detalle']
 
-		detalle_nvo = Detalle()
+        nota.save()
 
-		for detalle in detalle_nota:
-			detalle_nvo.nota = nota
-			detalle_nvo.articulo = detalle['articulo']
-			detalle_nvo.cantidad = detalle['cantidad']
-			detalle_nvo.partida = detalle['partida']
-			detalle_nvo.save()
-			print(detalle_nvo.cantidad)
+        detalle_nvo = Detalle()
 
-		return validated_data
+        for detalle in detalle_nota:
+            detalle_nvo.nota = nota
+            print detalle['articulo']
+            a = detalle.pop('articulo')
+            articulo = Articulo.objects.get(id=a['id'])
+            detalle_nvo.articulo = articulo
+            detalle_nvo.cantidad = detalle['cantidad']
+            detalle_nvo.partida = detalle['partida']
+            print("**************guarda detalle******************")
+            detalle_nvo.save()
+            print("**************guarda nuevo******************")
 
-	class Meta:
-		model  = Nota
-		fields = ('id',
-			      'cantidad',
-			      'persona_servicio',
-			      'observaciones',
-			      'status',
-			      'cliente',
-			      'fecha_termino',
-			      'fecha_entrega',
-			      'descuento',
-			      'detalle')
+        return validated_data
 
-class StatusSerializer(ModelSerializer):
-
-	class Meta:
-		model  = Status
-		fields = ('id',
-			      'valor',
-			      'descripcion')
+    class Meta:
+        model = Nota
+        fields = ('id',
+                  'cantidad',
+                  'persona_servicio',
+                  'observaciones',
+                  'status',
+                  'cliente',
+                  'fecha_termino',
+                  'fecha_entrega',
+                  'descuento',
+                  'detalle')

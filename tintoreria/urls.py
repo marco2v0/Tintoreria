@@ -18,7 +18,7 @@ from django.contrib import admin
 #from tintoreria.clientes.views import Cliente
 from django.views.generic import TemplateView
 from tintoreria.clientes.views import ClienteView, ClienteAPI, ClienteList, ClienteDetail
-from tintoreria.notas.views import NotaView, NotaAPI, NotaList, NotaDetail, StatusView, StatusAPI, StatusList, StatusDetail
+from tintoreria.notas.views import NotaView, NotaAPI, NotaList, NotaDetail
 from tintoreria.insumos.views import InsumoView, InsumoAPI, InsumoList, InsumoDetail
 from tintoreria.articulos.views import ArticuloView, ArticuloAPI, ArticuloList, ArticuloDetail
 from tintoreria.empleados.views import EmpleadoView, EmpleadoAPI, EmpleadoList, EmpleadoDetail, PuestoView, PuestoAPI, PuestoList, PuestoDetail
@@ -40,8 +40,6 @@ urlpatterns = [
     url(r'^api/cliente/(?P<pk>[0-9]+)/$', csrf_exempt(ClienteDetail.as_view())),
     url(r'^api/nota/$', csrf_exempt(NotaList.as_view())),
     url(r'^api/nota/(?P<pk>[0-9]+)/$', csrf_exempt(NotaDetail.as_view())),
-    url(r'^api/status/$', csrf_exempt(StatusList.as_view())),
-    url(r'^api/status/(?P<pk>[0-9]+)/$', csrf_exempt(StatusDetail.as_view())),
     url(r'^api/empleado/$', csrf_exempt(EmpleadoList.as_view())),
     url(r'^api/empleado/(?P<pk>[0-9]+)/$', csrf_exempt(EmpleadoDetail.as_view())),
     url(r'^api/puesto/$', csrf_exempt(PuestoList.as_view())),

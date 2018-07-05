@@ -5,63 +5,49 @@ from __future__ import unicode_literals
 import json
 from rest_framework.views import APIView
 from django.http import HttpResponse
-from tintoreria.notas.models import Nota, Status, Detalle
+from tintoreria.notas.models import Nota, Detalle
 from django.views.generic import TemplateView
 from django.shortcuts import render
-from tintoreria.notas.serializers import NotaSerializer, StatusSerializer, DetalleSerializer
+from tintoreria.notas.serializers import NotaSerializer, DetalleSerializer
 from rest_framework import generics
+
 
 # Create your views here.
 class NotaView(TemplateView):
-	template_name = 'notas/notas.html'
+    template_name = 'notas/notas.html'
+
 
 class NotaAPI(APIView):
-	serializer = NotaSerializer
+    serializer = NotaSerializer
 
-	def get(self,request,format=None):
-		lista = Nota.objects.all()
-		response = self.serializer(lista,many=True)
-		return HttpResponse(json.dumps(response.data),content_type='application/json')
+    def get(self, request, format=None):
+        lista = Nota.objects.all()
+        response = self.serializer(lista, many=True)
+        return HttpResponse(json.dumps(response.data), content_type='application/json')
+
 
 class NotaList(generics.ListCreateAPIView):
     queryset = Nota.objects.all()
     serializer_class = NotaSerializer
 
+
 class NotaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Nota.objects.all()
     serializer_class = NotaSerializer
 
-class StatusView(TemplateView):
-	template_name = 'notas/status.html'
-
-class StatusAPI(APIView):
-	serializer = StatusSerializer
-
-	def get(self,request,format=None):
-		lista = Status.objects.all()
-		response = self.serializer(lista,many=True)
-		return HttpResponse(json.dumps(response.data),content_type='application/json')
-
-class StatusList(generics.ListCreateAPIView):
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-
-
-class StatusDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Status.objects.all()
-    serializer_class = StatusSerializer
-
 class DetalleAPI(APIView):
-	serializer = DetalleSerializer
+    serializer = DetalleSerializer
 
-	def get(self,request,format=None):
-		lista = Detalle.objects.all()
-		response = self.serializer(lista,many=True)
-		return HttpResponse(json.dumps(response.data),content_type='application/json')
+    def get(self, request, format=None):
+        lista = Detalle.objects.all()
+        response = self.serializer(lista, many=True)
+        return HttpResponse(json.dumps(response.data), content_type='application/json')
+
 
 class DetalleList(generics.ListCreateAPIView):
     queryset = Detalle.objects.all()
     serializer_class = DetalleSerializer
+
 
 class DetalleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Detalle.objects.all()
