@@ -10,29 +10,31 @@ from tintoreria.articulos.serializers import ArticuloSerializer
 
 class DetalleSerializer(ModelSerializer):
     articulo = ArticuloSerializer()
+
     class Meta:
         model = Detalle
         fields = ('partida',
                   'articulo',
                   'cantidad')
 
+
 class NotaSerializer(ModelSerializer):
     detalle = DetalleSerializer(many=True);
     cliente = ClienteSerializer()
-    persona_servicio = EmpleadoSerializer()
+    empleado = EmpleadoSerializer()
 
     def create(self, validated_data):
         print("**************validated_data******************")
         print(validated_data)
         nota = Nota()
         detalle_nota = Detalle()
-        e = validated_data.pop('persona_servicio')
+        e = validated_data.pop('empleado')
         c = validated_data.pop('cliente')
         empleado = Empleado.objects.get(id=e['id'])
         cliente = Cliente.objects.get(id=c['id'])
 
         nota.cantidad = validated_data['cantidad']
-        nota.persona_servicio = empleado
+        nota.empleado = empleado
         nota.observaciones = validated_data['observaciones']
         nota.status = validated_data['status']
         nota.cliente = cliente
@@ -66,7 +68,7 @@ class NotaSerializer(ModelSerializer):
         model = Nota
         fields = ('id',
                   'cantidad',
-                  'persona_servicio',
+                  'empleado',
                   'observaciones',
                   'status',
                   'cliente',

@@ -2,7 +2,7 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.empleados = [];
     $scope.nota = {
         'cantidad': null,
-        'persona_servicio': null,
+        'empleado': null,
         'observaciones': null,
         'status': null,
         'cliente': null,
@@ -96,7 +96,7 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.guardar = function () {
         console.log($scope.nota);
         if ($scope.nota.cliente != null) {
-            if ($scope.nota.persona_servicio != null) {
+            if ($scope.nota.empleado != null) {
                 if ($scope.nota.fecha_termino != null) {
                     if ($scope.nota.fecha_entrega != null) {
                         $scope.nota.cantidad = cantidad_nota;

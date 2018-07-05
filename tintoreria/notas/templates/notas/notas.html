@@ -64,12 +64,12 @@
                                 <br>
                                 <div class="row">
                                     <div class="form-group">
-                                        <label for="persona_servicio" class="col-sm-2 col-md-3 control-label">Persona
+                                        <label for="empleado" class="col-sm-2 col-md-3 control-label">Persona
                                             Servicio:</label>
                                         <div class="col-sm-10 col-md-9">
                                             <select class="form-control form-control-sm" name="selectEmpleado"
                                                     ng-options="empleado.nombre + ' ' + empleado.paterno + ' ' + empleado.materno for empleado in empleados track by empleado.id"
-                                                    ng-model="nota.persona_servicio"></select>
+                                                    ng-model="nota.empleado"></select>
                                         </div>
                                     </div>
                                 </div>
