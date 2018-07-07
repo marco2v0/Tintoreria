@@ -8,7 +8,7 @@ class Articulo(models.Model):
 	
 	descripcion = models.CharField(max_length=255)
 	fecha_captura = models.DateTimeField(auto_now_add=True)
-	status = models.ForeignKey('notas.Status',on_delete=models.CASCADE, null=True)
+	status = models.CharField(max_length=3)
 	#clasificacion = models.ForeignKey('articulos.Clasificacion',on_delete=models.CASCADE)
 
 	def __str__(self):

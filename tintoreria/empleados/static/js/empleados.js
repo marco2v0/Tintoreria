@@ -20,8 +20,8 @@ app.controller('empleadosCtrl', function($http, $scope){
 			'/api/empleado/'		
 		).then(
 			function(response){
-				console.log(response.data);
-				$scope.empleados = response.data;
+				console.log(response.data.results);
+				$scope.empleados = response.data.results;
 			},
 			function(err){
 				console.log(err);

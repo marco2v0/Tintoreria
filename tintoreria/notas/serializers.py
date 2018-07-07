@@ -1,72 +1,78 @@
 from rest_framework.serializers import ModelSerializer
-from tintoreria.notas.models import Nota, Status, Detalle
+from tintoreria.notas.models import Nota, Detalle
+from tintoreria.clientes.models import Cliente
+from tintoreria.empleados.models import Empleado
+from tintoreria.articulos.models import Articulo
 from tintoreria.clientes.serializers import ClienteSerializer
-#from tintoreria.empleados.serializers import EmpleadoSerializer
+from tintoreria.empleados.serializers import EmpleadoSerializer
+from tintoreria.articulos.serializers import ArticuloSerializer
 
-class DetalleSerializer (ModelSerializer):
-	
-	class Meta:
-		model = Detalle
-		fields = ('partida',
-			      'articulo',
-			      'cantidad')
+
+class DetalleSerializer(ModelSerializer):
+    articulo = ArticuloSerializer()
+
+    class Meta:
+        model = Detalle
+        fields = ('partida',
+                  'articulo',
+                  'cantidad')
+
 
 class NotaSerializer(ModelSerializer):
-	#detalle = DetalleSerializer(many=True);
-	cliente = ClienteSerializer()
-	#empleado = EmpleadoSerializer()
+    detalle = DetalleSerializer(many=True);
+    cliente = ClienteSerializer()
+    empleado = EmpleadoSerializer()
 
-	def create (self, validated_data):
-		print(validated_data)
-		#detalle_nota = validated_data.pop('detalle')
-		#print(detalle_nota)
-		nota = Nota()
-		detalle_nota = Detalle()
-		nota.cantidad = validated_data['cantidad']
-		nota.persona_servicio = validated_data['persona_servicio']
-		nota.observaciones = validated_data['observaciones']
-		nota.status = validated_data['status']
-		nota.cliente = validated_data['cliente']
-		nota.fecha_termino = validated_data['fecha_termino']
-		nota.fecha_entrega = validated_data['fecha_entrega']
-		nota.descuento = validated_data['descuento']
-		nota.servicio = validated_data['servicio']
-		#nota.id = validated_data['id']
+    def create(self, validated_data):
+        print("**************validated_data******************")
+        print(validated_data)
+        nota = Nota()
+        detalle_nota = Detalle()
+        e = validated_data.pop('empleado')
+        c = validated_data.pop('cliente')
+        empleado = Empleado.objects.get(id=e['id'])
+        cliente = Cliente.objects.get(id=c['id'])
 
-		detalle_nota = validated_data['detalle']
+        nota.cantidad = validated_data['cantidad']
+        nota.empleado = empleado
+        nota.observaciones = validated_data['observaciones']
+        nota.status = validated_data['status']
+        nota.cliente = cliente
+        nota.fecha_termino = validated_data['fecha_termino']
+        nota.fecha_entrega = validated_data['fecha_entrega']
+        nota.descuento = validated_data['descuento']
 
-		nota.save()
+        print("**************detalle******************")
 
-		detalle_nvo = Detalle()
+        detalle_nota = validated_data['detalle']
 
-		for detalle in detalle_nota:
-			detalle_nvo.nota = nota
-			detalle_nvo.articulo = detalle['articulo']
-			detalle_nvo.cantidad = detalle['cantidad']
-			detalle_nvo.partida = detalle['partida']
-			detalle_nvo.save()
-			print(detalle_nvo.cantidad)
+        nota.save()
 
-		return validated_data
+        detalle_nvo = Detalle()
 
-	class Meta:
-		model  = Nota
-		fields = ('id',
-			      'cantidad',
-			      'persona_servicio',
-			      'observaciones',
-			      'status',
-			      'cliente',
-			      'fecha_termino',
-			      'fecha_entrega',
-			      'descuento',
-			      'detalle',
-			      'servicio')
+        for detalle in detalle_nota:
+            detalle_nvo.nota = nota
+            print detalle['articulo']
+            a = detalle.pop('articulo')
+            articulo = Articulo.objects.get(id=a['id'])
+            detalle_nvo.articulo = articulo
+            detalle_nvo.cantidad = detalle['cantidad']
+            detalle_nvo.partida = detalle['partida']
+            print("**************guarda detalle******************")
+            detalle_nvo.save()
+            print("**************guarda nuevo******************")
 
-class StatusSerializer(ModelSerializer):
+        return validated_data
 
-	class Meta:
-		model  = Status
-		fields = ('id',
-			      'valor',
-			      'descripcion')
+    class Meta:
+        model = Nota
+        fields = ('id',
+                  'cantidad',
+                  'empleado',
+                  'observaciones',
+                  'status',
+                  'cliente',
+                  'fecha_termino',
+                  'fecha_entrega',
+                  'descuento',
+                  'detalle')

@@ -46,8 +46,8 @@ app.controller('clientesCtrl', function($http, $scope){
 			'/api/cliente/'		
 		).then(
 			function(response){
-				console.log(response.data);
-				$scope.clientes = response.data;
+				console.log(response.data.results);
+				$scope.clientes = response.data.results;
 			},
 			function(err){
 				console.log(err);
