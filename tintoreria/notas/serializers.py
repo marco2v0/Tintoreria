@@ -7,42 +7,52 @@ from tintoreria.clientes.serializers import ClienteSerializer
 from tintoreria.empleados.serializers import EmpleadoSerializer
 from tintoreria.articulos.serializers import ArticuloSerializer
 
-
 class DetalleSerializer(ModelSerializer):
-    articulo = ArticuloSerializer()
+  articulo = ArticuloSerializer(write_only=True)
 
-    class Meta:
-        model = Detalle
-        fields = ('partida',
-                  'articulo',
-                  'cantidad')
-
+  class Meta:
+    model = Detalle
+    fields = ('partida',
+              'cantidad',
+              'articulo')
 
 class NotaSerializer(ModelSerializer):
     detalle = DetalleSerializer(many=True);
-    cliente = ClienteSerializer()
-    empleado = EmpleadoSerializer()
+    cliente = ClienteSerializer(write_only=True)
+    empleado = EmpleadoSerializer(write_only=True)
+
+    class Meta:
+      model = Nota
+      fields = ('id',
+               'cantidad',
+                'observaciones',
+                'status',
+                'fecha_termino',
+                'fecha_entrega',
+                'descuento',
+                'empleado',
+                'cliente',
+                'detalle')
 
     def create(self, validated_data):
         print("**************validated_data******************")
-        print(validated_data)
+        #print(validated_data)
         nota = Nota()
         detalle_nota = Detalle()
-        e = validated_data.pop('empleado')
         c = validated_data.pop('cliente')
-        empleado = Empleado.objects.get(id=e['id'])
+        e = validated_data.pop('empleado')
         cliente = Cliente.objects.get(id=c['id'])
+        empleado = Empleado.objects.get(id=e['id'])
 
         nota.cantidad = validated_data['cantidad']
-        nota.empleado = empleado
         nota.observaciones = validated_data['observaciones']
-        nota.status = validated_data['status']
-        nota.cliente = cliente
+        # nota.status = validated_data['status']
+        nota.status = 'NVA'
         nota.fecha_termino = validated_data['fecha_termino']
         nota.fecha_entrega = validated_data['fecha_entrega']
         nota.descuento = validated_data['descuento']
-
-        print("**************detalle******************")
+        nota.empleado = empleado
+        nota.cliente = cliente
 
         detalle_nota = validated_data['detalle']
 
@@ -52,27 +62,11 @@ class NotaSerializer(ModelSerializer):
 
         for detalle in detalle_nota:
             detalle_nvo.nota = nota
-            print detalle['articulo']
             a = detalle.pop('articulo')
             articulo = Articulo.objects.get(id=a['id'])
-            detalle_nvo.articulo = articulo
-            detalle_nvo.cantidad = detalle['cantidad']
             detalle_nvo.partida = detalle['partida']
-            print("**************guarda detalle******************")
+            detalle_nvo.cantidad = detalle['cantidad']
+            detalle_nvo.articulo = articulo
             detalle_nvo.save()
-            print("**************guarda nuevo******************")
 
         return validated_data
-
-    class Meta:
-        model = Nota
-        fields = ('id',
-                  'cantidad',
-                  'empleado',
-                  'observaciones',
-                  'status',
-                  'cliente',
-                  'fecha_termino',
-                  'fecha_entrega',
-                  'descuento',
-                  'detalle')

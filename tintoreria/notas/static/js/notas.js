@@ -1,16 +1,19 @@
 app.controller('notasCtrl', function ($http, $scope) {
     $scope.empleados = [];
-    $scope.nota = {
-        'cantidad': null,
-        'empleado': null,
-        'observaciones': null,
-        'status': null,
-        'cliente': null,
-        'fecha_termino': null,
-        'fecha_entrega': null,
-        'descuento': null,
-        'servicio': null,
-        'detalle': []
+
+    function inicializaAgregar(){
+        $scope.nota = {
+            'cantidad': null,
+            'empleado': null,
+            'observaciones': null,
+            'status': null,
+            'cliente': null,
+            'fecha_termino': null,
+            'fecha_entrega': null,
+            'descuento': null,
+            'servicio': null,
+            'detalle': []
+        }
     }
 
     var partida = 1;
@@ -56,6 +59,31 @@ app.controller('notasCtrl', function ($http, $scope) {
             });
     };
 
+    $scope.inicializaServicios = function () {
+        //let ruta = '/api/articulo/';
+        /*$http.get(ruta).then(
+            function (response) {
+                $scope.articulos = response.data.results;
+                console.log($scope.articulos);
+            });*/
+        $scope.example1model = []; 
+        $scope.example1data = 
+        [
+            {
+                id: 1, 
+                label: "Planchado"
+            },
+            {
+                id: 2, 
+                label: "Tintorería"
+            }, 
+            {
+                id: 3, 
+                label: "Lavado"
+            } 
+        ];
+    };
+
     const limpiaDetalle = function () {
         $scope.detalle = {
             'partida': partida,
@@ -71,6 +99,8 @@ app.controller('notasCtrl', function ($http, $scope) {
         $scope.inicializaEmpleados();
         $scope.inicializaClientes();
         $scope.inicializaArticulos();
+        inicializaAgregar();
+        $scope.inicializaServicios();
         if (pagina == null)
             ruta = '/api/nota/?page=1'
         else if (pagina == 'ant')
@@ -106,6 +136,7 @@ app.controller('notasCtrl', function ($http, $scope) {
                         ).then(
                             function (response) {
                                 alert("Registro guardado con exito");
+                                //$('#alertSuccess').alert();
                                 $scope.mostrar(null);
                                 $('#AddModal').modal('hide');
                             },
@@ -140,6 +171,7 @@ app.controller('notasCtrl', function ($http, $scope) {
                 $scope.nota.detalle.push($scope.detalle)
                 console.log($scope.detalle);
                 limpiaDetalle();
+                document.getElementById("articulo_a").focus();
             }
             else {
                 alert("Debe ingresar una cantidad para el artículo");
@@ -181,15 +213,13 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.update = function (nota) {
 
         $('#UpdateModal').modal('show');
-        $scope.cantidad_m = nota.cantidad;
-        $scope.persona_servicio_m = nota.persona_servicio;
-        $scope.observaciones_m = nota.observaciones;
-        $scope.status_m = nota.status;
-        $scope.cliente_m = nota.cliente;
+        $scope.empleado_m = nota.empleado.nombre;
+        $scope.cliente_m = nota.cliente.nombre;
+        $scope.descuento_m = nota.descuento;
         $scope.fecha_termino_m = nota.fecha_termino;
         $scope.fecha_entrega_m = nota.fecha_entrega;
-        $scope.descuento_m = nota.descuento;
-        $scope.servicio_m = nota.servicio;
+        $scope.observaciones_m = nota.observaciones;
+        $scope.status_m = nota.status;
         $scope.id_m = nota.id;
 
     }
