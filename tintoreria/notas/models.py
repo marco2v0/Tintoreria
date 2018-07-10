@@ -6,7 +6,7 @@ from django.db import models
 class Nota(models.Model):
     fecha_captura = models.DateTimeField(auto_now_add=True)
     cantidad = models.IntegerField()
-    empleado = models.ForeignKey('empleados.Empleado', on_delete=models.CASCADE)
+    empleado = models.ForeignKey('empleados.Empleado', related_name="empleado", on_delete=models.CASCADE)
     observaciones = models.TextField(null=True)
     status = models.CharField(max_length=3, null=True)
     cliente = models.ForeignKey('clientes.Cliente', on_delete=models.CASCADE)
