@@ -19,7 +19,7 @@ class DetalleSerializer(ModelSerializer):
 
 
 class NotaSerializer(ModelSerializer):
-    detalle = DetalleSerializer(many=True);
+    detalle = DetalleSerializer(many=True)
     cliente = ClienteSerializer()
     empleado = EmpleadoSerializer()
 
