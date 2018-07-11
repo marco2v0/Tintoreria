@@ -40,9 +40,9 @@ class NotaSerializer(ModelSerializer):
         nota = Nota()
         detalle_nota = Detalle()
         c = validated_data.pop('cliente')
-        e = validated_data.pop('empleado')
+        #e = validated_data.pop('empleado')
         cliente = Cliente.objects.get(id=c['id'])
-        empleado = Empleado.objects.get(id=e['id'])
+        #empleado = Empleado.objects.get(id=e['id'])
 
         nota.cantidad = validated_data['cantidad']
         nota.observaciones = validated_data['observaciones']
@@ -50,8 +50,8 @@ class NotaSerializer(ModelSerializer):
         nota.status = 'NVA'
         nota.fecha_termino = validated_data['fecha_termino']
         nota.fecha_entrega = validated_data['fecha_entrega']
-        nota.descuento = validated_data['descuento']
-        nota.empleado = empleado
+        #nota.descuento = validated_data['descuento']
+        #nota.empleado = empleado
         nota.cliente = cliente
 
         detalle_nota = validated_data['detalle']

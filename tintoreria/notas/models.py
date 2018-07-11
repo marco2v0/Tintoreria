@@ -6,11 +6,11 @@ from django.db import models
 class Nota(models.Model):
     fecha_captura = models.DateTimeField(auto_now_add=True)
     cantidad = models.IntegerField()
-    empleado = models.ForeignKey('empleados.Empleado', related_name="empleado", on_delete=models.CASCADE)
+    empleado = models.ForeignKey('empleados.Empleado', related_name="empleado", on_delete=models.CASCADE, null=True,blank=True)
     observaciones = models.TextField(null=True)
-    status = models.CharField(max_length=3, null=True)
+    status = models.CharField(max_length=3,default='NVA')
     cliente = models.ForeignKey('clientes.Cliente', on_delete=models.CASCADE)
-    fecha_termino = models.DateTimeField()
+    fecha_termino = models.DateTimeField(null=True)
     fecha_entrega = models.DateTimeField()
     descuento = models.IntegerField(null=True)
 

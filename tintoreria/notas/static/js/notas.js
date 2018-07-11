@@ -1,17 +1,16 @@
 app.controller('notasCtrl', function ($http, $scope) {
     $scope.empleados = [];
 
-    function inicializaAgregar(){
+    function inicializaAgregar() {
         $scope.nota = {
             'cantidad': null,
-            'empleado': null,
+            //'empleado': null,
             'observaciones': null,
-            'status': null,
+            //'status': null,
             'cliente': null,
-            'fecha_termino': null,
+            //'fecha_termino': null,
             'fecha_entrega': null,
-            'descuento': null,
-            'servicio': null,
+            //'descuento': null,
             'detalle': []
         }
     }
@@ -66,22 +65,22 @@ app.controller('notasCtrl', function ($http, $scope) {
                 $scope.articulos = response.data.results;
                 console.log($scope.articulos);
             });*/
-        $scope.example1model = []; 
-        $scope.example1data = 
-        [
-            {
-                id: 1, 
-                label: "Planchado"
-            },
-            {
-                id: 2, 
-                label: "Tintorería"
-            }, 
-            {
-                id: 3, 
-                label: "Lavado"
-            } 
-        ];
+        $scope.example1model = [];
+        $scope.example1data =
+            [
+                {
+                    id: 1,
+                    label: "Planchado"
+                },
+                {
+                    id: 2,
+                    label: "Tintorería"
+                },
+                {
+                    id: 3,
+                    label: "Lavado"
+                }
+            ];
     };
 
     const limpiaDetalle = function () {
@@ -101,6 +100,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         $scope.inicializaArticulos();
         inicializaAgregar();
         $scope.inicializaServicios();
+        console.log($scope.example1data);
         if (pagina == null)
             ruta = '/api/nota/?page=1'
         else if (pagina == 'ant')
@@ -126,35 +126,25 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.guardar = function () {
         console.log($scope.nota);
         if ($scope.nota.cliente != null) {
-            if ($scope.nota.empleado != null) {
-                if ($scope.nota.fecha_termino != null) {
-                    if ($scope.nota.fecha_entrega != null) {
-                        $scope.nota.cantidad = cantidad_nota;
-                        $http.post(
-                            '/api/nota/',
-                            $scope.nota
-                        ).then(
-                            function (response) {
-                                alert("Registro guardado con exito");
-                                //$('#alertSuccess').alert();
-                                $scope.mostrar(null);
-                                $('#AddModal').modal('hide');
-                            },
-                            function (err) {
-                                console.log(err);
-                            }
-                        )
+            if ($scope.nota.fecha_entrega != null) {
+                $scope.nota.cantidad = cantidad_nota;
+                $http.post(
+                    '/api/nota/',
+                    $scope.nota
+                ).then(
+                    function (response) {
+                        alert("Registro guardado con exito");
+                        //$('#alertSuccess').alert();
+                        $scope.mostrar(null);
+                        $('#AddModal').modal('hide');
+                    },
+                    function (err) {
+                        console.log(err);
                     }
-                    else {
-                        alert("Debe ingresar la fecha de entrega");
-                    }
-                }
-                else {
-                    alert("Debe ingresar la fecha de término");
-                }
+                )
             }
             else {
-                alert("Debe ingresar la persona asignada al servicio");
+                alert("Debe ingresar la fecha de entrega");
             }
         }
         else {
