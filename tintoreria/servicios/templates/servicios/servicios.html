@@ -18,11 +18,11 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="{% static "js/app.js" %}"></script>
-    <script src="{% static "js/status.js" %}"></script>
+    <script src="{% static "js/empleados.js" %}"></script>
 </head>
 
 <body ng-App="App" >
-  <div ng-controller="statusCtrl">
+  <div ng-controller="empleadosCtrl">
     {% verbatim %}
 
     <div class="row">
@@ -38,7 +38,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="AddModalTitle">Agregar Status</h5>
+                <h5 class="modal-title" id="AddModalTitle">Agregar Empleado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,15 +46,33 @@
               <div class="modal-body">
                 <form class="form-horizontal">
                   <div class="form-group">
-                    <label for="valor" class="col-sm-2 col-md-3 control-label">Valor:</label>
+                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Nombre:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="status.valor" name="valor" />
+                      <input type="text" class="form-control" ng-model="empleado.nombre" name="nombre" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="descripcion" class="col-sm-2 col-md-3 control-label">Descripción:</label>
+                    <label for="paterno" class="col-sm-2 col-md-3 control-label">Paterno:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="status.descripcion" name="descripcion" />
+                      <input type="text" class="form-control" ng-model="empleado.paterno" name="paterno" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="empleado.materno" name="materno" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="puesto" class="col-sm-2 col-md-3 control-label">Puesto:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="empleado.puesto" name="puesto" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="empleado.status" name="status" />
                     </div>
                   </div>
                 </form>
@@ -76,19 +94,25 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Valor</th>
-              <th scope="col">Descripción</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Paterno</th>
+              <th scope="col">Materno</th>
+              <th scope="col">Puesto</th>
+              <th scope="col">Status</th>
               <th scope="col">Editar</th>
               <th scope="col">Eliminar</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="stat in status">
-              <th scope="row">{{stat.id}}</th>
-              <td>{{ stat.valor }}</td>
-              <td>{{ stat.descripcion }}</td>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="update(status)">Editar</button></th>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(status)">Eliminar</button></th>
+            <tr ng-repeat="empleado in empleados">
+              <th scope="row">{{empleado.id}}</th>
+              <td>{{ empleado.nombre }}</td>
+              <td>{{ empleado.paterno }}</td>
+              <td>{{ empleado.materno }}</td>
+              <td>{{ empleado.puesto }}</td>
+              <td>{{ empleado.status }}</td>
+              <th scope="col"><button type="button" class="btn btn-success" ng-click="update(empleado)">Editar</button></th>
+              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(empleado)">Eliminar</button></th>
             </tr>
           </tbody>
         </table>
@@ -102,7 +126,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="UpdateModalTitle">Actualizar Status</h5>
+                <h5 class="modal-title" id="UpdateModalTitle">Actualizar Empleado</h5>
                 <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button-->
@@ -110,15 +134,33 @@
               <div class="modal-body">
                 <form class="form-horizontal" id="UpdateForm">
                   <div class="form-group">
-                    <label for="valor_m" class="col-sm-2 col-md-3 control-label">Valor:</label>
+                    <label for="nombre_m" class="col-sm-2 col-md-3 control-label">Nombre:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="valor_m" name="valor_m" />
+                      <input type="text" class="form-control" ng-model="nombre_m" name="nombre_m"/>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="descripcion_m" class="col-sm-2 col-md-3 control-label">Descripción:</label>
+                    <label for="paterno_m" class="col-sm-2 col-md-3 control-label">Paterno:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="descripcion_m" name="descripcion_m"/>
+                      <input type="text" class="form-control" ng-model="paterno_m" name="paterno_m" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="materno_m" class="col-sm-2 col-md-3 control-label">Materno:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="materno_m" name="materno_m" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="puesto_m" class="col-sm-2 col-md-3 control-label">Puesto:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="puesto_m" name="puesto_m" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
+                    <div class="col-sm-10 col-md-4">
+                      <input type="text" class="form-control" ng-model="status_m" name="status_m" />
                     </div>
                   </div>
                 </form>

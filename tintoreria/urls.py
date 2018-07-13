@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-#from tintoreria.clientes.views import Cliente
 from django.views.generic import TemplateView
 from tintoreria.clientes.views import ClienteView, ClienteAPI, ClienteList, ClienteDetail
 from tintoreria.notas.views import NotaView, NotaAPI, NotaList, NotaDetail
 from tintoreria.insumos.views import InsumoView, InsumoAPI, InsumoList, InsumoDetail
 from tintoreria.articulos.views import ArticuloView, ArticuloAPI, ArticuloList, ArticuloDetail
+from tintoreria.servicios.views import ServicioView, ServicioAPI, ServicioList, ServicioDetail
 from tintoreria.empleados.views import EmpleadoView, EmpleadoAPI, EmpleadoList, EmpleadoDetail, PuestoView, PuestoAPI, PuestoList, PuestoDetail
 from django.views.decorators.csrf import csrf_exempt
 
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^puestos/', TemplateView.as_view(template_name='empleados/puestos.html')),
     url(r'^insumos/', TemplateView.as_view(template_name='insumos/insumos.html')),
     url(r'^articulos/', TemplateView.as_view(template_name='articulos/articulos.html')),
+    url(r'^servicios/', TemplateView.as_view(template_name='servicios/servicios.html.html')),
     url(r'^test2/', ClienteView.as_view()),
     url(r'^api/cliente/$', csrf_exempt(ClienteList.as_view())),
     url(r'^api/cliente/(?P<pk>[0-9]+)/$', csrf_exempt(ClienteDetail.as_view())),
@@ -48,4 +49,6 @@ urlpatterns = [
     url(r'^api/insumo/(?P<pk>[0-9]+)/$', csrf_exempt(InsumoDetail.as_view())),
     url(r'^api/articulo/$', csrf_exempt(ArticuloList.as_view())),
     url(r'^api/articulo/(?P<pk>[0-9]+)/$', csrf_exempt(ArticuloDetail.as_view())),
+    url(r'^api/servicio/$', csrf_exempt(ServicioList.as_view())),
+    url(r'^api/servicio/(?P<pk>[0-9]+)/$', csrf_exempt(ServicioDetail.as_view())),
 ]

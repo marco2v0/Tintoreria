@@ -58,29 +58,13 @@ app.controller('notasCtrl', function ($http, $scope) {
             });
     };
 
-    $scope.inicializaServicios = function () {
-        //let ruta = '/api/articulo/';
-        /*$http.get(ruta).then(
+    inicializaServicios = function () {
+        let ruta = '/api/servicio/';
+        $http.get(ruta).then(
             function (response) {
-                $scope.articulos = response.data.results;
-                console.log($scope.articulos);
-            });*/
-        $scope.example1model = [];
-        $scope.example1data =
-            [
-                {
-                    id: 1,
-                    label: "Planchado"
-                },
-                {
-                    id: 2,
-                    label: "Tintorería"
-                },
-                {
-                    id: 3,
-                    label: "Lavado"
-                }
-            ];
+                $scope.servicios = response.data.results;
+                console.log($scope.servicios);
+            });
     };
 
     const limpiaDetalle = function () {
@@ -99,8 +83,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         $scope.inicializaClientes();
         $scope.inicializaArticulos();
         inicializaAgregar();
-        $scope.inicializaServicios();
-        console.log($scope.example1data);
+        inicializaServicios();
         if (pagina == null)
             ruta = '/api/nota/?page=1'
         else if (pagina == 'ant')
