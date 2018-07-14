@@ -4,15 +4,13 @@ app.controller('notasCtrl', function ($http, $scope) {
     function inicializaAgregar() {
         $scope.nota = {
             'cantidad': null,
-            //'empleado': null,
             'observaciones': null,
-            //'status': null,
             'cliente': null,
-            //'fecha_termino': null,
             'fecha_entrega': null,
-            //'descuento': null,
             'detalle': []
-        }
+        };
+        cantidad_nota = 0;
+        partida = 0;
     }
 
     var partida = 1;
