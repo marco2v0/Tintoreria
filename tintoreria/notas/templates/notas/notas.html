@@ -22,6 +22,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="{% static "js/app.js" %}"></script>
     <script src="{% static "js/notas.js" %}"></script>
+    <script src="{% static "js/angularjs-dropdown-multiselect.js" %}"></script>
+    <script type="text/javascript" src="lodash.js"></script>
 </head>
 
 <body ng-App="App">
@@ -124,11 +126,13 @@
                                                 <input type="number" class="form-control" ng-model="detalle.cantidad"/>
                                             </th>
                                             <th>
-                                                <select size="3" name="serviciosAdd" ng-model="detalle.servicio" multiple>
+                                                <div ng-dropdown-multiselect="Prueba" options="servicio in servicios" selected-model="detalle.servicio">
+                                                <!--select-- size="3" name="serviciosAdd" ng-model="detalle.servicio" multiple>
                                                     <option ng-repeat="servicio in servicios"
                                                             ng-value="servicio.nombre">{{servicio.nombre}}
                                                     </option>
-                                                </select>
+                                                </select-->
+                                                </div>
                                             </th>
                                             <th>
                                                 <button type="button" class="btn btn-info btn-sm"
