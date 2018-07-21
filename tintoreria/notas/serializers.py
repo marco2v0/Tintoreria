@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from tintoreria.notas.models import Nota, Detalle
+from tintoreria.notas.models import Nota, Detalle, Servicio
 from tintoreria.clientes.models import Cliente
 from tintoreria.articulos.models import Articulo
 from tintoreria.clientes.serializers import ClienteSerializer
@@ -48,10 +48,12 @@ class NotaSerializer(ModelSerializer):
         nota.cliente = cliente
 
         detalle_nota = validated_data['detalle']
+        print(detalle_nota)
 
         nota.save()
 
         detalle_nvo = Detalle()
+        servicio_nvo = Servicio()
 
         for detalle in detalle_nota:
             detalle_nvo.nota = nota
@@ -60,8 +62,13 @@ class NotaSerializer(ModelSerializer):
             detalle_nvo.partida = detalle['partida']
             detalle_nvo.cantidad = detalle['cantidad']
             detalle_nvo.articulo = articulo
-            #detalle.servicio = detalle['servicio']
-            #print(detalle.servicio)
+
+            servicio_nota = detalle['servicio']
+            print(servicio_nota)
+            for servicio in servicio_nota:
+                servicio_nvo.articulo = articulo
+                servicio_nvo.detalle = detalle
+                servicio_nvo.servicio = servicio['servicio']
 
             detalle_nvo.save()
 

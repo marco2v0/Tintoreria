@@ -137,12 +137,17 @@ app.controller('notasCtrl', function ($http, $scope) {
         //console.log($scope.nota);
         if ($scope.detalle.articulo != null) {
             if ($scope.detalle.cantidad != null) {
-                cantidad_nota = parseInt(cantidad_nota) + parseInt($scope.detalle.cantidad);
-                partida += 1;
-                $scope.nota.detalle.push($scope.detalle)
-                console.log($scope.detalle);
-                limpiaDetalle();
-                document.getElementById("articulo_a").focus();
+                if ($scope.detalle.servicio != null) {
+                    cantidad_nota = parseInt(cantidad_nota) + parseInt($scope.detalle.cantidad);
+                    partida += 1;
+                    $scope.nota.detalle.push($scope.detalle)
+                    console.log($scope.detalle);
+                    limpiaDetalle();
+                    document.getElementById("articulo_a").focus();
+                }
+                else {
+                    alert("Debe ingresar al menos un servicio para el artículo");
+                }
             }
             else {
                 alert("Debe ingresar una cantidad para el artículo");
