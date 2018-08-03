@@ -10,10 +10,8 @@ app.controller('notasCtrl', function ($http, $scope) {
             'detalle': []
         };
         cantidad_nota = 0;
-        partida = 0;
     }
 
-    var partida = 1;
     var cantidad_nota = 0;
 
     function autocomplete() {
@@ -65,9 +63,19 @@ app.controller('notasCtrl', function ($http, $scope) {
             });
     };
 
+    obtieneServicio = function (p_articulo,p_servicio) {
+        let ruta = '/api/servicio/'+p_servicio;
+        $http.get(ruta).then(
+            function (response) {
+                servicio = response.data.results.id;
+                console_log(servicio);
+                return servicio;
+            }
+        )
+    };
+
     const limpiaDetalle = function () {
         $scope.detalle = {
-            'partida': partida,
             'articulo': null,
             'cantidad': null,
             'servicio': null,
@@ -139,8 +147,8 @@ app.controller('notasCtrl', function ($http, $scope) {
             if ($scope.detalle.cantidad != null) {
                 if ($scope.detalle.servicio != null) {
                     cantidad_nota = parseInt(cantidad_nota) + parseInt($scope.detalle.cantidad);
-                    partida += 1;
-                    $scope.nota.detalle.push($scope.detalle)
+                    precio = $scope.detalle.cantidad * obtieneServicio($scope.detalle.servicio.id)
+                    $scope.nota.detalle.push($scope.detalle);
                     console.log($scope.detalle);
                     limpiaDetalle();
                     document.getElementById("articulo_a").focus();

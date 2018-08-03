@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'tintoreria.notas',
     'tintoreria.empleados',
     'tintoreria.servicios',
+    'tintoreria.precios',
     'rest_framework',
 ]
 

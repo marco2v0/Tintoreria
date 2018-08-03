@@ -14,10 +14,10 @@ class DetalleSerializer(ModelSerializer):
 
     class Meta:
         model = Detalle
-        fields = ('partida',
-                  'cantidad',
+        fields = ('cantidad',
                   'articulo',
-                  'servicio')
+                  'servicio',
+                  'precio')
 
 
 class NotaSerializer(ModelSerializer):
@@ -57,17 +57,18 @@ class NotaSerializer(ModelSerializer):
         nota.save()
 
         for detalle in detalle_nota:
+            detalle_nvo = Detalle()
+            detalle_nvo.nota = nota
             servicio_nota = detalle['servicio']
-            for servicio in servicio_nota:
-                detalle_nvo = Detalle()
-                detalle_nvo.nota = nota
-                a = detalle.pop('articulo')
-                articulo = Articulo.objects.get(id=a['id'])
-                detalle_nvo.cantidad = detalle['cantidad']
-                detalle_nvo.articulo = articulo
-                detalle_nvo.servicio = Servicio.objects.get(id=servicio['id'])
+            a = detalle.pop('articulo')
+            articulo = Articulo.objects.get(id=a['id'])
+            detalle_nvo.cantidad = detalle['cantidad']
+            detalle_nvo.articulo = articulo
+            print(servicio_nota)
 
-                print(servicio)
+            for servicio in servicio_nota:
+                detalle_nvo.servicio = Servicio.objects.get(id=servicio['id'])
+                #print(servicio)
                 detalle_nvo.save()
 
         return validated_data

@@ -149,18 +149,18 @@
                                         <tbody>
                                         <thead>
                                         <tr>
-                                            <th>Partida</th>
                                             <th>Artículo</th>
                                             <th>Cantidad</th>
-                                            <th align="center">Servicio</th>
+                                            <th>Servicio</th>
+                                            <th>Precio</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tr ng-repeat="det in nota.detalle">
-                                            <th>{{ det.partida }}</th>
                                             <th>{{ det.articulo.descripcion }}</th>
                                             <th>{{ det.cantidad }}</th>
                                             <th>{{ det.servicio.toString() }}</th>
+                                            <th>{{ det.precio }}</th>
                                             <th>
                                                 <button type="button" class="btn btn-danger btn-xs"
                                                         ng-click="borrarDet(det)">
