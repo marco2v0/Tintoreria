@@ -14,20 +14,7 @@ app.controller('notasCtrl', function ($http, $scope) {
 
     var cantidad_nota = 0;
 
-    function autocomplete() {
-        let ruta_clientes = '/api/cliente/';
-        $http.get(ruta_clientes).success(function (dataCliente) {
-            $scope.cliente_auto = dataCliente;
-            $(document).ready(function () {
-                $('#autocomplete-cliente').autocomplete({
-                    data: $scope.dataCliente,
-                    limit: 5
-                });
-            });
-        });
-    }
-
-    $scope.inicializaEmpleados = function () {
+    inicializaEmpleados = function () {
         let ruta = '/api/empleado/';
         $http.get(ruta).then(
             function (response) {
@@ -36,7 +23,7 @@ app.controller('notasCtrl', function ($http, $scope) {
             });
     };
 
-    $scope.inicializaClientes = function () {
+    inicializaClientes = function () {
         let ruta = '/api/cliente/';
         $http.get(ruta).then(
             function (response) {
@@ -45,12 +32,12 @@ app.controller('notasCtrl', function ($http, $scope) {
             });
     };
 
-    $scope.inicializaArticulos = function () {
+    inicializaArticulos = function () {
         let ruta = '/api/articulo/';
         $http.get(ruta).then(
             function (response) {
                 $scope.articulos = response.data.results;
-                console.log($scope.articulos);
+                //console.log($scope.articulos);
             });
     };
 
@@ -59,19 +46,8 @@ app.controller('notasCtrl', function ($http, $scope) {
         $http.get(ruta).then(
             function (response) {
                 $scope.servicios = response.data.results;
-                console.log($scope.servicios);
+                //console.log($scope.servicios);
             });
-    };
-
-    obtieneServicio = function (p_articulo,p_servicio) {
-        let ruta = '/api/servicio/'+p_servicio;
-        $http.get(ruta).then(
-            function (response) {
-                servicio = response.data.results.id;
-                console_log(servicio);
-                return servicio;
-            }
-        )
     };
 
     const limpiaDetalle = function () {
@@ -79,15 +55,17 @@ app.controller('notasCtrl', function ($http, $scope) {
             'articulo': null,
             'cantidad': null,
             'servicio': null,
+            'precio_unitario': null,
+            'precio_total': null
         }
     }
 
     limpiaDetalle();
 
     $scope.mostrar = function (pagina) {
-        $scope.inicializaEmpleados();
-        $scope.inicializaClientes();
-        $scope.inicializaArticulos();
+        inicializaEmpleados();
+        inicializaClientes();
+        inicializaArticulos();
         inicializaAgregar();
         inicializaServicios();
         if (pagina == null)
@@ -101,7 +79,7 @@ app.controller('notasCtrl', function ($http, $scope) {
             ruta
         ).then(
             function (response) {
-                console.log(response.data);
+                //console.log(response.data);
                 $scope.notas = response.data;
             },
             function (err) {
@@ -143,15 +121,28 @@ app.controller('notasCtrl', function ($http, $scope) {
 
     $scope.guardarDet = function (nota) {
         //console.log($scope.nota);
+        $scope.total_cantidad = 0;
+        $scope.total_precio_total = 0;
         if ($scope.detalle.articulo != null) {
             if ($scope.detalle.cantidad != null) {
                 if ($scope.detalle.servicio != null) {
                     cantidad_nota = parseInt(cantidad_nota) + parseInt($scope.detalle.cantidad);
-                    precio = $scope.detalle.cantidad * obtieneServicio($scope.detalle.servicio.id)
-                    $scope.nota.detalle.push($scope.detalle);
-                    console.log($scope.detalle);
-                    limpiaDetalle();
-                    document.getElementById("articulo_a").focus();
+                    let precioarticulo;
+                    $http.get('/api/precio/?a=' + $scope.detalle.articulo.id + '&s=' + $scope.detalle.servicio.id).then(
+                        function (response) {
+                            precio = response.data.results[0];
+                            //console.log(precio.importe);
+                            $scope.detalle.precio_unitario = parseFloat(precio.importe);
+                            $scope.detalle.precio_total = parseInt($scope.detalle.cantidad) * parseFloat(precio.importe);
+                            $scope.nota.detalle.push($scope.detalle);
+                            $scope.nota.detalle.forEach(function (valor, indice, array) {
+                                $scope.total_cantidad += valor.cantidad;
+                                $scope.total_precio_total += valor.precio_total;
+                            });
+                            limpiaDetalle();
+                            document.getElementById("articulo_a").focus();
+                        }
+                    )
                 }
                 else {
                     alert("Debe ingresar al menos un servicio para el artículo");
@@ -207,6 +198,38 @@ app.controller('notasCtrl', function ($http, $scope) {
         $scope.id_m = nota.id;
 
     }
+
+    $scope.Catalogoclientes = function () {
+        $('#ClienteModal').modal('show');
+    }
+
+    $scope.BuscaCliente = function (p_nombre) {
+        let ruta = '/api/cliente/?q=' + p_nombre;
+        $http.get(ruta).then(
+            function (response) {
+                $scope.busquedaclientes = response.data.results;
+                //console.log($scope.busquedaclientes);
+            });
+    }
+
+    $scope.AsignaCliente = function (cliente) {
+        $('#ClienteModal').modal('hide');
+        $scope.cliente_a = cliente.nombre + ' ' + cliente.paterno + ' ' + cliente.materno;
+    }
+
+    ObtienePrecio = function (p_articulo, p_servicio) {
+        console.log(p_articulo);
+        console.log(p_servicio)
+        let ruta = '/api/precio/?a=' + p_articulo + '&s=' + p_servicio;
+        console.log(ruta)
+        $http.get(ruta).then(
+            function (response) {
+                precio = response.data.results;
+                console.log(precio);
+                return precio;
+            }
+        )
+    };
 
     $scope.actualizar = function () {
         $scope.nota_nvo = {

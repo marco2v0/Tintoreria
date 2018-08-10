@@ -7,9 +7,9 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 from tintoreria.precios.models import Precio
 from django.views.generic import TemplateView
-from django.shortcuts import render
 from tintoreria.precios.serializers import PrecioSerializer
 from rest_framework import generics
+from django.db.models import Q
 
 
 # Create your views here.
@@ -27,8 +27,18 @@ class PrecioAPI(APIView):
 
 
 class PrecioList(generics.ListCreateAPIView):
-    queryset = Precio.objects.all()
+    # queryset = Precio.objects.all()
     serializer_class = PrecioSerializer
+
+    def get_queryset(self):
+        if ('a', 's') in self.request.GET:
+            a = self.request.GET.get('a')
+            s = self.request.GET.get('s')
+            queryset = Precio.objects.filter(
+                Q(articulo=a,servicio=s))
+            return queryset
+        else:
+            return Precio.objects.all()
 
 
 class PrecioDetail(generics.RetrieveUpdateDestroyAPIView):
