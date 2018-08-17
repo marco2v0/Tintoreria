@@ -3,10 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ce723454-bd36-4fac-b1e5-46bef92303ae" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tintoreria/clientes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/clientes/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tintoreria/empleados/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/empleados/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tintoreria/empleados/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/empleados/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tintoreria/empleados/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/empleados/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tintoreria/notas/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/notas/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tintoreria/notas/static/js/notas.js" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/notas/static/js/notas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tintoreria/notas/templates/notas/notas.html" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/notas/templates/notas/notas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tintoreria/precios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/precios/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tintoreria/notas/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tintoreria/notas/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,22 +24,37 @@
     <session id="567920643">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.28" value="1" />
+          <entry key="project.open.time.30" value="1" />
+          <entry key="project.open.time.32" value="1" />
+          <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="306" />
-          <entry key="js" value="274" />
-          <entry key="py" value="18" />
+          <entry key="html" value="973" />
+          <entry key="js" value="971" />
+          <entry key="py" value="203" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="306" />
-          <entry key="JavaScript" value="274" />
-          <entry key="Python" value="18" />
+          <entry key="HTML" value="973" />
+          <entry key="JavaScript" value="971" />
+          <entry key="Python" value="203" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="9" />
         </counts>
       </usages-collector>
     </session>
@@ -44,52 +62,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tintoreria/notas/serializers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tintoreria/articulos/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-              <folding>
-                <element signature="e#24#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tintoreria/notas/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-              <folding>
-                <element signature="e#24#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tintoreria/notas/static/js/notas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="124" column="34" selection-start-line="124" selection-start-column="34" selection-end-line="124" selection-end-column="34" />
+            <state relative-caret-position="200">
+              <caret line="324" column="38" lean-forward="true" selection-start-line="324" selection-start-column="38" selection-end-line="324" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tintoreria/precios/views.py">
+        <entry file="file://$PROJECT_DIR$/tintoreria/clientes/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+            <state relative-caret-position="-204">
+              <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tintoreria/notas/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="611">
+              <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
               <folding>
                 <element signature="e#25#64#0" expanded="true" />
               </folding>
@@ -98,10 +92,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tintoreria/clientes/views.py">
+        <entry file="file://$PROJECT_DIR$/tintoreria/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="30" />
+            <state>
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tintoreria/precios/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-323">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="e#25#64#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,15 +115,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tintoreria/notas/templates/notas/notas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="136" column="80" lean-forward="true" selection-start-line="136" selection-start-column="80" selection-end-line="136" selection-end-column="80" />
-              <folding>
-                <element signature="n#style#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="220">
+              <caret line="204" column="57" selection-start-line="204" selection-start-column="57" selection-end-line="204" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -138,6 +137,11 @@
       <find>OBTIENE</find>
       <find>cliente_ac</find>
       <find>servic</find>
+      <find>precio_toal</find>
+      <find>update</find>
+      <find>fecha_entrega_m</find>
+      <find>guardarde</find>
+      <find>asignaCliente</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,8 +152,6 @@
       <list>
         <option value="$PROJECT_DIR$/tintoreria/articulos/templates/articulos/articulos.html" />
         <option value="$PROJECT_DIR$/tintoreria/articulos/static/js/articulos.js" />
-        <option value="$PROJECT_DIR$/tintoreria/notas/views.py" />
-        <option value="$PROJECT_DIR$/tintoreria/empleados/models.py" />
         <option value="$PROJECT_DIR$/tintoreria/servicios/admin.py" />
         <option value="$PROJECT_DIR$/tintoreria/servicios/apps.py" />
         <option value="$PROJECT_DIR$/tintoreria/servicios/views.py" />
@@ -159,11 +161,15 @@
         <option value="$PROJECT_DIR$/tintoreria/clientes/static/js/app.js" />
         <option value="$PROJECT_DIR$/tintoreria/servicios/models.py" />
         <option value="$PROJECT_DIR$/tintoreria/notas/models.py" />
-        <option value="$PROJECT_DIR$/tintoreria/notas/serializers.py" />
         <option value="$PROJECT_DIR$/tintoreria/articulos/models.py" />
         <option value="$PROJECT_DIR$/tintoreria/clientes/views.py" />
         <option value="$PROJECT_DIR$/tintoreria/precios/views.py" />
+        <option value="$PROJECT_DIR$/tintoreria/notas/serializers.py" />
+        <option value="$PROJECT_DIR$/tintoreria/empleados/views.py" />
+        <option value="$PROJECT_DIR$/tintoreria/empleados/models.py" />
+        <option value="$PROJECT_DIR$/tintoreria/empleados/serializers.py" />
         <option value="$PROJECT_DIR$/tintoreria/notas/static/js/notas.js" />
+        <option value="$PROJECT_DIR$/tintoreria/notas/views.py" />
         <option value="$PROJECT_DIR$/tintoreria/notas/templates/notas/notas.html" />
       </list>
     </option>
@@ -185,7 +191,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -202,7 +207,13 @@
               <item name="Tintoreria_Princesa" type="b2602c69:ProjectViewProjectNode" />
               <item name="Tintoreria_Princesa" type="462c0819:PsiDirectoryNode" />
               <item name="tintoreria" type="462c0819:PsiDirectoryNode" />
-              <item name="precios" type="462c0819:PsiDirectoryNode" />
+              <item name="empleados" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Tintoreria_Princesa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Tintoreria_Princesa" type="462c0819:PsiDirectoryNode" />
+              <item name="tintoreria" type="462c0819:PsiDirectoryNode" />
+              <item name="notas" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Tintoreria_Princesa" type="b2602c69:ProjectViewProjectNode" />
@@ -214,6 +225,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,13 +306,13 @@
     <frame x="-1374" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2397882" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24357034" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.871407" visible="true" weight="0.32733223" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39869282" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.87065053" weight="0.32569557" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.33551556" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32843137" />
@@ -308,37 +320,14 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32843137" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.8313162" weight="0.32843137" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.6686838" weight="0.3137255" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.12859304" side_tool="true" visible="true" weight="0.32733223" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.6656581" weight="0.28150573" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.3343419" side_tool="true" weight="0.28150573" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2397882" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8729198" visible="true" weight="0.32843137" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39869282" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32843137" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32843137" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.8313162" weight="0.32843137" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.6686838" weight="0.3137255" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.12708019" side_tool="true" weight="0.32843137" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -350,9 +339,18 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tintoreria/precios/views.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/tintoreria/notas/serializers.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tintoreria/notas/serializers.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tintoreria/empleados/serializers.py</url>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -372,24 +370,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/empleados/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../venv/Lib/site-packages/rest_framework/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-448">
           <caret line="904" column="8" selection-start-line="904" selection-start-column="8" selection-end-line="904" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/empleados/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -402,13 +386,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/servicios/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/servicios/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/notas/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -446,9 +423,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/notas/static/js/typeahead.bundle.js" />
-    <entry file="file://$PROJECT_DIR$/tintoreria/notas/views.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1088">
@@ -457,20 +431,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/servicios/models.py" />
-    <entry file="file://$PROJECT_DIR$/tintoreria/servicios/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="41" column="63" selection-start-line="41" selection-start-column="63" selection-end-line="41" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/clientes/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -484,16 +444,23 @@
     <entry file="file://$PROJECT_DIR$/tintoreria/clientes/serializers.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/notas/serializers.py">
+    <entry file="file://$PROJECT_DIR$/tintoreria/servicios/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="48" />
+        <state relative-caret-position="187">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tintoreria/servicios/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/articulos/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="119">
           <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
@@ -501,51 +468,98 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tintoreria/notas/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/notas/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+        <state relative-caret-position="323">
+          <caret line="19" column="69" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/clientes/views.py">
+    <entry file="file://$PROJECT_DIR$/tintoreria/notas/static/js/notas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="30" />
+        <state relative-caret-position="200">
+          <caret line="324" column="38" lean-forward="true" selection-start-line="324" selection-start-column="38" selection-end-line="324" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/precios/views.py">
+    <entry file="file://$PROJECT_DIR$/tintoreria/empleados/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+        <state relative-caret-position="191">
+          <caret line="42" column="37" lean-forward="true" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
           <folding>
             <element signature="e#25#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tintoreria/notas/static/js/notas.js">
+    <entry file="file://$PROJECT_DIR$/tintoreria/empleados/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="124" column="34" selection-start-line="124" selection-start-column="34" selection-end-line="124" selection-end-column="34" />
+        <state relative-caret-position="412">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tintoreria/empleados/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tintoreria/precios/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#25#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tintoreria/clientes/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tintoreria/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tintoreria/notas/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="611">
+          <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+          <folding>
+            <element signature="e#25#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tintoreria/notas/templates/notas/notas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="136" column="80" lean-forward="true" selection-start-line="136" selection-start-column="80" selection-end-line="136" selection-end-column="80" />
-          <folding>
-            <element signature="n#style#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="220">
+          <caret line="204" column="57" selection-start-line="204" selection-start-column="57" selection-end-line="204" selection-end-column="57" />
         </state>
       </provider>
     </entry>

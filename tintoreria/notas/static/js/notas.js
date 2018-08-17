@@ -10,9 +10,12 @@ app.controller('notasCtrl', function ($http, $scope) {
             'detalle': []
         };
         cantidad_nota = 0;
+        $scope.total_cantidad = 0;
+        $scope.total_precio_total = 0;
     }
 
     var cantidad_nota = 0;
+    var cantidad_nota_m = 0;
 
     inicializaEmpleados = function () {
         let ruta = '/api/empleado/';
@@ -56,7 +59,17 @@ app.controller('notasCtrl', function ($http, $scope) {
             'cantidad': null,
             'servicio': null,
             'precio_unitario': null,
-            'precio_total': null
+            'precio': null
+        }
+    }
+
+    const limpiaDetalleM = function () {
+        $scope.detalle_m = {
+            'articulo': null,
+            'cantidad': null,
+            'servicio': null,
+            'precio_unitario': null,
+            'precio': null
         }
     }
 
@@ -91,6 +104,7 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.mostrar(null);
 
     $scope.guardar = function () {
+        console.log('*********NOTA A GUARDAR*********');
         console.log($scope.nota);
         if ($scope.nota.cliente != null) {
             if ($scope.nota.fecha_entrega != null) {
@@ -101,7 +115,6 @@ app.controller('notasCtrl', function ($http, $scope) {
                 ).then(
                     function (response) {
                         alert("Registro guardado con exito");
-                        //$('#alertSuccess').alert();
                         $scope.mostrar(null);
                         $('#AddModal').modal('hide');
                     },
@@ -133,14 +146,53 @@ app.controller('notasCtrl', function ($http, $scope) {
                             precio = response.data.results[0];
                             //console.log(precio.importe);
                             $scope.detalle.precio_unitario = parseFloat(precio.importe);
-                            $scope.detalle.precio_total = parseInt($scope.detalle.cantidad) * parseFloat(precio.importe);
+                            $scope.detalle.precio = parseInt($scope.detalle.cantidad) * parseFloat(precio.importe);
                             $scope.nota.detalle.push($scope.detalle);
                             $scope.nota.detalle.forEach(function (valor, indice, array) {
                                 $scope.total_cantidad += valor.cantidad;
-                                $scope.total_precio_total += valor.precio_total;
+                                $scope.total_precio_total += valor.precio;
                             });
                             limpiaDetalle();
                             document.getElementById("articulo_a").focus();
+                        }
+                    )
+                }
+                else {
+                    alert("Debe ingresar al menos un servicio para el artículo");
+                }
+            }
+            else {
+                alert("Debe ingresar una cantidad para el artículo");
+            }
+        }
+        else {
+            alert("Debe ingresar un articulo");
+        }
+
+    }
+
+    $scope.guardarDetM = function (nota) {
+        //console.log($scope.nota);
+        $scope.total_cantidad_m = 0;
+        $scope.total_precio_total_m = 0;
+        if ($scope.detalle_m.articulo != null) {
+            if ($scope.detalle_m.cantidad != null) {
+                if ($scope.detalle_m.servicio != null) {
+                    cantidad_nota_m = parseInt(cantidad_nota_m) + parseInt($scope.detalle_m.cantidad);
+                    let precioarticulo_m;
+                    $http.get('/api/precio/?a=' + $scope.detalle_m.articulo.id + '&s=' + $scope.detalle_m.servicio.id).then(
+                        function (response) {
+                            precio_m = response.data.results[0];
+                            //console.log(precio.importe);
+                            $scope.detalle_m.precio_unitario = parseFloat(precio_m.importe);
+                            $scope.detalle_m.precio = parseInt($scope.detalle_m.cantidad) * parseFloat(precio_m.importe);
+                            $scope.nota_m.detalle.push($scope.detalle_m);
+                            $scope.nota_m.detalle.forEach(function (valor, indice, array) {
+                                $scope.total_cantidad_m += valor.cantidad;
+                                $scope.total_precio_total_m += valor.precio;
+                            });
+                            limpiaDetalleM();
+                            document.getElementById("articulo_m").focus();
                         }
                     )
                 }
@@ -171,31 +223,44 @@ app.controller('notasCtrl', function ($http, $scope) {
     }
 
     $scope.borrar = function (nota) {
-        $http.delete(
-            '/api/nota/' + nota.id
-        ).then(
-            function (response) {
-                alert("Registro eliminado con exito");
-                $scope.mostrar();
-            },
-            function (err) {
-                console.log(err);
-            }
-        )
+
+        if ($scope.nota.status == 'ASG') {
+            alert("No puede borrar la nota ya que ha sido asignada");
+        }
+        else {
+            $http.delete(
+                '/api/nota/' + nota.id
+            ).then(
+                function (response) {
+                    alert("Registro eliminado con exito");
+                    $scope.mostrar();
+                },
+                function (err) {
+                    console.log(err);
+                }
+            )
+        }
 
     }
 
     $scope.update = function (nota) {
 
-        $('#UpdateModal').modal('show');
-        $scope.empleado_m = nota.empleado.nombre;
-        $scope.cliente_m = nota.cliente.nombre;
-        $scope.descuento_m = nota.descuento;
-        $scope.fecha_termino_m = nota.fecha_termino;
-        $scope.fecha_entrega_m = nota.fecha_entrega;
-        $scope.observaciones_m = nota.observaciones;
-        $scope.status_m = nota.status;
-        $scope.id_m = nota.id;
+        $scope.nota_m = nota;
+        console.log('*****NOTA_M****');
+        console.log($scope.nota_m);
+
+        if ($scope.nota_m.status == 'ASG') {
+            alert("No puede editar la nota ya que ha sido asignada");
+        }
+        else {
+            $('#UpdateModal').modal('show');
+            $scope.total_cantidad_m=0;
+            $scope.total_precio_total_m=0;
+            $scope.nota_m.detalle.forEach(function (valor, indice, array) {
+                $scope.total_cantidad_m += valor.cantidad;
+                $scope.total_precio_total_m += valor.precio;
+            });
+        }
 
     }
 
@@ -212,40 +277,16 @@ app.controller('notasCtrl', function ($http, $scope) {
             });
     }
 
-    $scope.AsignaCliente = function (cliente) {
+    $scope.asignaCliente = function (cliente) {
         $('#ClienteModal').modal('hide');
-        $scope.cliente_a = cliente.nombre + ' ' + cliente.paterno + ' ' + cliente.materno;
+        $scope.nota.cliente = cliente;
     }
 
-    ObtienePrecio = function (p_articulo, p_servicio) {
-        console.log(p_articulo);
-        console.log(p_servicio)
-        let ruta = '/api/precio/?a=' + p_articulo + '&s=' + p_servicio;
-        console.log(ruta)
-        $http.get(ruta).then(
-            function (response) {
-                precio = response.data.results;
-                console.log(precio);
-                return precio;
-            }
-        )
-    };
-
-    $scope.actualizar = function () {
-        $scope.nota_nvo = {
-            'cantidad': $scope.cantidad_m,
-            'persona_servicio': $scope.persona_servicio_m,
-            'observaciones': $scope.observaciones_m,
-            'status': $scope.status_m,
-            'cliente': $scope.cliente_m,
-            'fecha_termino': $scope.fecha_termino_m,
-            'fecha_entrega': $scope.fecha_entrega_m,
-            'descuento': $scope.descuento_m,
-            'servicio': $scope.servicio_m
-        }
-        //console.log($scope.nota);
+    $scope.actualizar = function (nota) {
+        //console.log($scope.nota_m);
         $http.put(
-            '/api/nota/' + $scope.id_m + '/', $scope.nota_nvo
+            '/api/nota/' + nota.id + '/',
+            nota
         ).then(
             function (response) {
                 alert("Registro actualizado con exito");
@@ -256,6 +297,32 @@ app.controller('notasCtrl', function ($http, $scope) {
                 console.log(err);
             }
         )
+    }
+
+    $scope.updateEmpleado = function (nota) {
+
+        if (nota.status == 'ASG') {
+            alert("La nota seleccionada ya fue asignada");
+        }
+        else if (nota.status =='NVA') {
+            //console.log(nota);
+            $('#EmpleadoModal').modal('show');
+        }
+
+    }
+
+    $scope.buscaEmpleado = function (nombre) {
+        let ruta = '/api/empleado/?q=' + nombre;
+        $http.get(ruta).then(
+            function (response) {
+                $scope.busquedaempleado = response.data.results;
+                console.log($scope.busquedaempleado);
+            });
+    }
+
+    $scope.asignaEmpleado = function (empleado) {
+        $('#EmpleadoModal').modal('hide');
+        $scope.nota.cliente = cliente;
     }
 
 })

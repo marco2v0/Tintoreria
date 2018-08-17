@@ -8,7 +8,7 @@ class Empleado(models.Model):
     nombre = models.CharField(max_length=30)
     paterno = models.CharField(max_length=30)
     materno = models.CharField(max_length=30)
-    puesto = models.ForeignKey('empleados.Puesto', on_delete=models.CASCADE)
+    puesto = models.ForeignKey('empleados.Puesto')
     status = models.CharField(max_length=3)
 
     def __str__(self):

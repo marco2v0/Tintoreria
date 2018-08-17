@@ -9,8 +9,10 @@ from tintoreria.servicios.serializers import ServicioSerializer
 
 
 class DetalleSerializer(ModelSerializer):
-    articulo = ArticuloSerializer(write_only=True)
-    servicio = ServicioSerializer(many=True)
+    #rticulo = ArticuloSerializer(write_only=True)
+    #servicio = ServicioSerializer(write_only=True)
+    articulo = ArticuloSerializer()
+    servicio = ServicioSerializer()
 
     class Meta:
         model = Detalle
@@ -22,7 +24,6 @@ class DetalleSerializer(ModelSerializer):
 
 class NotaSerializer(ModelSerializer):
     detalle = DetalleSerializer(many=True)
-    #cliente = ClienteSerializer(write_only=True,required=False)
     cliente = ClienteSerializer(required=False)
 
     class Meta:
@@ -40,7 +41,7 @@ class NotaSerializer(ModelSerializer):
 
     def create(self, validated_data):
         print("**************validated_data******************")
-        # print(validated_data)
+        print(validated_data)
 
         nota = Nota()
         c = validated_data.pop('cliente')
@@ -59,16 +60,16 @@ class NotaSerializer(ModelSerializer):
         for detalle in detalle_nota:
             detalle_nvo = Detalle()
             detalle_nvo.nota = nota
-            servicio_nota = detalle['servicio']
+            s = detalle.pop('servicio')
+            servicio = Servicio.objects.get(id=s['id'])
+            detalle_nvo.servicio = servicio
             a = detalle.pop('articulo')
             articulo = Articulo.objects.get(id=a['id'])
-            detalle_nvo.cantidad = detalle['cantidad']
             detalle_nvo.articulo = articulo
-            print(servicio_nota)
-
-            for servicio in servicio_nota:
-                detalle_nvo.servicio = Servicio.objects.get(id=servicio['id'])
-                #print(servicio)
-                detalle_nvo.save()
+            detalle_nvo.cantidad = detalle['cantidad']
+            detalle_nvo.precio = detalle['precio']
+            #print(servicio_nota)
+            detalle_nvo.save()
 
         return validated_data
+

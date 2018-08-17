@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 from tintoreria.notas.models import Nota, Detalle
 from django.views.generic import TemplateView
-from django.shortcuts import render
 from tintoreria.notas.serializers import NotaSerializer, DetalleSerializer
 from rest_framework import generics
 
