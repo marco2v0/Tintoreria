@@ -22,6 +22,7 @@ class Detalle(models.Model):
     cantidad = models.IntegerField()
     servicio = models.ForeignKey('servicios.Servicio',null=True)
     precio = models.IntegerField(null=True)
+    precio_unitario = models.IntegerField(null=True)
 
     def __str__(self):
         return self.nota

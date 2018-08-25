@@ -60,7 +60,8 @@
                                             <div class="input-group col-sm-10 col-md-6">
                                                 <input type="text" class="form-control" id="cliente"
                                                        placeholder="Cliente"
-                                                       ng_model="nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno">
+                                                       ng-model="nota.cliente"
+                                                       value="nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno">
                                                 <div class="input-group-addon" ng-click="Catalogoclientes()"><span
                                                         class="glyphicon glyphicon-search"></span></div>
                                             </div>
@@ -267,7 +268,7 @@
                                             <div class="input-group col-sm-10 col-md-6">
                                                 <input type="text" class="form-control" id="cliente_m"
                                                        placeholder="Cliente"
-                                                       ng_model="nota_m.cliente.nombre+' '+nota_m.cliente.paterno+' '+nota_m.cliente.materno">
+                                                       value="{{ nota_m.cliente.nombre + ' ' + nota_m.cliente.paterno+' '+nota_m.cliente.materno}}">
                                                 <div class="input-group-addon" ng-click="Catalogoclientes()"><span
                                                         class="glyphicon glyphicon-search"></span></div>
                                             </div>
@@ -280,7 +281,7 @@
                                         <label class="col-sm-2 col-md-3 control-label">Fecha
                                             Entrega:</label>
                                         <div class="col-sm-10 col-md-4">
-                                            <input type="date" class="form-control" ng-model="nota_m.fecha_entrega">
+                                            <input type="date" class="form-control" ng-model="nota_m.fecha_entrega" value="{{ nota_m.fecha_entrega }}">
                                         </div>
                                     </div>
                                 </div>
@@ -291,8 +292,7 @@
                                                class="col-sm-2 col-md-3 control-label">Observaciones:</label>
                                         <div class="col-sm-10 col-md-9">
                                             <textarea type="text" class="form-control" rows="3"
-                                                      ng-model="nota_m.observaciones" name="observaciones_m"/>
-                                            </textarea>
+                                                      ng-model="nota_m.observaciones" name="observaciones_m"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -483,13 +483,6 @@
                             <div class="modal-header">
                                 <div class="form-group">
                                     <h5 class="modal-title col-sm-10 col-md-6" id="EmpleadoModalTitle">Asigna Empleado</h5>
-                                    <div class="input-group col-sm-10 col-md-6">
-                                        <input type="text" class="form-control" id="empleado_ac"
-                                               placeholder="Empleado" ng-model="empleado_ac"
-                                               ng-keypress="[13, 32].includes($event.keyCode) && buscaEmpleado(empleado_ac)">
-                                        <div class="input-group-addon" ng-click="buscaEmpleado(empleado_ac)"><span
-                                                class="glyphicon glyphicon-search"></span></div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="modal-body">
@@ -515,7 +508,7 @@
                                                 <td></td>
                                                 <th scope="col">
                                                     <button type="button" class="btn btn-primary btn-xs"
-                                                            ng-click="asignaEmpleado(empleado)">
+                                                            ng-click="asignaEmpleado(notaActualizaEmpleado, empleado)">
                                                         <span class="glyphicon glyphicon-ok"></span>
                                                     </button>
                                                 </th>
@@ -527,6 +520,31 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- *********************************** MODAL MENSAJES *****************************************-->
+    <div class="row">
+            <div class="col-md-1 col-md-offset-10">
+                <!-- Modal Mensajes-->
+                <div class="modal fade" id="MensajeModal" tabindex="-1" role="dialog"
+                     aria-labelledby="MensajeModalTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center">
+                                        <label>{{ mensaje }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
                             </div>
                         </div>
                     </div>

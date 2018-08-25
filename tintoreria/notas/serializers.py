@@ -3,13 +3,14 @@ from tintoreria.notas.models import Nota, Detalle
 from tintoreria.clientes.models import Cliente
 from tintoreria.articulos.models import Articulo
 from tintoreria.servicios.models import Servicio
+from tintoreria.empleados.models import Empleado
 from tintoreria.clientes.serializers import ClienteSerializer
 from tintoreria.articulos.serializers import ArticuloSerializer
 from tintoreria.servicios.serializers import ServicioSerializer
-
+from tintoreria.empleados.serializers import EmpleadoSerializer
 
 class DetalleSerializer(ModelSerializer):
-    #rticulo = ArticuloSerializer(write_only=True)
+    #articulo = ArticuloSerializer(write_only=True)
     #servicio = ServicioSerializer(write_only=True)
     articulo = ArticuloSerializer()
     servicio = ServicioSerializer()
@@ -19,12 +20,14 @@ class DetalleSerializer(ModelSerializer):
         fields = ('cantidad',
                   'articulo',
                   'servicio',
-                  'precio')
+                  'precio',
+                  'precio_unitario')
 
 
 class NotaSerializer(ModelSerializer):
     detalle = DetalleSerializer(many=True)
     cliente = ClienteSerializer(required=False)
+    empleado = EmpleadoSerializer(required=False,allow_null=True)
 
     class Meta:
         model = Nota
@@ -40,8 +43,8 @@ class NotaSerializer(ModelSerializer):
                   'detalle')
 
     def create(self, validated_data):
-        print("**************validated_data******************")
-        print(validated_data)
+        #print("**************CREATE******************")
+        #print(validated_data)
 
         nota = Nota()
         c = validated_data.pop('cliente')
@@ -68,8 +71,21 @@ class NotaSerializer(ModelSerializer):
             detalle_nvo.articulo = articulo
             detalle_nvo.cantidad = detalle['cantidad']
             detalle_nvo.precio = detalle['precio']
+            detalle_nvo.precio_unitario = detalle['precio_unitario']
             #print(servicio_nota)
             detalle_nvo.save()
 
-        return validated_data
+        return nota
 
+    def update(self, instance, validated_data):
+        print("**************UPDATE******************")
+        print(validated_data)
+        c = validated_data.pop('empleado')
+        print c
+        empleado = Empleado.objects.get(id=c['id'])
+        instance.empleado = empleado
+        instance.status = validated_data.get('status',instance.status)
+        instance.fecha_termino = validated_data.get('fecha_termino',instance.fecha_termino)
+        instance.save()
+
+        return instance

@@ -114,7 +114,8 @@ app.controller('notasCtrl', function ($http, $scope) {
                     $scope.nota
                 ).then(
                     function (response) {
-                        alert("Registro guardado con exito");
+                        $scope.mensaje = 'Registro guardado con exito';
+                        $('#MensajeModal').modal('show');
                         $scope.mostrar(null);
                         $('#AddModal').modal('hide');
                     },
@@ -124,11 +125,13 @@ app.controller('notasCtrl', function ($http, $scope) {
                 )
             }
             else {
-                alert("Debe ingresar la fecha de entrega");
+                $scope.mensaje = 'Debe ingresar la fecha de entrega';
+                $('#MensajeModal').modal('show');
             }
         }
         else {
-            alert("Debe ingresar un cliente");
+            $scope.mensaje = 'Debe ingresar un cliente';
+            $('#MensajeModal').modal('show');
         }
     }
 
@@ -158,15 +161,18 @@ app.controller('notasCtrl', function ($http, $scope) {
                     )
                 }
                 else {
-                    alert("Debe ingresar al menos un servicio para el artículo");
+                    $scope.mensaje = 'Debe ingresar al menos un servicio para el artículo';
+                    $('#MensajeModal').modal('show');
                 }
             }
             else {
-                alert("Debe ingresar una cantidad para el artículo");
+                $scope.mensaje = 'Debe ingresar una cantidad para el artículo';
+                $('#MensajeModal').modal('show');
             }
         }
         else {
-            alert("Debe ingresar un articulo");
+            $scope.mensaje = 'Debe ingresar un articulo';
+            $('#MensajeModal').modal('show');
         }
 
     }
@@ -225,14 +231,16 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.borrar = function (nota) {
 
         if ($scope.nota.status == 'ASG') {
-            alert("No puede borrar la nota ya que ha sido asignada");
+            $scope.mensaje = 'No puede borrar la nota ya que ha sido asignada';
+            $('#MensajeModal').modal('show');
         }
         else {
             $http.delete(
                 '/api/nota/' + nota.id
             ).then(
                 function (response) {
-                    alert("Registro eliminado con exito");
+                    $scope.mensaje = 'Registro eliminado con exito';
+                    $('#MensajeModal').modal('show');
                     $scope.mostrar();
                 },
                 function (err) {
@@ -246,16 +254,19 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.update = function (nota) {
 
         $scope.nota_m = nota;
+        $scope.nota_m.fecha_entrega = new Date($scope.nota_m.fecha_entrega);
         console.log('*****NOTA_M****');
         console.log($scope.nota_m);
 
         if ($scope.nota_m.status == 'ASG') {
-            alert("No puede editar la nota ya que ha sido asignada");
+            $scope.mensaje = 'No puede editar la nota ya que ha sido asignada';
+            $('#MensajeModal').modal('show');
         }
         else {
             $('#UpdateModal').modal('show');
-            $scope.total_cantidad_m=0;
-            $scope.total_precio_total_m=0;
+            $scope.total_cantidad_m = 0;
+            $scope.total_precio_total_m = 0;
+            //Ciclo para obtener la cantidad total, precio total y precio unitario
             $scope.nota_m.detalle.forEach(function (valor, indice, array) {
                 $scope.total_cantidad_m += valor.cantidad;
                 $scope.total_precio_total_m += valor.precio;
@@ -283,13 +294,14 @@ app.controller('notasCtrl', function ($http, $scope) {
     }
 
     $scope.actualizar = function (nota) {
-        //console.log($scope.nota_m);
+        console.log($scope.nota_m);
         $http.put(
             '/api/nota/' + nota.id + '/',
             nota
         ).then(
             function (response) {
-                alert("Registro actualizado con exito");
+                $scope.mensaje = 'Registro actualizado con exito';
+                $('#MensajeModal').modal('show');
                 $scope.mostrar();
                 $('#UpdateModal').modal('hide');
             },
@@ -302,27 +314,40 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.updateEmpleado = function (nota) {
 
         if (nota.status == 'ASG') {
-            alert("La nota seleccionada ya fue asignada");
+            $scope.mensaje = 'La nota seleccionada ya fue asignada';
+            $('#MensajeModal').modal('show');
         }
-        else if (nota.status =='NVA') {
+        else if (nota.status == 'NVA') {
             //console.log(nota);
-            $('#EmpleadoModal').modal('show');
+            $scope.notaActualizaEmpleado = nota;
+            let ruta = '/api/empleado/?status=ACT';
+            $http.get(ruta).then(
+                function (response) {
+                    $scope.busquedaempleado = response.data.results;
+                    //console.log($scope.busquedaempleado);
+                    $('#EmpleadoModal').modal('show');
+                });
         }
 
     }
 
-    $scope.buscaEmpleado = function (nombre) {
-        let ruta = '/api/empleado/?q=' + nombre;
-        $http.get(ruta).then(
-            function (response) {
-                $scope.busquedaempleado = response.data.results;
-                console.log($scope.busquedaempleado);
-            });
-    }
+    $scope.asignaEmpleado = function (nota, empleado) {
+        console.log('***nota actualizar empleado*****');
+        nota.empleado = empleado;
+        nota.status = 'ASG';
+        let fechaActual = new Date();
+        nota.fecha_termino = fechaActual;
+        console.log(nota);
 
-    $scope.asignaEmpleado = function (empleado) {
-        $('#EmpleadoModal').modal('hide');
-        $scope.nota.cliente = cliente;
+        let ruta = '/api/nota/' + nota.id + '/';
+        $http.put(ruta, nota).then(
+            function (response) {
+                $('#EmpleadoModal').modal('hide');
+                //$scope.nota.cliente = cliente;
+                $scope.mensaje = 'Registro actualizado con exito';
+                $('#MensajeModal').modal('show');
+                $scope.mostrar();
+            });
     }
 
 })

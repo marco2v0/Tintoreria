@@ -44,12 +44,10 @@ class EmpleadoList(generics.ListCreateAPIView):
     serializer_class = EmpleadoSerializer
 
     def get_queryset(self):
-        if 'q' in self.request.GET:
-            q = self.request.GET.get('q')
+        if 'status' in self.request.GET:
+            status = self.request.GET.get('status')
             queryset = Empleado.objects.filter(
-                Q(nombre__contains=q) |
-                Q(materno__contains=q) |
-                Q(paterno__contains=q))
+                Q(status=status))
             return queryset
         else:
             return Empleado.objects.all()
