@@ -79,13 +79,40 @@ class NotaSerializer(ModelSerializer):
 
     def update(self, instance, validated_data):
         print("**************UPDATE******************")
-        print(validated_data)
+        #print(validated_data)
+        c = validated_data.pop('cliente')
+        #print c
+        if c:
+            cliente = Cliente.objects.get(id=c['id'])
+            instance.cliente = cliente
+        instance.fecha_entrega = validated_data.get('fecha_entrega',instance.fecha_entrega)
+        instance.observaciones = validated_data.get('observaciones',instance.observaciones)
         c = validated_data.pop('empleado')
-        print c
-        empleado = Empleado.objects.get(id=c['id'])
-        instance.empleado = empleado
+        #print c
+        if c:
+            empleado = Empleado.objects.get(id=c['id'])
+            instance.empleado = empleado
         instance.status = validated_data.get('status',instance.status)
         instance.fecha_termino = validated_data.get('fecha_termino',instance.fecha_termino)
+        instance.cantidad = validated_data.get('cantidad',instance.cantidad)
+
+        Detalle.objects.filter(nota=instance).delete()
+
+        detalle_nota = validated_data.get('detalle',instance.detalle)
+        for detalle in detalle_nota:
+            detalle_nvo = Detalle()
+            detalle_nvo.nota = instance
+            s = detalle.pop('servicio')
+            servicio = Servicio.objects.get(id=s['id'])
+            detalle_nvo.servicio = servicio
+            a = detalle.pop('articulo')
+            articulo = Articulo.objects.get(id=a['id'])
+            detalle_nvo.articulo = articulo
+            detalle_nvo.cantidad = detalle['cantidad']
+            detalle_nvo.precio = detalle['precio']
+            detalle_nvo.precio_unitario = detalle['precio_unitario']
+            detalle_nvo.save()
+
         instance.save()
 
         return instance

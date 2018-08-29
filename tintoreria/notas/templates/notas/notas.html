@@ -46,10 +46,10 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="AddModalTitle">Agregar Nota</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
+                            <h4 class="modal-title" id="AddModalTitle">Agregar Nota</h4>
                         </div>
                         <div class="modal-body" style="font-size: 12px">
                             <form>
@@ -60,8 +60,7 @@
                                             <div class="input-group col-sm-10 col-md-6">
                                                 <input type="text" class="form-control" id="cliente"
                                                        placeholder="Cliente"
-                                                       ng-model="nota.cliente"
-                                                       value="nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno">
+                                                       value="{{ nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno}}">
                                                 <div class="input-group-addon" ng-click="Catalogoclientes()"><span
                                                         class="glyphicon glyphicon-search"></span></div>
                                             </div>
@@ -371,7 +370,7 @@
                                             <th>{{ det.precio }}</th>
                                             <th>
                                                 <button type="button" class="btn btn-danger btn-xs"
-                                                        ng-click="borrarDet(det)">
+                                                        ng-click="borrarDetM(det)">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </th>
