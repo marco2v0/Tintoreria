@@ -311,8 +311,8 @@ app.controller('notasCtrl', function ($http, $scope) {
     };
 
     $scope.Catalogoclientes = function () {
-        $('#AddModal').modal('hide');
         $('#ClienteModal').modal('show');
+        document.getElementById("cliente_ac").focus();
     };
 
     $scope.BuscaCliente = function (p_nombre) {
@@ -322,17 +322,16 @@ app.controller('notasCtrl', function ($http, $scope) {
                 $scope.busquedaclientes = response.data.results;
                 //console.log($scope.busquedaclientes);
             });
-    }
+    };
 
     $scope.asignaCliente = function (cliente) {
         $('#ClienteModal').modal('hide');
-        $('#AddModal').modal('toggle');
         $scope.nota.cliente = cliente;
         $scope.nota_m.cliente = cliente;
-    }
+    };
 
     $scope.actualizar = function (nota) {
-        console.log('$scope.total_cantidad_m ='+$scope.total_cantidad_m);
+        console.log('$scope.total_cantidad_m =' + $scope.total_cantidad_m);
         $scope.nota_m.cantidad = $scope.total_cantidad_m;
         console.log($scope.nota_m);
         $http.put(
