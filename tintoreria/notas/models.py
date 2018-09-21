@@ -5,10 +5,10 @@ from django.db import models
 class Nota(models.Model):
     fecha_captura = models.DateTimeField(auto_now_add=True)
     cantidad = models.IntegerField()
-    empleado = models.ForeignKey('empleados.Empleado', related_name="empleado", null=True,blank=True)
+    empleado = models.ForeignKey('empleados.Empleado', on_delete=models.PROTECT, related_name="empleado", null=True,blank=True)
     observaciones = models.TextField(null=True)
     status = models.CharField(max_length=3,default='NVA')
-    cliente = models.ForeignKey('clientes.Cliente')
+    cliente = models.ForeignKey('clientes.Cliente', on_delete=models.PROTECT)
     fecha_termino = models.DateTimeField(null=True)
     fecha_entrega = models.DateTimeField()
     descuento = models.IntegerField(null=True)
@@ -17,10 +17,10 @@ class Nota(models.Model):
         return self.cliente
 
 class Detalle(models.Model):
-    nota = models.ForeignKey(Nota, related_name="detalle", db_column='nota_id')
-    articulo = models.ForeignKey('articulos.Articulo')
+    nota = models.ForeignKey(Nota, on_delete=models.PROTECT, related_name="detalle", db_column='nota_id')
+    articulo = models.ForeignKey('articulos.Articulo',on_delete=models.PROTECT)
     cantidad = models.IntegerField()
-    servicio = models.ForeignKey('servicios.Servicio',null=True)
+    servicio = models.ForeignKey('servicios.Servicio',null=True,on_delete=models.PROTECT)
     precio = models.IntegerField(null=True)
     precio_unitario = models.IntegerField(null=True)
 

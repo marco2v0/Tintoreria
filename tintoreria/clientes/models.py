@@ -22,5 +22,10 @@ class Cliente(models.Model):
 	sexo = models.CharField(max_length=2)
 	fecha_captura = models.DateTimeField(auto_now_add=True)
 
+	def get_direccion(self):
+		return self.direccion + ' ' + self.ciudad + ' ' + self.colonia
+	def get_nombre_completo(self):
+		return self.nombre + ' ' + self.paterno + ' ' + self.materno
+
 	def __str__(self):
 		return self.nombre

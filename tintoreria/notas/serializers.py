@@ -8,6 +8,7 @@ from tintoreria.clientes.serializers import ClienteSerializer
 from tintoreria.articulos.serializers import ArticuloSerializer
 from tintoreria.servicios.serializers import ServicioSerializer
 from tintoreria.empleados.serializers import EmpleadoSerializer
+from tintoreria.notas.functions import impresion
 
 class DetalleSerializer(ModelSerializer):
     #articulo = ArticuloSerializer(write_only=True)
@@ -74,6 +75,8 @@ class NotaSerializer(ModelSerializer):
             detalle_nvo.precio_unitario = detalle['precio_unitario']
             #print(servicio_nota)
             detalle_nvo.save()
+
+        impresion(nota)
 
         return nota
 
