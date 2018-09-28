@@ -1,8 +1,12 @@
 app.controller('articulosCtrl', function($http, $scope){
-	$scope.articulo = {
-		'descripcion': null,
-		'status': null
+	inicializaArticulo = function(){
+		$scope.articulo = {
+			'descripcion': null,
+			'status': null
+		}
 	}
+
+	inicializaArticulo();
 
 	$scope.articulo_nvo = {
 		'descripcion': null,
@@ -48,7 +52,8 @@ app.controller('articulosCtrl', function($http, $scope){
 			'/api/articulo/'+articulo.id
 		).then(
 			function(response){
-				alert("Registro eliminado con exito");
+				$scope.mensaje = 'Registro eliminado con exito';
+				$('#MensajeModal').modal('show');
 				$scope.mostrar();
 			},
 			function(err){

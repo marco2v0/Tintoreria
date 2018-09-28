@@ -15,7 +15,6 @@ from rest_framework import generics
 class NotaView(TemplateView):
     template_name = 'notas/notas.html'
 
-
 class NotaAPI(APIView):
     serializer = NotaSerializer
 

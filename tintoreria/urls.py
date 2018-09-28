@@ -23,6 +23,7 @@ from tintoreria.articulos.views import ArticuloView, ArticuloAPI, ArticuloList, 
 from tintoreria.servicios.views import ServicioView, ServicioAPI, ServicioList, ServicioDetail
 from tintoreria.precios.views import PrecioView, PrecioAPI, PrecioList, PrecioDetail
 from tintoreria.empleados.views import EmpleadoView, EmpleadoAPI, EmpleadoList, EmpleadoDetail, PuestoView, PuestoAPI, PuestoList, PuestoDetail
+from tintoreria.core.views import CoreView
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -37,7 +38,7 @@ urlpatterns = [
     url(r'^insumos/', TemplateView.as_view(template_name='insumos/insumos.html')),
     url(r'^articulos/', TemplateView.as_view(template_name='articulos/articulos.html')),
     url(r'^servicios/', TemplateView.as_view(template_name='servicios/servicios.html')),
-    url(r'^precios/', TemplateView.as_view(template_name='precios/precioshtml')),
+    url(r'^precios/', TemplateView.as_view(template_name='precios/precios.html')),
     url(r'^test2/', ClienteView.as_view()),
     url(r'^api/cliente/$', csrf_exempt(ClienteList.as_view())),
     url(r'^api/cliente/(?P<pk>[0-9]+)/$', csrf_exempt(ClienteDetail.as_view())),
@@ -55,4 +56,5 @@ urlpatterns = [
     url(r'^api/servicio/(?P<pk>[0-9]+)/$', csrf_exempt(ServicioDetail.as_view())),
     url(r'^api/precio/$', csrf_exempt(PrecioList.as_view())),
     url(r'^api/precio/(?P<pk>[0-9]+)/$', csrf_exempt(PrecioDetail.as_view())),
+    #url(r'^', TemplateView.as_view(template_name='core/core.html')),
 ]
