@@ -18,11 +18,11 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="{% static "js/app.js" %}"></script>
-    <script src="{% static "js/empleados.js" %}"></script>
+    <script src="{% static "js/servicios.js" %}"></script>
 </head>
 
 <body ng-App="App" >
-  <div ng-controller="empleadosCtrl">
+  <div ng-controller="serviciosCtrl">
     {% verbatim %}
 
     <div class="row">
@@ -38,7 +38,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="AddModalTitle">Agregar Empleado</h5>
+                <h5 class="modal-title" id="AddModalTitle">Agregar Servicio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,33 +46,19 @@
               <div class="modal-body">
                 <form class="form-horizontal">
                   <div class="form-group">
-                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Nombre:</label>
+                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Descripciòn:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.nombre" name="nombre" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="paterno" class="col-sm-2 col-md-3 control-label">Paterno:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.paterno" name="paterno" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.materno" name="materno" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="puesto" class="col-sm-2 col-md-3 control-label">Puesto:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.puesto" name="puesto" />
+                      <input type="text" class="form-control" ng-model="servicio.nombre" name="nombre" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.status" name="status" />
+                      <select type="text" class="form-control" ng-model="servicio.status"
+                         name="status"/>
+                         <option value="ACT">Activo</option>
+                         <option value="INA">Inactivo</option>
+                      </select>
                     </div>
                   </div>
                 </form>
@@ -94,25 +80,27 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Paterno</th>
-              <th scope="col">Materno</th>
-              <th scope="col">Puesto</th>
-              <th scope="col">Status</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Eliminar</th>
+              <th scope="col">Servicio</th>
+              <th scope="col">Descripciòn</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="empleado in empleados">
-              <th scope="row">{{empleado.id}}</th>
-              <td>{{ empleado.nombre }}</td>
-              <td>{{ empleado.paterno }}</td>
-              <td>{{ empleado.materno }}</td>
-              <td>{{ empleado.puesto }}</td>
-              <td>{{ empleado.status }}</td>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="update(empleado)">Editar</button></th>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(empleado)">Eliminar</button></th>
+            <tr ng-repeat="Servicio in servicios">
+              <th scope="row">{{servicio.id}}</th>
+              <td>{{ servicio.nombre }}</td>
+              <td>{{ servicio.status }}</td>
+              <th scope="col">
+                  <button type="button" class="btn btn-warning btn-xs" ng-click="update(articulo)">
+                      <span class="glyphicon glyphicon-edit"></span>
+                  </button>
+              </th>
+              <th scope="col">
+                  <button type="button" class="btn btn-danger btn-xs" ng-click="borrar(articulo)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+              </th>
             </tr>
           </tbody>
         </table>
@@ -173,6 +161,31 @@
           </div>
         </div>
       </div>
+    </div>
+
+<!-- *********************************** MODAL MENSAJES *****************************************-->
+    <div class="row">
+        <div class="col-md-1 col-md-offset-10">
+            <!-- Modal Mensajes-->
+            <div class="modal fade" id="MensajeModal" tabindex="-1" role="dialog"
+                 aria-labelledby="MensajeModalTitle"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: center">
+                                    <label>{{ mensaje }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     {% endverbatim %}

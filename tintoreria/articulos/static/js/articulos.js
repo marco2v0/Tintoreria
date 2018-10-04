@@ -18,7 +18,7 @@ app.controller('articulosCtrl', function($http, $scope){
 			'/api/articulo/'		
 		).then(
 			function(response){
-				console.log(response.data.results);
+				//console.log(response.data.results);
 				$scope.articulos = response.data.results;
 			},
 			function(err){
@@ -36,7 +36,8 @@ app.controller('articulosCtrl', function($http, $scope){
 			$scope.articulo
 		).then(
 			function(response){
-				alert("Registro guardado con exito");
+				$scope.mensaje = 'Registro guardado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#AddModal').modal('hide');
 			},
@@ -81,7 +82,8 @@ app.controller('articulosCtrl', function($http, $scope){
 			'/api/articulo/'+$scope.id_m+'/',$scope.articulo_nvo
 		).then(
 			function(response){
-				alert("Registro actualizado con exito");
+				$scope.mensaje = 'Registro actualizado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#UpdateModal').modal('hide');
 			},
