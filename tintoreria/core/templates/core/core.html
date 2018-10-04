@@ -1,0 +1,137 @@
+{% load staticfiles %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+    </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script src="{% static "js/app.js" %}"></script>
+    <script src="{% static "js/notas.js" %}"></script>
+</head>
+
+<body>
+<div>
+
+
+    <div class="row">
+        <!--div class="col-md-1 col-md-offset-10"-->
+        <div class="col-md-8 col-md-offset-2">
+
+            <!-- Button trigger modal -->
+            <br>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Notas</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Clientes</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Artículos</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Servicios</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="{% url 'notas' %}">
+                        <button type="button" class="btn btn-primary btn-lg"><span style="font-size: 70px;"
+                                                                                   class="glyphicon glyphicon-list-alt"></span>
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{% url 'clientes' %}">
+                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal"
+                                data-target="#AddModal"><span style="font-size: 70px;"
+                                                              class="glyphicon glyphicon-user"></span></button>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{% url 'articulos' %}">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                            data-target="#AddModal"><span style="font-size: 70px;"
+                                                          class="glyphicon glyphicon-gift"></span></button>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{% url 'servicios' %}">
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal"
+                            data-target="#AddModal"><span style="font-size: 70px;"
+                                                          class="glyphicon glyphicon-leaf"></span></button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Empleados</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Insumos</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Precios</label>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="{% url 'empleados' %}">
+                    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                            data-target="#AddModal"><span style="font-size: 70px;"
+                                                          class="glyphicon glyphicon-briefcase"></span></button>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{% url 'insumos' %}">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                            data-target="#AddModal"><span style="font-size: 70px;"
+                                                          class="glyphicon glyphicon-sort-by-attributes"></span>
+                    </button>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{% url 'precios' %}">
+                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal"
+                            data-target="#AddModal"><span style="font-size: 70px;" class="glyphicon glyphicon-usd" {%
+                                                          url 'clientes' %}></span>
+                    </button>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>

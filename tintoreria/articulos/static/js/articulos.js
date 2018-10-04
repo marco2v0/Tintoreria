@@ -49,7 +49,7 @@ app.controller('articulosCtrl', function($http, $scope){
 
 	$scope.borrar = function(articulo){
 		$http.delete(
-			'/api/articulo/'+articulo.id
+			'/api/articulo/' + articulo.id
 		).then(
 			function(response){
 				$scope.mensaje = 'Registro eliminado con exito';
@@ -60,7 +60,6 @@ app.controller('articulosCtrl', function($http, $scope){
 				console.log(err);
 			}
 		)
-		
 	}
 
 	$scope.update = function(articulo){
