@@ -64,7 +64,8 @@ app.controller('clientesCtrl', function($http, $scope){
 			$scope.cliente		
 		).then(
 			function(response){
-				alert("Registro guardado con exito");
+				$scope.mensaje = 'Registro guardado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#AddModal').modal('hide');
 			},
@@ -80,7 +81,8 @@ app.controller('clientesCtrl', function($http, $scope){
 			'/api/cliente/'+cliente.id
 		).then(
 			function(response){
-				alert("Registro eliminado con exito");
+				$scope.mensaje = 'Registro eliminado con exito';
+				$('#MensajeModal').modal('show');
 				$scope.mostrar();
 			},
 			function(err){
@@ -132,7 +134,8 @@ app.controller('clientesCtrl', function($http, $scope){
 			'/api/cliente/'+$scope.id_m+'/',$scope.cliente_nvo	
 		).then(
 			function(response){
-				alert("Registro actualizado con exito");
+				$scope.mensaje = 'Registro actualizado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#UpdateModal').modal('hide');
 			},
@@ -142,27 +145,4 @@ app.controller('clientesCtrl', function($http, $scope){
 		)
 	}
 
-	/*
-	$http.put(
-		'/api/',
-		{"nombre":"Raul","paterno":"Flores","materno":"Arroyo"}		
-	).then(
-		function(response){
-			$scope.clientes = response.data;
-		},
-		function(err){
-			console.log(err);
-		}
-	)
-
-	$http.delete(
-		'/api/'		
-	).then(
-		function(response){
-			$scope.clientes = response.data;
-		},
-		function(err){
-			console.log(err);
-		}
-	)*/
 })

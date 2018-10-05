@@ -20,7 +20,7 @@ app.controller('empleadosCtrl', function($http, $scope){
 			'/api/empleado/'		
 		).then(
 			function(response){
-				console.log(response.data.results);
+				//console.log(response.data.results);
 				$scope.empleados = response.data.results;
 			},
 			function(err){
@@ -38,7 +38,8 @@ app.controller('empleadosCtrl', function($http, $scope){
 			$scope.empleado
 		).then(
 			function(response){
-				alert("Registro guardado con exito");
+				$scope.mensaje = 'Registro guardado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#AddModal').modal('hide');
 			},
@@ -54,7 +55,8 @@ app.controller('empleadosCtrl', function($http, $scope){
 			'/api/empleado/'+empleado.id
 		).then(
 			function(response){
-				alert("Registro eliminado con exito");
+				$scope.mensaje = 'Registro eliminado con exito';
+				$('#MensajeModal').modal('show');
 				$scope.mostrar();
 			},
 			function(err){
@@ -89,7 +91,8 @@ app.controller('empleadosCtrl', function($http, $scope){
 			'/api/empleado/'+$scope.id_m+'/',$scope.empleado_nvo
 		).then(
 			function(response){
-				alert("Registro actualizado con exito");
+				$scope.mensaje = 'Registro actualizado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#UpdateModal').modal('hide');
 			},

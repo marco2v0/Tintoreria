@@ -18,19 +18,20 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="{% static "js/app.js" %}"></script>
-    <script src="{% static "js/empleados.js" %}"></script>
+    <script src="{% static "js/precios.js" %}"></script>
 </head>
 
 <body ng-App="App" >
-  <div ng-controller="empleadosCtrl">
+  <div ng-controller="preciosCtrl">
     {% verbatim %}
 
     <div class="row">
       <div class="col-md-1 col-md-offset-10">
         
         <!-- Button trigger modal -->
-        <br></br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Agregar
+       <br>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+            <span class="glyphicon glyphicon-plus"></span>
         </button>
 
         <!-- Modal -->
@@ -38,7 +39,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="AddModalTitle">Agregar Empleado</h5>
+                <h5 class="modal-title" id="AddModalTitle">Agregar Precio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,33 +47,38 @@
               <div class="modal-body">
                 <form class="form-horizontal">
                   <div class="form-group">
-                    <label for="nombre" class="col-sm-2 col-md-3 control-label">Nombre:</label>
+                    <label class="col-sm-2 col-md-3 control-label">Artículo:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.nombre" name="nombre" />
+                      <select id="articulo_a" type="text" class="form-control"
+                              ng-options="articulo.descripcion for articulo in articulos track by articulo.id"
+                              ng-model="precio.articulo"></select>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="paterno" class="col-sm-2 col-md-3 control-label">Paterno:</label>
+                    <label class="col-sm-2 col-md-3 control-label">Servicio:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.paterno" name="paterno" />
+                      <select class="form-control" type="text"
+                              ng-options="servicio.nombre for servicio in servicios track by servicio.id"
+                              ng-model="precio.servicio">
+                      </select>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="materno" class="col-sm-2 col-md-3 control-label">Materno:</label>
+                    <label for="materno" class="col-sm-2 col-md-3 control-label">Vigencia Del:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.materno" name="materno" />
+                      <input type="date" class="form-control" ng-model="precio.vigencia_del" name="vigencia_del" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="puesto" class="col-sm-2 col-md-3 control-label">Puesto:</label>
+                    <label for="puesto" class="col-sm-2 col-md-3 control-label">Vigencia Al:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.puesto" name="puesto" />
+                      <input type="date" class="form-control" ng-model="precio.vigencia_al" name="vigencia_al" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
+                    <label for="status" class="col-sm-2 col-md-3 control-label">Precio:</label>
                     <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.status" name="status" />
+                      <input type="number" class="form-control" ng-model="precio.importe" name="importe" />
                     </div>
                   </div>
                 </form>
@@ -94,30 +100,51 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Paterno</th>
-              <th scope="col">Materno</th>
-              <th scope="col">Puesto</th>
-              <th scope="col">Status</th>
+              <th scope="col">Artículo</th>
+              <th scope="col">Servicio</th>
+              <th scope="col">Vigencia Del</th>
+              <th scope="col">Vigencia Al</th>
+              <th scope="col">Precio</th>
               <th scope="col">Editar</th>
               <th scope="col">Eliminar</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="empleado in empleados">
-              <th scope="row">{{empleado.id}}</th>
-              <td>{{ empleado.nombre }}</td>
-              <td>{{ empleado.paterno }}</td>
-              <td>{{ empleado.materno }}</td>
-              <td>{{ empleado.puesto }}</td>
-              <td>{{ empleado.status }}</td>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="update(empleado)">Editar</button></th>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(empleado)">Eliminar</button></th>
+            <tr ng-repeat="precio in precios">
+              <th scope="row">{{precio.id}}</th>
+              <td>{{ precio.articulo.descripcion }}</td>
+              <td>{{ precio.servicio.descripcion }}</td>
+              <td>{{ precio.vigencia_del }}</td>
+              <td>{{ precio.vigencia_al }}</td>
+              <td>{{ precio.importe }}</td>
+              <th scope="col">
+                  <button type="button" class="btn btn-warning btn-xs" ng-click="update(precio)">
+                      <span class="glyphicon glyphicon-edit"></span>
+                  </button>
+              </th>
+              <th scope="col">
+                  <button type="button" class="btn btn-danger btn-xs" ng-click="borrar(precio)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+              </th>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+    {% endverbatim %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <a href="{% url 'menu' %}">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-triangle-left"></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    {% verbatim %}
 
    <div class="row">
       <div class="col-md-1 col-md-offset-10">
@@ -173,6 +200,31 @@
           </div>
         </div>
       </div>
+    </div>
+
+<!-- *********************************** MODAL MENSAJES *****************************************-->
+    <div class="row">
+        <div class="col-md-1 col-md-offset-10">
+            <!-- Modal Mensajes-->
+            <div class="modal fade" id="MensajeModal" tabindex="-1" role="dialog"
+                 aria-labelledby="MensajeModalTitle"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: center">
+                                    <label>{{ mensaje }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     {% endverbatim %}

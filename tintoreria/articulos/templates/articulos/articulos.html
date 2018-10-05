@@ -32,9 +32,10 @@
         <div class="col-md-1 col-md-offset-10">
 
             <!-- Button trigger modal -->
-            <br></br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Agregar
-            </button>
+        <br>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
 
             <!-- Modal -->
             <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalTitle"
@@ -112,6 +113,19 @@
             </table>
         </div>
     </div>
+
+    {% endverbatim %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <a href="{% url 'menu' %}">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-triangle-left"></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    {% verbatim %}
 
     <div class="row">
         <div class="col-md-1 col-md-offset-10">

@@ -8,17 +8,9 @@ class Empleado(models.Model):
     nombre = models.CharField(max_length=30)
     paterno = models.CharField(max_length=30)
     materno = models.CharField(max_length=30)
-    puesto = models.ForeignKey('empleados.Puesto',on_delete=models.PROTECT)
-    status = models.CharField(max_length=3)
-
-    def __str__(self):
-        return self.nombre
-
-
-class Puesto(models.Model):
-    descripcion = models.CharField(max_length=255)
+    puesto = models.CharField(max_length=30)
     fecha_captura = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=3)
 
     def __str__(self):
-        return self.descripcion
+        return self.nombre

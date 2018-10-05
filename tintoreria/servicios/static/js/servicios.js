@@ -18,7 +18,7 @@ app.controller('serviciosCtrl', function($http, $scope){
 			'/api/servicio/'		
 		).then(
 			function(response){
-				console.log(response.data.results);
+				//console.log(response.data.results);
 				$scope.servicios = response.data.results;
 			},
 			function(err){
@@ -48,7 +48,7 @@ app.controller('serviciosCtrl', function($http, $scope){
 		
 	}
 
-	$scope.borrar = function(empleado){
+	$scope.borrar = function(servicio){
 		$http.delete(
 			'/api/servicio/'+servicio.id
 		).then(

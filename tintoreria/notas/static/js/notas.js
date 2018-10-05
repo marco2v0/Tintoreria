@@ -113,7 +113,7 @@ app.controller('notasCtrl', function ($http, $scope) {
             ruta
         ).then(
             function (response) {
-                //console.log(response.data);
+                console.log(response.data);
                 $scope.notas = response.data;
             },
             function (err) {

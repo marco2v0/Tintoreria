@@ -1,8 +1,13 @@
 app.controller('insumosCtrl', function($http, $scope){
-	$scope.insumo = {
-		'descripcion': null,
-		'costo': null
+
+	inicializaInsumo = function(){
+		$scope.insumo = {
+			'descripcion': null,
+			'costo': null
+		}
 	}
+
+	inicializaInsumo();
 
 	$scope.insumo_nvo = {
 		'descripcion': null,
@@ -15,7 +20,7 @@ app.controller('insumosCtrl', function($http, $scope){
 		).then(
 			function(response){
 				console.log(response.data);
-				$scope.insumos = response.data;
+				$scope.insumos = response.data.results;
 			},
 			function(err){
 				console.log(err);
@@ -32,7 +37,8 @@ app.controller('insumosCtrl', function($http, $scope){
 			$scope.insumo
 		).then(
 			function(response){
-				alert("Registro guardado con exito");
+				$scope.mensaje = 'Registro guardado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#AddModal').modal('hide');
 			},
@@ -48,7 +54,8 @@ app.controller('insumosCtrl', function($http, $scope){
 			'/api/insumo/'+insumo.id
 		).then(
 			function(response){
-				alert("Registro eliminado con exito");
+				$scope.mensaje = 'Registro eliminado con exito';
+				$('#MensajeModal').modal('show');
 				$scope.mostrar();
 			},
 			function(err){
@@ -77,7 +84,8 @@ app.controller('insumosCtrl', function($http, $scope){
 			'/api/insumo/'+$scope.id_m+'/',$scope.insumo_nvo
 		).then(
 			function(response){
-				alert("Registro actualizado con exito");
+				$scope.mensaje = 'Registro actualizado con exito';
+                $('#MensajeModal').modal('show');
 				$scope.mostrar();
 				$('#UpdateModal').modal('hide');
 			},

@@ -29,8 +29,9 @@
       <div class="col-md-1 col-md-offset-10">
         
         <!-- Button trigger modal -->
-        <br></br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">Agregar
+        <br>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+            <span class="glyphicon glyphicon-plus"></span>
         </button>
 
         <!-- Modal -->
@@ -78,8 +79,8 @@
               <th scope="col">#</th>
               <th scope="col">Descripción</th>
               <th scope="col">Costo</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Eliminar</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -87,13 +88,34 @@
               <th scope="row">{{insumo.id}}</th>
               <td>{{ insumo.descripcion }}</td>
               <td>{{ insumo.costo }}</td>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="update(insumo)">Editar</button></th>
-              <th scope="col"><button type="button" class="btn btn-success" ng-click="borrar(insumo)">Eliminar</button></th>
+              <th scope="col">
+                  <button type="button" class="btn btn-warning btn-xs" ng-click="update(insumo)">
+                      <span class="glyphicon glyphicon-edit"></span>
+                  </button>
+              </th>
+              <th scope="col">
+                  <button type="button" class="btn btn-danger btn-xs" ng-click="borrar(insumo)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+              </th>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+    {% endverbatim %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <a href="{% url 'menu' %}">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-triangle-left"></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    {% verbatim %}
 
    <div class="row">
       <div class="col-md-1 col-md-offset-10">
@@ -131,6 +153,32 @@
           </div>
         </div>
       </div>
+    </div>
+
+
+<!-- *********************************** MODAL MENSAJES *****************************************-->
+    <div class="row">
+        <div class="col-md-1 col-md-offset-10">
+            <!-- Modal Mensajes-->
+            <div class="modal fade" id="MensajeModal" tabindex="-1" role="dialog"
+                 aria-labelledby="MensajeModalTitle"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: center">
+                                    <label>{{ mensaje }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     {% endverbatim %}

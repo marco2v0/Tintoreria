@@ -1,15 +1,7 @@
 from rest_framework.serializers import ModelSerializer
-from tintoreria.empleados.models import Empleado, Puesto
-
-class PuestoSerializer(ModelSerializer):
-    class Meta:
-        model = Puesto
-        fields = ('id',
-                  'descripcion',
-                  'status')
+from tintoreria.empleados.models import Empleado
 
 class EmpleadoSerializer(ModelSerializer):
-    puesto = PuestoSerializer()
 
     def to_internal_value(self, data):
         obj = super(EmpleadoSerializer, self).to_internal_value(data)

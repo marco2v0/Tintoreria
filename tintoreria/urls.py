@@ -22,7 +22,7 @@ from tintoreria.insumos.views import InsumoView, InsumoAPI, InsumoList, InsumoDe
 from tintoreria.articulos.views import ArticuloView, ArticuloAPI, ArticuloList, ArticuloDetail
 from tintoreria.servicios.views import ServicioView, ServicioAPI, ServicioList, ServicioDetail
 from tintoreria.precios.views import PrecioView, PrecioAPI, PrecioList, PrecioDetail
-from tintoreria.empleados.views import EmpleadoView, EmpleadoAPI, EmpleadoList, EmpleadoDetail, PuestoView, PuestoAPI, PuestoList, PuestoDetail
+from tintoreria.empleados.views import EmpleadoView, EmpleadoAPI, EmpleadoList, EmpleadoDetail
 from tintoreria.core.views import CoreView
 from django.views.decorators.csrf import csrf_exempt
 
@@ -34,7 +34,6 @@ urlpatterns = [
     url(r'^notas/', TemplateView.as_view(template_name='notas/notas.html'),name = 'notas'),
     url(r'^status/', TemplateView.as_view(template_name='notas/status.html')),
     url(r'^empleados/', TemplateView.as_view(template_name='empleados/empleados.html'),name='empleados'),
-    url(r'^puestos/', TemplateView.as_view(template_name='empleados/puestos.html')),
     url(r'^insumos/', TemplateView.as_view(template_name='insumos/insumos.html'),name='insumos'),
     url(r'^articulos/', TemplateView.as_view(template_name='articulos/articulos.html'),name='articulos'),
     url(r'^servicios/', TemplateView.as_view(template_name='servicios/servicios.html'),name='servicios'),
@@ -46,8 +45,6 @@ urlpatterns = [
     url(r'^api/nota/(?P<pk>[0-9]+)/$', csrf_exempt(NotaDetail.as_view())),
     url(r'^api/empleado/$', csrf_exempt(EmpleadoList.as_view())),
     url(r'^api/empleado/(?P<pk>[0-9]+)/$', csrf_exempt(EmpleadoDetail.as_view())),
-    url(r'^api/puesto/$', csrf_exempt(PuestoList.as_view())),
-    url(r'^api/puesto/(?P<pk>[0-9]+)/$', csrf_exempt(PuestoDetail.as_view())),
     url(r'^api/insumo/$', csrf_exempt(InsumoList.as_view())),
     url(r'^api/insumo/(?P<pk>[0-9]+)/$', csrf_exempt(InsumoDetail.as_view())),
     url(r'^api/articulo/$', csrf_exempt(ArticuloList.as_view())),
