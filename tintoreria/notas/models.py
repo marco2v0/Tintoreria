@@ -11,7 +11,8 @@ class Nota(models.Model):
     cliente = models.ForeignKey('clientes.Cliente', on_delete=models.PROTECT)
     fecha_termino = models.DateTimeField(null=True)
     fecha_entrega = models.DateTimeField()
-    descuento = models.IntegerField(null=True)
+    descuento = models.FloatField(null=True)
+    pagado = models.FloatField(default=0)
 
     def __str__(self):
         return self.cliente
@@ -21,8 +22,8 @@ class Detalle(models.Model):
     articulo = models.ForeignKey('articulos.Articulo',on_delete=models.PROTECT)
     cantidad = models.IntegerField()
     servicio = models.ForeignKey('servicios.Servicio',null=True,on_delete=models.PROTECT)
-    precio = models.IntegerField(null=True)
-    precio_unitario = models.IntegerField(null=True)
+    precio = models.FloatField(null=True)
+    precio_unitario = models.FloatField(null=True)
 
     def __str__(self):
         return self.nota

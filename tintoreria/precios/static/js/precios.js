@@ -94,8 +94,8 @@ app.controller('preciosCtrl', function($http, $scope){
 		$('#UpdateModal').modal('show');
 		$scope.articulo_m = precio.articulo;
 		$scope.servicio_m = precio.servicio;
-		$scope.vigencia_del_m = precio.vigencia_del;
-		$scope.vigencia_al_m = precio.vigencia_al;
+		$scope.vigencia_del_m = new Date(precio.vigencia_del);
+		$scope.vigencia_al_m = new Date(precio.vigencia_al);
 		$scope.importe_m = precio.importe;
 		$scope.id_m = precio.id;
 

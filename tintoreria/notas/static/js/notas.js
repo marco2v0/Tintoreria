@@ -125,7 +125,7 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.mostrar(null);
 
     $scope.guardar = function () {
-        console.log('*********NOTA A GUARDAR*********');
+        //console.log('*********NOTA A GUARDAR*********');
         console.log($scope.nota);
         if ($scope.nota.cliente != null) {
             if ($scope.nota.fecha_entrega != null) {

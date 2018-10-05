@@ -41,11 +41,12 @@ class NotaSerializer(ModelSerializer):
                   'descuento',
                   'empleado',
                   'cliente',
+                  'pagado',
                   'detalle')
 
     def create(self, validated_data):
         #print("**************CREATE******************")
-        #print(validated_data)
+        print(validated_data)
 
         nota = Nota()
         c = validated_data.pop('cliente')
@@ -55,7 +56,8 @@ class NotaSerializer(ModelSerializer):
         nota.status = 'NVA'
         nota.fecha_entrega = validated_data['fecha_entrega']
         nota.cliente = cliente
-
+        nota.pagado = validated_data['pagado']
+        print(nota.pagado)
         detalle_nota = validated_data['detalle']
         #print(detalle_nota)
 
@@ -76,7 +78,7 @@ class NotaSerializer(ModelSerializer):
             #print(servicio_nota)
             detalle_nvo.save()
 
-        impresion(nota)
+        #impresion(nota)
 
         return nota
 
@@ -98,6 +100,7 @@ class NotaSerializer(ModelSerializer):
         instance.status = validated_data.get('status',instance.status)
         instance.fecha_termino = validated_data.get('fecha_termino',instance.fecha_termino)
         instance.cantidad = validated_data.get('cantidad',instance.cantidad)
+        instance.pagado = validated_data.get('pagado',instance.pagado)
 
         Detalle.objects.filter(nota=instance).delete()
 
