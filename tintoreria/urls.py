@@ -30,6 +30,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
     url(r'^clientes/', TemplateView.as_view(template_name='clientes/clientes.html'),name = 'clientes'),
     url(r'^notas/', TemplateView.as_view(template_name='notas/notas.html'),name = 'notas'),
     url(r'^status/', TemplateView.as_view(template_name='notas/status.html')),
@@ -42,9 +43,9 @@ urlpatterns = [
     url(r'^api/cliente/$', csrf_exempt(ClienteList.as_view())),
     url(r'^api/cliente/(?P<pk>[0-9]+)/$', csrf_exempt(ClienteDetail.as_view())),
     url(r'^api/nota/$', csrf_exempt(NotaList.as_view())),
-    url(r'^api/nota/(?P<pk>[0-9]+)/$', csrf_exempt(NotaDetail.as_view())),
+    url(r'^api/nota/(?P<pk>[0-9]+)$', csrf_exempt(NotaDetail.as_view())),
     url(r'^api/empleado/$', csrf_exempt(EmpleadoList.as_view())),
-    url(r'^api/empleado/(?P<pk>[0-9]+)/$', csrf_exempt(EmpleadoDetail.as_view())),
+    url(r'^api/empleado/(?P<pk>[0-9]+)$', csrf_exempt(EmpleadoDetail.as_view())),
     url(r'^api/insumo/$', csrf_exempt(InsumoList.as_view())),
     url(r'^api/insumo/(?P<pk>[0-9]+)/$', csrf_exempt(InsumoDetail.as_view())),
     url(r'^api/articulo/$', csrf_exempt(ArticuloList.as_view())),
@@ -54,5 +55,5 @@ urlpatterns = [
     url(r'^api/precio/$', csrf_exempt(PrecioList.as_view())),
     url(r'^api/precio/(?P<pk>[0-9]+)/$', csrf_exempt(PrecioDetail.as_view())),
 
-    url(r'^', TemplateView.as_view(template_name='core/core.html'), name='menu'),
+    url(r'^$', TemplateView.as_view(template_name='core/core.html'), name='menu'),
 ]

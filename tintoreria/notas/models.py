@@ -14,16 +14,24 @@ class Nota(models.Model):
     descuento = models.FloatField(null=True)
     pagado = models.FloatField(default=0)
 
+
     def __str__(self):
         return self.cliente
 
 class Detalle(models.Model):
-    nota = models.ForeignKey(Nota, on_delete=models.PROTECT, related_name="detalle", db_column='nota_id')
+    nota = models.ForeignKey(Nota, on_delete=models.CASCADE, related_name="detalle", db_column='nota_id')
     articulo = models.ForeignKey('articulos.Articulo',on_delete=models.PROTECT)
     cantidad = models.IntegerField()
     servicio = models.ForeignKey('servicios.Servicio',null=True,on_delete=models.PROTECT)
     precio = models.FloatField(null=True)
     precio_unitario = models.FloatField(null=True)
+
+    def delete(self, *args, **kwargs):
+        try:
+            super(Detalle, self).delete(*args, **kwargs)
+        except:
+            raise ValidationError({'Detalle de orden de venta usada':
+                                   'Otros elementos depende de el, borre primero los otros elementos'})
 
     def __str__(self):
         return self.nota

@@ -31,7 +31,7 @@ class PrecioList(generics.ListCreateAPIView):
     serializer_class = PrecioSerializer
 
     def get_queryset(self):
-        if ('a', 's') in self.request.GET:
+        if ('a','s') in self.request.GET:
             a = self.request.GET.get('a')
             s = self.request.GET.get('s')
             queryset = Precio.objects.filter(
