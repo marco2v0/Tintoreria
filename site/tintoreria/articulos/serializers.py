@@ -15,4 +15,5 @@ class ArticuloSerializer(ModelSerializer):
 		fields = ('id',
 			      'descripcion',
 			      'descripcion_corta',
-			      'status')
+			      'status',
+			      'clasificacion')

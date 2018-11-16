@@ -60,19 +60,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion"
-                                           class="col-sm-2 col-md-3 control-label">Descripción Corta:</label>
+                                           class="col-sm-2 col-md-3 control-label">Descripción Ticket:</label>
                                     <div class="col-sm-10 col-md-4">
                                         <input type="text" class="form-control" ng-model="articulo.descripcion_corta"
                                                name="descripcion_corta"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
+                                    <label for="clasificacion" class="col-sm-2 col-md-3 control-label">Clasificación:</label>
                                     <div class="col-sm-10 col-md-4">
-                                        <select type="text" class="form-control" ng-model="articulo.status"
-                                               name="status"/>
-                                               <option value="ACT">Activo</option>
-                                               <option value="INA">Inactivo</option>
+                                        <select type="text" class="form-control" ng-model="articulo.clasificacion"
+                                               name="clasificacion"/>
+                                               <option value="Planchado">Planchado</option>
+                                               <option value="Tintoreria">Tintoreria</option>
+                                               <option value="Lavado">Lavado</option>
                                         </select>
                                     </div>
                                 </div>
@@ -96,7 +97,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Descripción</th>
-                    <th scope="col">Descripción Corta</th>
+                    <th scope="col">Descripción Ticket</th>
+                    <th scope="col">Clasificación</th>
                     <th scope="col">Status</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -107,6 +109,7 @@
                     <th scope="row">{{articulo.id}}</th>
                     <td>{{ articulo.descripcion }}</td>
                     <td>{{ articulo.descripcion_corta }}</td>
+                    <td>{{ articulo.clasificacion }}</td>
                     <td>{{ articulo.status }}</td>
                     <th scope="col">
                         <button type="button" class="btn btn-warning btn-xs" ng-click="update(articulo)">
@@ -146,9 +149,6 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="UpdateModalTitle">Actualizar Artículo</h5>
-                            <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button-->
                         </div>
                         <div class="modal-body">
                             <form class="form-horizontal" id="UpdateForm">
@@ -162,10 +162,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion_corta_m"
-                                           class="col-sm-2 col-md-3 control-label">Descripción Corta:</label>
+                                           class="col-sm-2 col-md-3 control-label">Descripción Ticket:</label>
                                     <div class="col-sm-10 col-md-4">
                                         <input type="text" class="form-control" ng-model="descripcion_corta_m"
                                                name="descripcion_corta_m"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clasificacion_m" class="col-sm-2 col-md-3 control-label">Clasificación:</label>
+                                    <div class="col-sm-10 col-md-4">
+                                        <select type="text" class="form-control" ng-model="clasificacion_m" name="clasificacion_m"/>
+                                        <option value="Planchado">Planchado</option>
+                                        <option value="Tintoreria">Tintoreria</option>
+                                        <option value="Lavado">Lavado</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">

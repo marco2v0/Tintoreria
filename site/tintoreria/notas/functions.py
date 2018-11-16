@@ -1,4 +1,4 @@
-#from escpos.printer import Usb
+# coding=utf-8
 from escpos import *
 
 def impresion(nota):
@@ -23,7 +23,11 @@ def impresion(nota):
 	p.text("Cliente\n")
 	p.set(align="left",font="a")
 	#p.text("Nombre: " + str(nota.cliente.get_nombre_completo()) + "\n")
-	p.text("Nombre: " + str(nota.cliente.nombre) + " " + str(nota.cliente.paterno) + " " + str(nota.cliente.materno) + "\n")
+	if nota.cliente.materno is None:
+		v_materno = ' '
+	else:
+		v_materno = nota.cliente.materno
+	p.text("Nombre: " + str(nota.cliente.nombre) + " " + str(nota.cliente.paterno) + " " + str(v_materno) + "\n")
 	p.text("----------------------------------------------\n")
 	p.set(align="center",font="a")
 	p.text("Articulos\n")

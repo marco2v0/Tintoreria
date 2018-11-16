@@ -16,6 +16,23 @@ app.controller('notasCtrl', function ($http, $scope) {
         cantidad_nota = 0;
         $scope.total_cantidad = 0;
         $scope.total_precio_total = 0;
+    };
+
+    function inicializaModificar() {
+        $scope.nota_m = {
+            'cantidad': null,
+            'observaciones': null,
+            'cliente': null,
+            'fecha_entrega': null,
+            'pagado':0,
+            'descuento':null,
+            'total':null,
+            'total_apagar':null,
+            'detalle': []
+        };
+        cantidad_nota_m = 0;
+        $scope.total_cantidad_m = 0;
+        $scope.total_precio_total_m = 0;
     }
 
     var cantidad_nota = 0;
@@ -105,6 +122,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         inicializaClientes();
         inicializaArticulos();
         inicializaAgregar();
+        inicializaModificar();
         inicializaServicios();
         if (pagina == null)
             ruta = '/api/nota/?page=1'
@@ -168,6 +186,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         if ($scope.detalle.articulo != null) {
             if ($scope.detalle.cantidad != null) {
                 if ($scope.detalle.servicio != null) {
+                    $scope.total_cantidad_descuento = 0;
                     $scope.total_cantidad = 0;
                     $scope.total_precio_total = 0;
                     cantidad_nota = parseInt(cantidad_nota) + parseInt($scope.detalle.cantidad);
@@ -182,8 +201,12 @@ app.controller('notasCtrl', function ($http, $scope) {
                             $scope.nota.detalle.forEach(function (valor, indice, array) {
                                 $scope.total_cantidad += valor.cantidad;
                                 $scope.total_precio_total += valor.precio;
+                                //console.log($scope.detalle.servicio.nombre.substring(0,9));
+                                if ($scope.detalle.servicio.nombre.substring(0,9) == 'Planchado'){
+                                    $scope.total_cantidad_descuento += valor.cantidad;
+                                }
                             });
-                            $scope.descuento = Math.trunc($scope.total_cantidad / 12) * 12;
+                            $scope.descuento = Math.trunc($scope.total_cantidad_descuento / 12) * 12;
                             $scope.total_precio_final = $scope.total_precio_total - $scope.descuento;
                             $scope.ActualizaDebe();
                             limpiaDetalle();
@@ -215,6 +238,7 @@ app.controller('notasCtrl', function ($http, $scope) {
                 if ($scope.detalle_m.servicio != null) {
                     $scope.total_cantidad_m = 0;
                     $scope.total_precio_total_m = 0;
+                    $scope.total_cantidad_descuento_m = 0;
                     let precioarticulo_m;
                     $http.get('/api/precio/?a=' + $scope.detalle_m.articulo.id + '&s=' + $scope.detalle_m.servicio.id).then(
                         function (response) {
@@ -227,8 +251,12 @@ app.controller('notasCtrl', function ($http, $scope) {
                                 $scope.total_cantidad_m += valor.cantidad;
                                 $scope.total_precio_total_m += valor.precio;
                                 //cantidad_nota_m = cantidad_nota_m + valor.cantidad;
+                                console.log($scope.detalle_m.servicio.nombre.substring(0,9));
+                                if ($scope.detalle_m.servicio.nombre.substring(0,9) == 'Planchado'){
+                                    $scope.total_cantidad_descuento_m += valor.cantidad;
+                                }
                             });
-                            $scope.descuento_m = Math.trunc($scope.total_cantidad_m / 12) * 12;
+                            $scope.descuento_m = Math.trunc($scope.total_cantidad_descuento_m / 12) * 12;
                             $scope.total_precio_final_m = $scope.total_precio_total_m - $scope.descuento_m;
                             $scope.ActualizaDebeM();
                             limpiaDetalleM();
@@ -308,7 +336,6 @@ app.controller('notasCtrl', function ($http, $scope) {
     $scope.update = function (nota) {
 
         $scope.nota_m = nota;
-        $scope.nota_m.fecha_entrega = new Date($scope.nota_m.fecha_entrega);
         console.log('*****NOTA_M****');
         console.log($scope.nota_m);
 
@@ -317,6 +344,10 @@ app.controller('notasCtrl', function ($http, $scope) {
             $('#MensajeModal').modal('show');
         }
         else {
+            $scope.nota_m.fecha_entrega = new Date($scope.nota_m.fecha_entrega);
+            $scope.descuento_m = $scope.nota_m.descuento;
+            $scope.total_precio_final_m = $scope.nota_m.total_apagar;
+            $scope.debe_m = $scope.nota_m.total_apagar - $scope.nota_m.descuento - $scope.nota_m.pagado;
             $('#UpdateModal').modal('show');
             $scope.total_cantidad_m = 0;
             $scope.total_precio_total_m = 0;

@@ -25,7 +25,13 @@ class Cliente(models.Model):
 	def get_direccion(self):
 		return self.direccion + ' ' + self.ciudad + ' ' + self.colonia
 	def get_nombre_completo(self):
-		return self.nombre + ' ' + self.paterno + ' ' + self.materno
+		if self.materno is None:
+			v_materno = ' '
+		else:
+			v_materno = self.materno	
+		#return self.nombre + ' ' + self.paterno + ' ' + v_materno
+
+		return '%s %s %s' % (self.nombre, self.paterno, v_materno)
 
 	def __str__(self):
 		return self.nombre

@@ -3,7 +3,8 @@ app.controller('articulosCtrl', function($http, $scope){
 		$scope.articulo = {
 			'descripcion': null,
 			'descripcion_corta':null,
-			'status': null
+			'status': null,
+			'clasificacion': null
 		}
 	}
 
@@ -12,7 +13,8 @@ app.controller('articulosCtrl', function($http, $scope){
 	$scope.articulo_nvo = {
 		'descripcion': null,
 		'descripcion_corta':null,
-		'status': null
+		'status': null,
+		'clasificacion': null
 	}
 
 	$scope.mostrar = function(){
@@ -71,6 +73,7 @@ app.controller('articulosCtrl', function($http, $scope){
 		$scope.descripcion_m = articulo.descripcion;
 		$scope.descripcion_corta_m = articulo.descripcion_corta;
 		$scope.status_m = articulo.status;
+		$scope.clasificacion_m = articulo.clasificacion;
 		$scope.id_m = articulo.id;
 
 	}
@@ -79,7 +82,8 @@ app.controller('articulosCtrl', function($http, $scope){
 		$scope.articulo_nvo = {
 		'descripcion': $scope.descripcion_m,
 		'descripcion_corta':$scope.descripcion_corta_m,
-		'status': $scope.status_m
+		'status': $scope.status_m,
+		'clasificacion': $scope.clasificacion_m
 		}
 		//console.log($scope.articulo);
 		$http.put(
