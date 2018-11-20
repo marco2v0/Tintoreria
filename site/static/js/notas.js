@@ -1,7 +1,7 @@
 app.controller('notasCtrl', function ($http, $scope) {
     $scope.empleados = [];
 
-    function inicializaAgregar() {
+    function inicializaNota() {
         $scope.nota = {
             'cantidad': null,
             'observaciones': null,
@@ -42,7 +42,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         let ruta = '/api/empleado/';
         $http.get(ruta).then(
             function (response) {
-                $scope.empleados = response.data.results;
+                $scope.empleados = response.data;
                 //console.log($scope.empleados);
             });
     };
@@ -51,7 +51,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         let ruta = '/api/cliente/';
         $http.get(ruta).then(
             function (response) {
-                $scope.clientes = response.data.results;
+                $scope.clientes = response.data;
                 //console.log($scope.clientes);
             });
     };
@@ -60,7 +60,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         let ruta = '/api/articulo/';
         $http.get(ruta).then(
             function (response) {
-                $scope.articulos = response.data.results;
+                $scope.articulos = response.data;
                 //console.log($scope.articulos);
             });
     };
@@ -69,7 +69,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         let ruta = '/api/servicio/';
         $http.get(ruta).then(
             function (response) {
-                $scope.servicios = response.data.results;
+                $scope.servicios = response.data;
                 //console.log($scope.servicios);
             });
     };
@@ -114,6 +114,11 @@ app.controller('notasCtrl', function ($http, $scope) {
         }
     }
 
+    $scope.agregar = function(){
+        $('#AddModal').modal('show');
+        inicializaNota();
+    }
+
     inicializaDetalle();
     inicializaDetalleM();
 
@@ -121,15 +126,18 @@ app.controller('notasCtrl', function ($http, $scope) {
         inicializaEmpleados();
         inicializaClientes();
         inicializaArticulos();
-        inicializaAgregar();
+        inicializaNota();
         inicializaModificar();
         inicializaServicios();
-        if (pagina == null)
+
+        /*if (pagina == null)
             ruta = '/api/nota/?page=1'
         else if (pagina === 'ant')
             ruta = $scope.notas.previous;
-        else if (pagina == 'sig')
-            ruta = $scope.notas.next;
+        else if (pagina === 'sig')
+            ruta = $scope.notas.next;*/
+
+        ruta = '/api/nota/';
 
         $http.get(
             ruta
@@ -146,9 +154,17 @@ app.controller('notasCtrl', function ($http, $scope) {
 
     $scope.mostrar(null);
 
+    $scope.propertyName = 'fecha_entrega';
+    $scope.reverse = false;
+
+    $scope.sortBy = function(propertyName) {
+       $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+       $scope.propertyName = propertyName;
+    };
+
     $scope.guardar = function () {
         //console.log('*********NOTA A GUARDAR*********');
-        console.log($scope.nota);
+        //console.log($scope.nota);
         if ($scope.nota.cliente != null) {
             if ($scope.nota.fecha_entrega != null) {
                 $scope.nota.cantidad = cantidad_nota;
@@ -193,7 +209,7 @@ app.controller('notasCtrl', function ($http, $scope) {
                     let precioarticulo;
                     $http.get('/api/precio/?a=' + $scope.detalle.articulo.id + '&s=' + $scope.detalle.servicio.id).then(
                         function (response) {
-                            precio = response.data.results[0];
+                            precio = response.data[0];
                             //console.log(precio.importe);
                             $scope.detalle.precio_unitario = parseFloat(precio.importe);
                             $scope.detalle.precio = parseInt($scope.detalle.cantidad) * parseFloat(precio.importe);
@@ -242,7 +258,7 @@ app.controller('notasCtrl', function ($http, $scope) {
                     let precioarticulo_m;
                     $http.get('/api/precio/?a=' + $scope.detalle_m.articulo.id + '&s=' + $scope.detalle_m.servicio.id).then(
                         function (response) {
-                            precio_m = response.data.results[0];
+                            precio_m = response.data[0];
                             //console.log(precio.importe);
                             $scope.detalle_m.precio_unitario = parseFloat(precio_m.importe);
                             $scope.detalle_m.precio = parseInt($scope.detalle_m.cantidad) * parseFloat(precio_m.importe);
@@ -416,7 +432,7 @@ app.controller('notasCtrl', function ($http, $scope) {
         let ruta = '/api/cliente/?q=' + p_nombre;
         $http.get(ruta).then(
             function (response) {
-                $scope.busquedaclientes = response.data.results;
+                $scope.busquedaclientes = response.data;
                 console.log($scope.busquedaclientes);
             });
     };
@@ -459,7 +475,7 @@ app.controller('notasCtrl', function ($http, $scope) {
             let ruta = '/api/empleado/?status=ACT';
             $http.get(ruta).then(
                 function (response) {
-                    $scope.busquedaempleado = response.data.results;
+                    $scope.busquedaempleado = response.data;
                     //console.log($scope.busquedaempleado);
                     $('#EmpleadoModal').modal('show');
                 });

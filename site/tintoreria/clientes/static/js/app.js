@@ -7,22 +7,25 @@ app.config(function($httpProvider) {
 });
 
 app.controller('clientesCtrl', function($http, $scope){
-	$scope.cliente = {
-		'nombre': null,
-		'paterno': null,
-		'materno': null,
-		'direccion': null,
-		'ciudad': null,
-		'colonia': null,
-		'cp': null,
-		'estado': null,
-		'tel_fijo': null,
-		'tel_movil': null,
-		'tel_trabajo': null,
-		'email': null,
-		'status': null,
-		'sexo': null
-	}
+
+	inicializaCliente = function(){
+		$scope.cliente = {
+			'nombre': null,
+			'paterno': null,
+			'materno': null,
+			'direccion': null,
+			'ciudad': null,
+			'colonia': null,
+			'cp': null,
+			'estado': null,
+			'tel_fijo': null,
+			'tel_movil': null,
+			'tel_trabajo': null,
+			'email': null,
+			'status': null,
+			'sexo': null
+		}
+	};
 
 	$scope.cliente_nvo = {
 		'nombre': null,
@@ -41,13 +44,18 @@ app.controller('clientesCtrl', function($http, $scope){
 		'sexo': null
 	}
 
+	$scope.agregar = function(){
+		$('#AddModal').modal('show');
+		inicializaCliente();
+	}
+
 	$scope.mostrar = function(){
 		$http.get(
 			'/api/cliente/'		
 		).then(
 			function(response){
-				console.log(response.data.results);
-				$scope.clientes = response.data.results;
+				//console.log(response.data);
+				$scope.clientes = response.data;
 			},
 			function(err){
 				console.log(err);
@@ -56,6 +64,14 @@ app.controller('clientesCtrl', function($http, $scope){
 	}
 
 	$scope.mostrar();
+
+	$scope.propertyName = 'nombre';
+	$scope.reverse = false;
+
+	$scope.sortBy = function(propertyName) {
+	   $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+	   $scope.propertyName = propertyName;
+	};
 
 	$scope.guardar = function(){
 		//console.log($scope.cliente);

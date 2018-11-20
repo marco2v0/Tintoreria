@@ -3,27 +3,40 @@ app.controller('articulosCtrl', function($http, $scope){
 		$scope.articulo = {
 			'descripcion': null,
 			'descripcion_corta':null,
-			'status': null,
-			'clasificacion': null
+			'status': null
 		}
-	}
+	};
 
 	inicializaArticulo();
 
 	$scope.articulo_nvo = {
 		'descripcion': null,
 		'descripcion_corta':null,
-		'status': null,
-		'clasificacion': null
+		'status': null
 	}
 
-	$scope.mostrar = function(){
+	$scope.agregar = function(){
+		$('#AddModal').modal('show');
+		inicializaArticulo();
+	}
+
+	$scope.mostrar = function(pagina){
+
+        /*if (pagina == null)
+            ruta = '/api/articulo/?page=1'
+        else if (pagina === 'ant')
+            ruta = $scope.articulos.previous;
+        else if (pagina === 'sig')
+            ruta = $scope.articulos.next;*/
+
+        ruta = '/api/articulo/';
+
 		$http.get(
-			'/api/articulo/'		
+			ruta		
 		).then(
 			function(response){
-				//console.log(response.data.results);
-				$scope.articulos = response.data.results;
+				//console.log(response.data);
+				$scope.articulos = response.data;
 			},
 			function(err){
 				console.log(err);
@@ -31,10 +44,19 @@ app.controller('articulosCtrl', function($http, $scope){
 		)
 	}
 
-	$scope.mostrar();
+	$scope.mostrar(null);
+
+	$scope.propertyName = 'descripcion';
+	$scope.reverse = false;
+
+	$scope.sortBy = function(propertyName) {
+	   $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+	   $scope.propertyName = propertyName;
+	};
 
 	$scope.guardar = function(){
-		console.log($scope.articulo);
+		//console.log($scope.articulo);
+		$scope.articulo.status = 'ACT';
 		$http.post(
 			'/api/articulo/',
 			$scope.articulo
@@ -73,7 +95,6 @@ app.controller('articulosCtrl', function($http, $scope){
 		$scope.descripcion_m = articulo.descripcion;
 		$scope.descripcion_corta_m = articulo.descripcion_corta;
 		$scope.status_m = articulo.status;
-		$scope.clasificacion_m = articulo.clasificacion;
 		$scope.id_m = articulo.id;
 
 	}
@@ -82,8 +103,7 @@ app.controller('articulosCtrl', function($http, $scope){
 		$scope.articulo_nvo = {
 		'descripcion': $scope.descripcion_m,
 		'descripcion_corta':$scope.descripcion_corta_m,
-		'status': $scope.status_m,
-		'clasificacion': $scope.clasificacion_m
+		'status': $scope.status_m
 		}
 		//console.log($scope.articulo);
 		$http.put(

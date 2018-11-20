@@ -10,6 +10,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <LINK REL=StyleSheet HREF="{% static "css/servicios.css" %}" TYPE="text/css" MEDIA=screen>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -30,7 +32,7 @@
         
         <!-- Button trigger modal -->
         <br>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="agregar()">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
 
@@ -53,20 +55,13 @@
                         <input type="text" class="form-control" ng-model="servicio.nombre" name="nombre" />
                       </div>
                     </div>
+                  </div>
+                  <div class="form-group">
                     <div>
                       <label for="nombre_corto" class="col-sm-2 col-md-3 control-label">Descripción Corta:</label>
                       <div class="col-sm-10 col-md-4">
                         <input type="text" class="form-control" ng-model="servicio.nombre_corto" name="nombre_corto" />
                       </div>
-                    </div>
-                  <div class="form-group">
-                    <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <select type="text" class="form-control" ng-model="servicio.status"
-                         name="status"/>
-                         <option value="ACT">Activo</option>
-                         <option value="INA">Inactivo</option>
-                      </select>
                     </div>
                   </div>
                 </form>
@@ -87,16 +82,18 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Servicio</th>
-              <th scope="col">Descripción Corta</th>
-              <th scope="col">Status</th>
+              <th scope="col">Id</th>
+                    <th><button class="btn btn-warning" ng-click="sortBy('nombre')">Descripción</button>
+                    <span class="sortorder" ng-show="propertyName === 'nombre'" ng-class="{reverse: reverse}"></span>
+                    <th><button class="btn btn-warning" ng-click="sortBy('nombre_corto')">Descripción Ticket</button>
+                    <span class="sortorder" ng-show="propertyName === 'nombre_corto'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning">Status</button></th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="servicio in servicios">
+            <tr ng-repeat="servicio in servicios | orderBy:propertyName:reverse ">
               <th scope="row">{{servicio.id}}</th>
               <td>{{ servicio.nombre }}</td>
               <td>{{ servicio.nombre_corto }}</td>

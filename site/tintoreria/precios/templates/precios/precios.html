@@ -10,6 +10,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <LINK REL=StyleSheet HREF="{% static "css/servicios.css" %}" TYPE="text/css" MEDIA=screen>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -30,7 +32,7 @@
         
         <!-- Button trigger modal -->
        <br>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="agregar()">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
 
@@ -50,7 +52,7 @@
                     <label class="col-sm-2 col-md-3 control-label">Artículo:</label>
                     <div class="col-sm-10 col-md-4">
                       <select id="articulo_a" type="text" class="form-control"
-                              ng-options="articulo.descripcion for articulo in articulos track by articulo.id"
+                              ng-options="articulo.descripcion for articulo in articulos | orderBy:'descripcion' track by articulo.descripcion"
                               ng-model="precio.articulo"></select>
                     </div>
                   </div>
@@ -58,7 +60,7 @@
                     <label class="col-sm-2 col-md-3 control-label">Servicio:</label>
                     <div class="col-sm-10 col-md-4">
                       <select class="form-control" type="text"
-                              ng-options="servicio.nombre for servicio in servicios track by servicio.id"
+                              ng-options="servicio.nombre for servicio in servicios | orderBy:'nombre' track by servicio.nombre"
                               ng-model="precio.servicio">
                       </select>
                     </div>
@@ -95,28 +97,33 @@
     </div>
 
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-8 col-md-offset-2" style="overflow-x: 500px; overflow-y: auto;">
         <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Artículo</th>
-              <th scope="col">Servicio</th>
-              <th scope="col">Vigencia Del</th>
-              <th scope="col">Vigencia Al</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Eliminar</th>
+              <!--th scope="col">Artículo</th-->
+              <th><button class="btn btn-warning" ng-click="sortBy('articulo.descripcion')">Artículo</button>
+                <span class="sortorder" ng-show="propertyName === 'articulo.descripcion'" ng-class="{reverse: reverse}"></span>
+              </th>
+              <th><button class="btn btn-warning" ng-click="sortBy('servicio.nombre')">Servicio</button>
+                <span class="sortorder" ng-show="propertyName === 'servicio.nombre'" ng-class="{reverse: reverse}"></span></th>
+              <th><button class="btn btn-warning">Vigencia Del</button></th>
+              <th><button class="btn btn-warning">Vigencia Al</button></th>
+              <th><button class="btn btn-warning" ng-click="sortBy('importe')">Precio</button>
+                <span class="sortorder" ng-show="propertyName === 'importe'" ng-class="{reverse: reverse}"></span></th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="precio in precios">
+            <tr ng-repeat="precio in precios | orderBy:propertyName:reverse ">
               <th scope="row">{{precio.id}}</th>
               <td>{{ precio.articulo.descripcion }}</td>
               <td>{{ precio.servicio.nombre }}</td>
-              <td>{{ precio.vigencia_del }}</td>
-              <td>{{ precio.vigencia_al }}</td>
-              <td>{{ precio.importe }}</td>
+              <td>{{ precio.vigencia_del | date:'dd/MM/yyyy'}}</td>
+              <td>{{ precio.vigencia_al | date:'dd/MM/yyyy'}}</td>
+              <td>{{ precio.importe | currency}}</td>
               <th scope="col">
                   <button type="button" class="btn btn-warning btn-xs" ng-click="update(precio)">
                       <span class="glyphicon glyphicon-edit"></span>
@@ -130,6 +137,15 @@
             </tr>
           </tbody>
         </table>
+
+       <button type="button" class="btn btn-default" ng-show='precios.previous' ng-click="mostrar('ant')">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+        </button>
+        <button type="button" class="btn btn-default" ng-show='precios.next' ng-click="mostrar('sig')">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
+        <label for="total_art" class="col-sm-2 col-md-3 control-label">Total Registros: {{ precios.count }}</label>
+
       </div>
     </div>
 

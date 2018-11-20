@@ -10,6 +10,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <LINK REL=StyleSheet HREF="{% static "css/clientes.css" %}" TYPE="text/css" MEDIA=screen>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -29,7 +31,7 @@
         
         <!-- Button trigger modal -->
         <br>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="agregar()">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
 
@@ -146,15 +148,18 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Paterno</th>
-              <th scope="col">Materno</th>
+              <th><button class="btn btn-warning" ng-click="sortBy('nombre')">Nombre</button>
+              <span class="sortorder" ng-show="propertyName === 'nombre'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning" ng-click="sortBy('paterno')">Paterno</button>
+              <span class="sortorder" ng-show="propertyName === 'paterno'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning" ng-click="sortBy('materno')">Materno</button>
+              <span class="sortorder" ng-show="propertyName === 'materno'" ng-class="{reverse: reverse}"></span>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="cliente in clientes">
+            <tr ng-repeat="cliente in clientes | orderBy:propertyName:reverse ">
               <th scope="row">{{cliente.id}}</th>
               <td>{{ cliente.nombre }}</td>
               <td>{{ cliente.paterno }}</td>

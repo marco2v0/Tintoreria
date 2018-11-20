@@ -10,6 +10,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <LINK REL=StyleSheet HREF="{% static "css/empleados.css" %}" TYPE="text/css" MEDIA=screen>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -30,7 +32,7 @@
         
         <!-- Button trigger modal -->
         <br>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="agregar()">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
 
@@ -65,18 +67,12 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="puesto" class="col-sm-2 col-md-3 control-label">Puesto:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="empleado.puesto" name="puesto" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>
+                      <label for="status" class="col-sm-2 col-md-3 control-label">Puesto:</label>
                       <div class="col-sm-10 col-md-4">
-                          <select type="text" class="form-control" ng-model="empleado.status"
-                                 name="status"/>
-                                 <option value="ACT">Activo</option>
-                                 <option value="INA">Inactivo</option>
+                          <select type="text" class="form-control" ng-model="empleado.puesto"
+                                 name="puesto"/>
+                                 <option value="Encargado">Encargado</option>
+                                 <option value="Empleado">Empleado</option>
                           </select>
                       </div>
                   </div>
@@ -99,17 +95,21 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Paterno</th>
-              <th scope="col">Materno</th>
-              <th scope="col">Puesto</th>
-              <th scope="col">Status</th>
+              <th><button class="btn btn-warning" ng-click="sortBy('nombre')">Nombre</button>
+              <span class="sortorder" ng-show="propertyName === 'nombre'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning" ng-click="sortBy('paterno')">Paterno</button>
+              <span class="sortorder" ng-show="propertyName === 'paterno'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning" ng-click="sortBy('materno')">Materno</button>
+              <span class="sortorder" ng-show="propertyName === 'materno'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning" ng-click="sortBy('puesto')">Puesto</button>
+              <span class="sortorder" ng-show="propertyName === 'puesto'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning">Status</button>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="empleado in empleados">
+            <tr ng-repeat="empleado in empleados | orderBy:propertyName:reverse ">
               <th scope="row">{{empleado.id}}</th>
               <td>{{ empleado.nombre }}</td>
               <td>{{ empleado.paterno }}</td>
@@ -175,10 +175,14 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="puesto_m" class="col-sm-2 col-md-3 control-label">Puesto:</label>
-                    <div class="col-sm-10 col-md-4">
-                      <input type="text" class="form-control" ng-model="puesto_m" name="puesto_m" />
-                    </div>
+                      <label for="puesto" class="col-sm-2 col-md-3 control-label">Puesto:</label>
+                      <div class="col-sm-10 col-md-4">
+                          <select type="text" class="form-control" ng-model="puesto_m"
+                                 name="puesto_m"/>
+                                 <option value="Encargado">Encargado</option>
+                                 <option value="Empleado">Empleado</option>
+                          </select>
+                      </div>
                   </div>
                   <div class="form-group">
                       <label for="status" class="col-sm-2 col-md-3 control-label">Status:</label>

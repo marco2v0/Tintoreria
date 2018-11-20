@@ -10,7 +10,6 @@ class Articulo(models.Model):
 	descripcion_corta = models.CharField(max_length=8)
 	fecha_captura = models.DateTimeField(auto_now_add=True)
 	status = models.CharField(max_length=3)
-	clasificacion = models.CharField(max_length=30)
 
 	def __str__(self):
 		return self.descripcion

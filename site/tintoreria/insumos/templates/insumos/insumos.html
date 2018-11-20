@@ -10,6 +10,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <LINK REL=StyleSheet HREF="{% static "css/insumos.css" %}" TYPE="text/css" MEDIA=screen>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -30,7 +32,7 @@
         
         <!-- Button trigger modal -->
         <br>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="agregar()">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
 
@@ -77,14 +79,16 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Costo</th>
+              <th><button class="btn btn-warning" ng-click="sortBy('descripcion')">Descripción</button>
+              <span class="sortorder" ng-show="propertyName === 'descripcion'" ng-class="{reverse: reverse}"></span>
+              <th><button class="btn btn-warning" ng-click="sortBy('costo')">Costo</button>
+              <span class="sortorder" ng-show="propertyName === 'costo'" ng-class="{reverse: reverse}"></span>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="insumo in insumos">
+            <tr ng-repeat="insumo in insumos | orderBy:propertyName:reverse ">
               <th scope="row">{{insumo.id}}</th>
               <td>{{ insumo.descripcion }}</td>
               <td>{{ insumo.costo }}</td>

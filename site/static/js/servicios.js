@@ -15,13 +15,18 @@ app.controller('serviciosCtrl', function($http, $scope){
 		'status': null
 	}
 
+    $scope.agregar = function(){
+        $('#AddModal').modal('show');
+        inicializaServicio();
+    }
+
 	$scope.mostrar = function(){
 		$http.get(
 			'/api/servicio/'		
 		).then(
 			function(response){
-				//console.log(response.data.results);
-				$scope.servicios = response.data.results;
+				//console.log(response.data);
+				$scope.servicios = response.data;
 			},
 			function(err){
 				console.log(err);
@@ -31,8 +36,17 @@ app.controller('serviciosCtrl', function($http, $scope){
 
 	$scope.mostrar();
 
+	$scope.propertyName = 'nombre';
+	$scope.reverse = false;
+
+	$scope.sortBy = function(propertyName) {
+	   $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+	   $scope.propertyName = propertyName;
+	};
+
 	$scope.guardar = function(){
 		//console.log($scope.empleado);
+		$scope.servicio.status = 'ACT';
 		$http.post(
 			'/api/servicio/',
 			$scope.servicio

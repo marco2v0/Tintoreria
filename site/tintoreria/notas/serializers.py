@@ -84,7 +84,7 @@ class NotaSerializer(ModelSerializer):
             #print(servicio_nota)
             detalle_nvo.save()
 
-        impresion(nota)
+        #impresion(nota)
 
         return nota
 

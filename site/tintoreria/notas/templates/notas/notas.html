@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <LINK REL=StyleSheet HREF="{% static "css/notas.css" %}" TYPE="text/css" MEDIA=screen>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -33,7 +35,7 @@
 
             <!-- Button trigger modal -->
             <br>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#AddModal">
+            <button type="button" class="btn btn-primary btn-lg" ng-click="agregar()">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
 
@@ -103,64 +105,103 @@
                                     <table class="table table-hover" style="font-size: 12px;">
                                         <thead>
                                         <tr>
-                                            <th></th>
                                             <th style="text-align: center">
                                                 Articulo
                                             </th>
                                             <th style="text-align: center">
-                                                Servicio
+                                                Planchado
+                                            </th>
+                                            <th style="text-align: center">
+                                                Lavado
+                                            </th>
+                                            <th style="text-align: center">
+                                                Tintorería
+                                            </th>
+                                            <th style="text-align: center">
+                                                Teflon
+                                            </th>
+                                            <th style="text-align: center">
+                                                Teflon Cuello y Puños
+                                            </th>
+                                            <th style="text-align: center">
+                                                Almidon
+                                            </th>
+                                            <th style="text-align: center">
+                                                Costura
                                             </th>
                                             <th style="text-align: center">
                                                 Cantidad
                                             </th>
-                                            <th></th>
-                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <th class="col-md-1"></th>
-                                            <th class="col-md-3">
+                                            <th class="col-md-2">
                                                 <select id="articulo_a" type="text" class="form-control"
-                                                        ng-options="articulo.descripcion for articulo in articulos track by articulo.id"
+                                                        ng-options="articulo.descripcion for articulo in articulos | orderBy:'descripcion' track by articulo.id"
                                                         ng-model="detalle.articulo"></select>
                                             </th>
-                                            <th class="col-md-3">
-                                                <select class="form-control" type="text"
-                                                        ng-options="servicio.nombre for servicio in servicios track by servicio.id"
-                                                        ng-model="detalle.servicio">
-                                                </select>
+                                            <th class="col-md-1">
+                                                <input class="form-control" id="planchado_a" type="checkbox" value="S">
+                                            </th>
+                                            <th class="col-md-1">
+                                                <input class="form-control" id="lavado_a" type="checkbox" value="S">
+                                            </th>
+                                            <th class="col-md-1">
+                                                <input class="form-control" id="tintoreria_a" type="checkbox" value="S">
+                                            </th>
+                                            <th class="col-md-1">
+                                                <input class="form-control" id="teflon_a" type="checkbox" value="S">
+                                            </th>
+                                            <th class="col-md-1">
+                                                <input class="form-control" id="tefloncyp_a" type="checkbox" value="S">
+                                            </th>
+                                            <th class="col-md-1">
+                                                <input class="form-control" id="almidon_a" type="checkbox" value="S">
+                                            </th>
+                                            <th class="col-md-1">
+                                                <input class="form-control" id="costura_a" type="checkbox" value="S">
                                             </th>
                                             <th class="col-md-2 col-md-offset-1">
                                                 <input type="number" class="form-control" ng-model="detalle.cantidad"/>
                                             </th>
-                                            <th class="col-md-2" style="text-align: center">
+                                            <th class="col-md-1" style="text-align: center">
                                                 <button type="button" class="btn btn-info btn-sm"
                                                         ng-click="guardarDet()">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                 </button>
                                             </th>
-                                            <th class="col-md-1"></th>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row col-md-8 col-md-offset-2">
+                                <div class="row col-md-12">
                                     <table class="table table-striped">
                                         <tbody>
                                         <thead>
                                         <tr>
                                             <th>Artículo</th>
-                                            <th>Servicio</th>
+                                            <th>Planchado</th>
+                                            <th>Lavado</th>
+                                            <th>Tintorería</th>
+                                            <th>Teflón</th>
+                                            <th>Teflón Cuello y Puños</th>
+                                            <th>Almidón</th>
+                                            <th>Costura</th>
                                             <th>Cantidad</th>
                                             <th>Precio Unitario</th>
                                             <th>Precio Total</th>
-                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tr ng-repeat="det in nota.detalle">
                                             <th>{{ det.articulo.descripcion }}</th>
-                                            <th>{{ det.servicio.nombre }}</th>
+                                            <th>{{ det.planchado }}</th>
+                                            <th>{{ det.lavado }}</th>
+                                            <th>{{ det.tintorería }}</th>
+                                            <th>{{ det.teflon }}</th>
+                                            <th>{{ det.tefloncyp }}</th>
+                                            <th>{{ det.almidon }}</th>
+                                            <th>{{ det.costura }}</th>
                                             <th>{{ det.cantidad }}</th>
                                             <th>{{ det.precio_unitario }}</th>
                                             <th>{{ det.precio }}</th>
@@ -172,6 +213,12 @@
                                             </th>
                                         </tr>
                                         <tr class="warning">
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th>{{ total_cantidad }}</th>
@@ -240,24 +287,32 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Cliente</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Empleado Asignado</th>
-                        <th scope="col">Fecha Entrega</th>
+                        <th><button class="btn btn-warning" ng-click="sortBy('cliente.nombre')">Cliente</button>
+                        <span class="sortorder" ng-show="propertyName === 'cliente.nombre'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th><button class="btn btn-warning" ng-click="sortBy('cantidad')">Cantidad</button>
+                        <span class="sortorder" ng-show="propertyName === 'cantidad'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th><button class="btn btn-warning" ng-click="sortBy('empleado.nombre')">Empleado Asignado</button>
+                        <span class="sortorder" ng-show="propertyName === 'empleado.nombre'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th><button class="btn btn-warning" ng-click="sortBy('fecha_entrega')">Fecha Entrega</button>
+                        <span class="sortorder" ng-show="propertyName === 'fecha_entrega'" ng-class="{reverse: reverse}"></span>
+                        </th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="nota in notas.results">
+                    <tr ng-repeat="nota in notas | orderBy:propertyName:reverse ">
                         <th>{{nota.id}}</th>
                         <td>{{nota.cliente.nombre+' '+nota.cliente.paterno+' '+nota.cliente.materno}}</td>
                         <td>{{nota.cantidad}}</td>
                         <td>{{nota.empleado.nombre + ' ' + nota.empleado.paterno + '
                             ' + nota.empleado.materno}}
                         </td>
-                        <td>{{nota.fecha_entrega}}</td>
+                        <td>{{nota.fecha_entrega | date:'dd/MM/yyyy'}}</td>
                         <th scope="col">
                             <button type="button" class="btn btn-primary btn-xs" ng-click="updateEmpleado(nota)">
                                 <span class="glyphicon glyphicon-hand-right"></span>

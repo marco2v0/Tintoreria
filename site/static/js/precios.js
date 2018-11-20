@@ -1,6 +1,6 @@
 app.controller('preciosCtrl', function($http, $scope){
 	inicializaPrecio = function(){
-		$scope.servicio = {
+		$scope.precio = {
 			'articulo': null,
 			'servicio': null,
 			'vigencia_del': null,
@@ -9,20 +9,20 @@ app.controller('preciosCtrl', function($http, $scope){
 		}
 	}
 
-		$scope.servicio_nvo = {
-			'articulo': null,
-			'servicio': null,
-			'vigencia_del': null,
-			'vigencia_al': null,
-			'importe':null
-		}
+	$scope.precio_nvo = {
+		'articulo': null,
+		'servicio': null,
+		'vigencia_del': null,
+		'vigencia_al': null,
+		'importe':null
+	}
 
     inicializaArticulos = function () {
         let ruta = '/api/articulo/';
         $http.get(ruta).then(
             function (response) {
-                $scope.articulos = response.data.results;
-                //console.log($scope.articulos);
+                $scope.articulos = response.data;
+                console.log($scope.articulos);
             });
     };
 
@@ -30,21 +30,36 @@ app.controller('preciosCtrl', function($http, $scope){
         let ruta = '/api/servicio/';
         $http.get(ruta).then(
             function (response) {
-                $scope.servicios = response.data.results;
+                $scope.servicios = response.data;
                 //console.log($scope.servicios);
             });
     };
 
-	$scope.mostrar = function(){
+	$scope.agregar = function(){
+		$('#AddModal').modal('show');
+		inicializaPrecio();
+	}
+
+	$scope.mostrar = function(pagina){
 		inicializaArticulos();
         inicializaPrecio();
         inicializaServicios();
+
+        /*if (pagina === null)
+            ruta = '/api/precio/?page=1'
+        else if (pagina === 'ant')
+            ruta = $scope.precios.previous;
+        else if (pagina === 'sig')
+            ruta = $scope.precios.next;*/
+
+        ruta = '/api/precio/';
+
 		$http.get(
-			'/api/precio/'		
+			ruta
 		).then(
 			function(response){
-				//console.log(response.data.results);
-				$scope.precios = response.data.results;
+				console.log(response.data);
+				$scope.precios = response.data;
 			},
 			function(err){
 				console.log(err);
@@ -52,7 +67,15 @@ app.controller('preciosCtrl', function($http, $scope){
 		)
 	}
 
-	$scope.mostrar();
+	$scope.mostrar(null);
+
+	$scope.propertyName = 'articulo.descripcion';
+	$scope.reverse = false;
+
+	$scope.sortBy = function(propertyName) {
+	   $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+	   $scope.propertyName = propertyName;
+	};
 
 	$scope.guardar = function(){
 		//console.log($scope.empleado);

@@ -1,11 +1,14 @@
 app.controller('empleadosCtrl', function($http, $scope){
-	$scope.empleado = {
-		'nombre': null,
-		'paterno': null,
-		'materno': null,
-		'puesto': null,
-		'status': null
-	}
+	
+	inicializaEmpleado = function(){
+		$scope.empleado = {
+			'nombre': null,
+			'paterno': null,
+			'materno': null,
+			'puesto': null,
+			'status': null
+		}
+	};
 
 	$scope.empleado_nvo = {
 		'nombre': null,
@@ -15,13 +18,18 @@ app.controller('empleadosCtrl', function($http, $scope){
 		'status': null
 	}
 
+	$scope.agregar = function(){
+		$('#AddModal').modal('show');
+		inicializaEmpleado();
+	}
+
 	$scope.mostrar = function(){
 		$http.get(
 			'/api/empleado/'		
 		).then(
 			function(response){
 				//console.log(response.data.results);
-				$scope.empleados = response.data.results;
+				$scope.empleados = response.data;
 			},
 			function(err){
 				console.log(err);
@@ -31,8 +39,17 @@ app.controller('empleadosCtrl', function($http, $scope){
 
 	$scope.mostrar();
 
+	$scope.propertyName = 'nombre';
+	$scope.reverse = false;
+
+	$scope.sortBy = function(propertyName) {
+	   $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+	   $scope.propertyName = propertyName;
+	};
+
 	$scope.guardar = function(){
-		console.log($scope.empleado);
+		//console.log($scope.empleado);
+		$scope.empleado.status = 'ACT';
 		$http.post(
 			'/api/empleado/',
 			$scope.empleado
